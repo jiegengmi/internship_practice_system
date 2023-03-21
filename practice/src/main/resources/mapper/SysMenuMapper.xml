@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ikikyou.practice.mapper.SysMenuMapper">
+
+    <resultMap id="BaseResultMap" type="com.ikikyou.practice.entity.SysMenu">
+            <id property="id" column="m_id" jdbcType="BIGINT"/>
+            <result property="name" column="m_name" jdbcType="VARCHAR"/>
+            <result property="permission" column="m_permission" jdbcType="VARCHAR"/>
+            <result property="parentId" column="m_parent_id" jdbcType="BIGINT"/>
+            <result property="icon" column="m_icon" jdbcType="VARCHAR"/>
+            <result property="path" column="m_path" jdbcType="VARCHAR"/>
+            <result property="component" column="m_component" jdbcType="VARCHAR"/>
+            <result property="order" column="m_order" jdbcType="SMALLINT"/>
+            <result property="type" column="m_type" jdbcType="INTEGER"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="isHidden" column="is_hidden" jdbcType="SMALLINT"/>
+            <result property="status" column="status" jdbcType="SMALLINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        m_id,m_name,m_permission,
+        m_parent_id,m_icon,m_path,
+        m_component,m_order,m_type,
+        create_time,update_time,is_hidden,
+        status
+    </sql>
+    <select id="getByRoleIds" resultType="com.ikikyou.practice.entity.SysMenu">
+        SELECT
+            m_id, m_name, m_permission, m_parent_id, m_icon, m_path, m_component, m_order, m_type, create_time, update_time, is_hidden, status
+        FROM
+        sys_menu menu left join sys_menu
+        where
+        m_id in
+        <foreach collection="roleIds" item="roleId" separator="," open="(" close=")" >
+            #{roleId}
+        </foreach>
+    </select>
+</mapper>
