@@ -7,6 +7,6 @@ internship_practice_system
  
 ## 后端环境
 JDK 17  
-Maven 3.6.0+
+Maven 3.6.0+  
 MySQL 8.0+  
 SpringBoot 3.0+  
