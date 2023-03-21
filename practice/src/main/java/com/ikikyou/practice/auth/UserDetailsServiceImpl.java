@@ -1,7 +1,12 @@
-package com.ikikyou.practice.service.impl;
+package com.ikikyou.practice.auth;
 
+import cn.hutool.core.util.ArrayUtil;
+import com.ikikyou.practice.constant.SecurityConstants;
+import com.ikikyou.practice.dto.UserDetail;
+import com.ikikyou.practice.dto.UserInfoDTO;
 import com.ikikyou.practice.entity.SysUser;
-import com.ikikyou.practice.service.SysUserService;
+import com.ikikyou.practice.service.UserInfoService;
+import com.ikikyou.practice.utils.Result;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -11,10 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author hongx
@@ -24,36 +26,35 @@ import java.util.Set;
 @Component(value = "UserDetailsServiceImpl")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    final SysUserService userService;
+    final UserInfoService userService;
 
     final PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        SysUser user = userService.findByName(username);
-        if (null == user) {
+        Result<UserInfoDTO> result = userService.getInfoByUserName(username);
+        if (!result.isSuccess()) {
             throw new UsernameNotFoundException("用户不存在");
         }
-        Collection<? extends GrantedAuthority> authorities =
-                processRolePermissions(user.getData().getRoleName(), user.getData().getPermissions());
-        String password = user.getData().getSysUser().getUsrPassword();
-        return new org.springframework.security.core.userdetails.User(username, password, authorities);
+        Collection<? extends GrantedAuthority> authorities = processRolePermissions(result.getData().getRoleIds(), result.getData().getPermissions());
+        SysUser user = result.getData().getUser();
+        return new UserDetail(user.getId(), username, user.getPassword(), authorities);
     }
 
     /**
      * 处理角色和权限
      *
-     * @param roleName    角色名称
+     * @param roleIds    角色集合
      * @param permissions 权限列表
      * @return the GrantedAuthority
      */
-    public Collection<? extends GrantedAuthority> processRolePermissions(String roleName, String[] permissions) {
+    public Collection<? extends GrantedAuthority> processRolePermissions(List<Long> roleIds, Set<String> permissions) {
         Set<String> dbAuthsSet = new HashSet<>();
-        if (roleName != null) {
+        if (ArrayUtil.isNotEmpty(roleIds)) {
             // 获取角色
-            dbAuthsSet.add(roleName);
+            roleIds.forEach(roleId -> dbAuthsSet.add(SecurityConstants.ROLE + roleId));
             // 获取资源
-            dbAuthsSet.addAll(Arrays.asList(permissions));
+            dbAuthsSet.addAll(permissions);
         }
         return AuthorityUtils.createAuthorityList(dbAuthsSet.toArray(new String[0]));
     }

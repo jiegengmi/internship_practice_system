@@ -1,6 +1,5 @@
 package com.ikikyou.practice.service.impl;
 
-import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.ikikyou.practice.dto.UserInfoDTO;
@@ -11,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,6 +25,7 @@ public abstract class AbstractUserInfo {
     protected abstract List<Long> getRoleIds(Long userId);
 
     protected abstract List<SysMenu> getMenu(List<Long> roleIds);
+
     protected abstract SysUser getSysUser(String username);
 
     /**
@@ -35,7 +34,7 @@ public abstract class AbstractUserInfo {
      * @param username 用户名
      * @return userInfo
      */
-    public Result<UserInfoDTO> buildUserInfo(String username) throws UsernameNotFoundException {
+    public Result<UserInfoDTO> buildUserInfo(String username) {
         UserInfoDTO userInfo = new UserInfoDTO();
         SysUser sysUser = getSysUser(username);
         if (ObjectUtil.isNull(sysUser)) {
@@ -44,9 +43,7 @@ public abstract class AbstractUserInfo {
         }
         userInfo.setUser(sysUser);
         List<Long> roleIds = this.getRoleIds(sysUser.getId());
-
         List<SysMenu> menuList = this.getMenu(roleIds);
-
         //设置角色权限
         userInfo.setRoleIds(roleIds);
         if (CollectionUtils.isEmpty(menuList)) {

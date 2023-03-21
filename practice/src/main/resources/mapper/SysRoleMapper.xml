@@ -5,13 +5,13 @@
 <mapper namespace="com.ikikyou.practice.mapper.SysRoleMapper">
 
     <resultMap id="BaseResultMap" type="com.ikikyou.practice.entity.SysRole">
-            <id property="id" column="r_id" jdbcType="BIGINT"/>
-            <result property="name" column="r_name" jdbcType="VARCHAR"/>
-            <result property="code" column="r_code" jdbcType="INTEGER"/>
-            <result property="desc" column="r_desc" jdbcType="VARCHAR"/>
-            <result property="status" column="status" jdbcType="SMALLINT"/>
-            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <id property="id" column="r_id" jdbcType="BIGINT"/>
+        <result property="name" column="r_name" jdbcType="VARCHAR"/>
+        <result property="code" column="r_code" jdbcType="INTEGER"/>
+        <result property="desc" column="r_desc" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="SMALLINT"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -19,4 +19,10 @@
         r_desc,status,create_time,
         update_time
     </sql>
+    <select id="getRoleByUserId" resultType="com.ikikyou.practice.entity.SysRole">
+        select *
+        from sys_role
+                 left join user_role_link link on role_id = r_id
+        where link.user_id = #{userId}
+    </select>
 </mapper>

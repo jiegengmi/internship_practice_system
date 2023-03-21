@@ -17,7 +17,7 @@ public class Result<T> implements Serializable {
     /**
      * 是否成功
      */
-    private boolean flag;
+    private boolean isSuccess;
 
     /**
      *  状态码
@@ -34,21 +34,21 @@ public class Result<T> implements Serializable {
      */
     private T data;
 
-    public Result(boolean flag, Integer code, String message, T data) {
-        this.flag = flag;
+    public Result(boolean isSuccess, Integer code, String message, T data) {
+        this.isSuccess = isSuccess;
         this.code = code;
         this.message = message;
         this.data =  data;
     }
 
-    public Result(boolean flag, Integer code, String message) {
-        this.flag = flag;
+    public Result(boolean isSuccess, Integer code, String message) {
+        this.isSuccess = isSuccess;
         this.code = code;
         this.message = message;
     }
 
     public Result() {
-        this.flag = true;
+        this.isSuccess = true;
         this.code = StatusCode.OK;
         this.message = "操作成功!";
     }
@@ -95,10 +95,10 @@ public class Result<T> implements Serializable {
         return restResult(null,StatusCode.ERROR,msg,false);
     }
 
-    public static  <T> Result<T> restResult(T data,Integer code,String msg,Boolean flag){
-        Result<T> res=new Result<>();
+    public static  <T> Result<T> restResult(T data,Integer code,String msg,Boolean isSuccess){
+        Result<T> res = new Result<>();
         res.setCode(code);
-        res.setFlag(flag);
+        res.setSuccess(isSuccess);
         res.setMessage(msg);
         res.setData(data);
         return res;
@@ -110,10 +110,10 @@ public class Result<T> implements Serializable {
     }
 
 
-    public Result(int code, String message, Boolean flag, T data) {
+    public Result(int code, String message, Boolean isSuccess, T data) {
         this.code = code;
         this.message = message;
-        this.flag = flag;
+        this.isSuccess = isSuccess;
         this.data = data;
     }
 
@@ -130,20 +130,20 @@ public class Result<T> implements Serializable {
     }
 
     public Result<T> setSuccess(Boolean flag) {
-        this.flag = flag;
+        this.isSuccess = flag;
         return this;
     }
 
-    public boolean isFlag() {
-        return flag;
+    public boolean isSuccess() {
+        return isSuccess;
     }
 
-    public void setFlag(boolean flag) {
-        this.flag = flag;
+    public void setFlag(boolean success) {
+        this.isSuccess = success;
     }
 
     public Boolean getFlag() {
-        return this.flag;
+        return this.isSuccess;
     }
 
     public Integer getCode() {

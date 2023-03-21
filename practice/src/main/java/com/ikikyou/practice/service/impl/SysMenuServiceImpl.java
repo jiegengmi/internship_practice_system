@@ -16,10 +16,6 @@ import java.util.List;
 @Service
 public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> implements SysMenuService{
 
-    @Override
-    public List<SysMenu> getByRoleIds(List<Long> roleIds) {
-        return null;
-    }
 }
 
 
