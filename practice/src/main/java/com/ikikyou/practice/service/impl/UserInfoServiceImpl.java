@@ -31,7 +31,7 @@ public class UserInfoServiceImpl extends AbstractUserInfo{
 
     @Override
     protected List<SysMenu> getMenu(List<Long> roleIds) {
-        return this.menuService.listByIds(roleIds);
+        return this.menuService.getByRoleIds(roleIds);
     }
 
     @Override

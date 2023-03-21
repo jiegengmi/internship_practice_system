@@ -31,9 +31,9 @@
         SELECT
             m_id, m_name, m_permission, m_parent_id, m_icon, m_path, m_component, m_order, m_type, create_time, update_time, is_hidden, status
         FROM
-        sys_menu menu left join sys_menu
+        sys_menu menu left join role_menu_link link on link.menu_id = m_id
         where
-        m_id in
+        link.role_id in
         <foreach collection="roleIds" item="roleId" separator="," open="(" close=")" >
             #{roleId}
         </foreach>
