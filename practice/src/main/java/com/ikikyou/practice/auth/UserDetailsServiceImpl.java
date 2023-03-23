@@ -7,13 +7,13 @@ import com.ikikyou.practice.dto.UserInfoDTO;
 import com.ikikyou.practice.entity.SysUser;
 import com.ikikyou.practice.service.UserInfoService;
 import com.ikikyou.practice.utils.Result;
+import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -22,13 +22,11 @@ import java.util.*;
  * @author hongx
  * @date 2023/03/21 10:20
  */
-@RequiredArgsConstructor
 @Component(value = "UserDetailsServiceImpl")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    final UserInfoService userService;
-
-    final PasswordEncoder passwordEncoder;
+    @Resource
+    UserInfoService userService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -46,7 +44,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
      *
      * @param roleIds    角色集合
      * @param permissions 权限列表
-     * @return the GrantedAuthority
      */
     public Collection<? extends GrantedAuthority> processRolePermissions(List<Long> roleIds, Set<String> permissions) {
         Set<String> dbAuthsSet = new HashSet<>();

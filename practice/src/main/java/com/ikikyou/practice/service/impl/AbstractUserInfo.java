@@ -1,5 +1,6 @@
 package com.ikikyou.practice.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.ikikyou.practice.dto.UserInfoDTO;
@@ -10,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -43,9 +45,14 @@ public abstract class AbstractUserInfo {
         }
         userInfo.setUser(sysUser);
         List<Long> roleIds = this.getRoleIds(sysUser.getId());
-        List<SysMenu> menuList = this.getMenu(roleIds);
         //设置角色权限
         userInfo.setRoleIds(roleIds);
+        if (CollectionUtil.isEmpty(roleIds)) {
+            userInfo.setRoleIds(new ArrayList<>());
+            userInfo.setPermissions(new HashSet<>());
+            return Result.ok();
+        }
+        List<SysMenu> menuList = this.getMenu(roleIds);
         if (CollectionUtils.isEmpty(menuList)) {
             userInfo.setPermissions(new HashSet<>());
             return Result.ok(userInfo);

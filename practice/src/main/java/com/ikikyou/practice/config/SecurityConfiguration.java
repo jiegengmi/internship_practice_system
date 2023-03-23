@@ -1,5 +1,6 @@
 package com.ikikyou.practice.config;
 
+import cn.hutool.crypto.digest.BCrypt;
 import com.ikikyou.practice.auth.UserDetailsServiceImpl;
 import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Bean;
@@ -31,9 +32,15 @@ public class SecurityConfiguration {
         return provider;
     }
 
+    /**
+     *  安全过滤
+     *   <a href="https://www.jianshu.com/p/b7c6b0cc87f0">作用参考</a>
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((auth) -> auth.anyRequest().authenticated())
+        http.authorizeHttpRequests((auth) -> auth
+                        .requestMatchers("/api/*").permitAll()
+                        .anyRequest().authenticated())
                 .httpBasic(withDefaults())
                 .authenticationProvider(systemAuthenticationProvider());
         return http.build();
