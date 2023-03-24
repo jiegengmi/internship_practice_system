@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Collection;
 
 /**
- * @author hongx
+ * @author ikikyou
  * @date 2023/03/21 13:56
  */
 public class UserDetail extends User implements Serializable {

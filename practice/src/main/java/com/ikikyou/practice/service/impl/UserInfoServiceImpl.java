@@ -6,8 +6,6 @@ import com.ikikyou.practice.entity.SysRole;
 import com.ikikyou.practice.entity.SysUser;
 import com.ikikyou.practice.mapper.SysMenuMapper;
 import com.ikikyou.practice.mapper.SysRoleMapper;
-import com.ikikyou.practice.service.SysMenuService;
-import com.ikikyou.practice.service.SysRoleService;
 import com.ikikyou.practice.service.SysUserService;
 import com.ikikyou.practice.service.UserInfoService;
 import com.ikikyou.practice.utils.Result;
@@ -19,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author hongx
+ * @author ikikyou
  * @date 2023/03/21 11:26
  */
 @Slf4j

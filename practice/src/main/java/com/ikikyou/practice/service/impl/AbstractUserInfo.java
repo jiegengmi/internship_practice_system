@@ -8,7 +8,6 @@ import com.ikikyou.practice.entity.SysMenu;
 import com.ikikyou.practice.entity.SysUser;
 import com.ikikyou.practice.utils.Result;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * @author hongx
+ * @author ikikyou
  * @date 2023/03/21 11:15
  */
 @Slf4j
@@ -61,7 +60,6 @@ public abstract class AbstractUserInfo {
                 .map(SysMenu::getPermission)
                 .filter(StrUtil::isNotBlank)
                 .collect(Collectors.toSet());
-        // 设置权限列表（menu.permission）
         userInfo.setPermissions(permissions);
         return Result.ok(userInfo);
     }

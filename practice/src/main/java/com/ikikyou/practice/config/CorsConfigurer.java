@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * 跨域处理
- * @author hongx
+ * @author ikikyou
  * @date 2023/03/21 10:18
  */
 @Configuration

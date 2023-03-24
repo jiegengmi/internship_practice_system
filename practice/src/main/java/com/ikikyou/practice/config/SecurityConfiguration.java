@@ -15,7 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 /**
- * @author hongx
+ * @author ikikyou
  * @date 2023/03/21 14:09
  */
 @Configuration

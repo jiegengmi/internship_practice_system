@@ -8,7 +8,6 @@ import com.ikikyou.practice.entity.SysUser;
 import com.ikikyou.practice.service.UserInfoService;
 import com.ikikyou.practice.utils.Result;
 import jakarta.annotation.Resource;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +18,7 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 /**
- * @author hongx
+ * @author ikikyou
  * @date 2023/03/21 10:20
  */
 @Component(value = "UserDetailsServiceImpl")
