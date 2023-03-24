@@ -5,22 +5,22 @@
 <mapper namespace="com.ikikyou.practice.mapper.SysUserMapper">
 
     <resultMap id="BaseResultMap" type="com.ikikyou.practice.entity.SysUser">
-            <id property="id" column="u_id" jdbcType="BIGINT"/>
-            <result property="name" column="u_name" jdbcType="VARCHAR"/>
-            <result property="age" column="u_age" jdbcType="SMALLINT"/>
-            <result property="sex" column="u_sex" jdbcType="SMALLINT"/>
-            <result property="tel" column="u_tel" jdbcType="VARCHAR"/>
-            <result property="email" column="u_email" jdbcType="VARCHAR"/>
-            <result property="password" column="u_password" jdbcType="VARCHAR"/>
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="age" column="age" jdbcType="SMALLINT"/>
+            <result property="sex" column="sex" jdbcType="SMALLINT"/>
+            <result property="tel" column="tel" jdbcType="VARCHAR"/>
+            <result property="email" column="email" jdbcType="VARCHAR"/>
+            <result property="password" column="password" jdbcType="VARCHAR"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
             <result property="status" column="status" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        u_id,u_name,u_age,
-        u_sex,u_tel,u_email,
-        u_password,create_time,update_time,
+        id,name,age,
+        sex,tel,email,
+        password,create_time,update_time,
         status
     </sql>
 </mapper>

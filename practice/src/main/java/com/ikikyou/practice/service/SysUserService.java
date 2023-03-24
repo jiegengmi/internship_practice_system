@@ -1,5 +1,6 @@
 package com.ikikyou.practice.service;
 
+import com.ikikyou.practice.dto.UserDTO;
 import com.ikikyou.practice.entity.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -11,4 +12,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface SysUserService extends IService<SysUser> {
 
     SysUser findByName(String username);
+
+    void insert(UserDTO userDTO);
 }

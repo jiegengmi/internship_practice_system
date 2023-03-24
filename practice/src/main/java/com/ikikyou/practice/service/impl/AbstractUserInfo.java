@@ -10,7 +10,6 @@ import com.ikikyou.practice.utils.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -44,10 +43,12 @@ public abstract class AbstractUserInfo {
         }
         userInfo.setUser(sysUser);
         List<Long> roleIds = this.getRoleIds(sysUser.getId());
+        if (CollectionUtils.isEmpty(roleIds)) {
+            return Result.fail("该用户没有角色！");
+        }
         //设置角色权限
         userInfo.setRoleIds(roleIds);
         if (CollectionUtil.isEmpty(roleIds)) {
-            userInfo.setRoleIds(new ArrayList<>());
             userInfo.setPermissions(new HashSet<>());
             return Result.ok();
         }

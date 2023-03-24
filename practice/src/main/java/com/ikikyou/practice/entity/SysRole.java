@@ -24,26 +24,26 @@ public class SysRole implements Serializable {
     /**
      *
      */
-    @TableId("r_id")
+    @TableId("id")
     private Long id;
 
     /**
      * 角色名称
      */
-    @TableField("r_name")
+    @TableField("name")
     private String name;
 
     /**
      * 角色编码
      */
-    @TableField("r_code")
+    @TableField("code")
     private Integer code;
 
     /**
      * 角色描述
      */
-    @TableField("r_desc")
-    private String desc;
+    @TableField("description")
+    private String description;
 
     /**
      * 角色状态（0：未启用；1：启用）

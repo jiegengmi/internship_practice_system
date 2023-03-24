@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +20,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class SysUser implements Serializable {
 
     @TableField(exist = false)
@@ -27,43 +29,43 @@ public class SysUser implements Serializable {
     /**
      * 
      */
-    @TableId("u_id")
+    @TableId("id")
     private Long id;
 
     /**
      * 用户名
      */
-    @TableField("u_name")
+    @TableField("name")
     private String name;
 
     /**
      * 年龄
      */
-    @TableField("u_age")
+    @TableField("age")
     private Integer age;
 
     /**
      * 性别
      */
-    @TableField("u_sex")
+    @TableField("sex")
     private Integer sex;
 
     /**
      * 联系方式
      */
-    @TableField("u_tel")
+    @TableField("tel")
     private String tel;
 
     /**
      * 邮箱
      */
-    @TableField("u_email")
+    @TableField("email")
     private String email;
 
     /**
      * 
      */
-    @TableField("u_password")
+    @TableField("password")
     private String password;
 
     /**

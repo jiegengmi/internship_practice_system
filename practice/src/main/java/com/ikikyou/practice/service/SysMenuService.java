@@ -2,6 +2,7 @@ package com.ikikyou.practice.service;
 
 import com.ikikyou.practice.entity.SysMenu;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ikikyou.practice.dto.UserMenuDTO;
 
 import java.util.List;
 
@@ -12,4 +13,5 @@ import java.util.List;
 */
 public interface SysMenuService extends IService<SysMenu> {
 
+    List<UserMenuDTO> buildMenus();
 }

@@ -23,55 +23,55 @@ public class SysMenu implements Serializable {
     /**
      * 
      */
-    @TableId("m_id")
+    @TableId("id")
     private Long id;
 
     /**
      * 菜单名称
      */
-    @TableField("m_name")
+    @TableField("name")
     private String name;
 
     /**
      * 菜单权限标识
      */
-    @TableField("m_permission")
+    @TableField("permission")
     private String permission;
 
     /**
      * 父菜单id
      */
-    @TableField("m_parent_id")
+    @TableField("parent_id")
     private Long parentId;
 
     /**
      * 图标
      */
-    @TableField("m_icon")
+    @TableField("icon")
     private String icon;
 
     /**
      * 前端路由标识路径
      */
-    @TableField("m_path")
+    @TableField("path")
     private String path;
 
     /**
      * 路由名称
      */
-    @TableField("m_component")
+    @TableField("component")
     private String component;
 
     /**
      * 排序值
      */
-    @TableField("m_order")
-    private Integer order;
+    @TableField("orders")
+    private Integer orders;
 
     /**
      * 菜单类型
      */
-    @TableField("m_type")
+    @TableField("type")
     private Integer type;
 
     /**

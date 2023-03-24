@@ -1,5 +1,7 @@
 server:
   port: 8080
+  servlet:
+    context-path: /practice
 
 spring:
   datasource:
@@ -17,3 +19,18 @@ spring:
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    root: INFO
+    org:
+      springframework:
+        security: INFO
+        web: INFO
+  charset:
+    console: UTF-8
+  config: classpath:logback-spring.xml
+
