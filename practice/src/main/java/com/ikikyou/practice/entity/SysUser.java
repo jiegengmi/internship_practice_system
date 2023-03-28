@@ -39,6 +39,12 @@ public class SysUser implements Serializable {
     private String name;
 
     /**
+     * 昵称
+     */
+    @TableField("nick_name")
+    private String nickName;
+
+    /**
      * 年龄
      */
     @TableField("age")

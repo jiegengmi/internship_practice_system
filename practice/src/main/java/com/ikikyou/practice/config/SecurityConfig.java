@@ -1,6 +1,5 @@
 package com.ikikyou.practice.config;
 
-import cn.hutool.crypto.digest.BCrypt;
 import com.ikikyou.practice.auth.UserDetailsServiceImpl;
 import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +18,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
  * @date 2023/03/21 14:09
  */
 @Configuration
-public class SecurityConfiguration {
+public class SecurityConfig {
 
     @Resource
     private UserDetailsServiceImpl userDetailsService;

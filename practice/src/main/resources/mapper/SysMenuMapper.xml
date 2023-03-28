@@ -6,7 +6,7 @@
 
     <resultMap id="BaseResultMap" type="com.ikikyou.practice.entity.SysMenu">
             <id property="id" column="id" jdbcType="BIGINT"/>
-            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
             <result property="permission" column="permission" jdbcType="VARCHAR"/>
             <result property="parentId" column="parent_id" jdbcType="BIGINT"/>
             <result property="icon" column="icon" jdbcType="VARCHAR"/>
@@ -21,7 +21,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,name,permission,
+        id,title,permission,
         parent_id,icon,path,
         component,orders,type,
         create_time,update_time,is_hidden,
@@ -29,7 +29,7 @@
     </sql>
     <select id="getByRoleIds" resultType="com.ikikyou.practice.entity.SysMenu">
         SELECT
-            id, name, permission, parent_id, icon, path, component, orders, type, create_time, update_time, is_hidden, status
+            id, title, permission, parent_id, icon, path, component, orders, type, create_time, update_time, is_hidden, status
         FROM
         sys_menu menu left join role_menu_link link on link.menu_id = id
         where

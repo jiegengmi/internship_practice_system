@@ -2,7 +2,7 @@ package com.ikikyou.practice.controller;
 
 import com.ikikyou.practice.service.SysMenuService;
 import com.ikikyou.practice.utils.Result;
-import com.ikikyou.practice.dto.UserMenuDTO;
+import com.ikikyou.practice.dto.MenuDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +25,7 @@ public class MenuController {
      * 构建用户菜单
      */
     @GetMapping("/build")
-    public Result<List<UserMenuDTO>> buildUserMenus() {
+    public Result<List<MenuDTO>> buildUserMenus() {
         return Result.ok(menuService.buildMenus());
     }
 }

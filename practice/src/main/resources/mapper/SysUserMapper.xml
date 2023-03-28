@@ -7,6 +7,7 @@
     <resultMap id="BaseResultMap" type="com.ikikyou.practice.entity.SysUser">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="nickName" column="nickName" jdbcType="VARCHAR"/>
             <result property="age" column="age" jdbcType="SMALLINT"/>
             <result property="sex" column="sex" jdbcType="SMALLINT"/>
             <result property="tel" column="tel" jdbcType="VARCHAR"/>
@@ -18,7 +19,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,name,age,
+        id,name,nick_name,age,
         sex,tel,email,
         password,create_time,update_time,
         status

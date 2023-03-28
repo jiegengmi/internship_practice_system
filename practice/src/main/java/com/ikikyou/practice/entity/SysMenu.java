@@ -29,8 +29,8 @@ public class SysMenu implements Serializable {
     /**
      * 菜单名称
      */
-    @TableField("name")
-    private String name;
+    @TableField("title")
+    private String title;
 
     /**
      * 菜单权限标识

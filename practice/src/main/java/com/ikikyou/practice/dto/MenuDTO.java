@@ -15,14 +15,14 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserMenuDTO {
+public class MenuDTO {
 
     private Long id;
 
     /**
      * 菜单名
      */
-    private String name;
+    private String title;
 
     /**
      * 路径
@@ -47,5 +47,5 @@ public class UserMenuDTO {
     /**
      * 子菜单列表
      */
-    private List<UserMenuDTO> children;
+    private List<MenuDTO> children;
 }

@@ -1,14 +1,13 @@
 package com.ikikyou.practice.controller;
 
 import com.ikikyou.practice.dto.UserDTO;
+import com.ikikyou.practice.dto.query.UserQueryDTO;
 import com.ikikyou.practice.service.SysUserService;
+import com.ikikyou.practice.utils.PageResult;
 import com.ikikyou.practice.utils.Result;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author hongx
@@ -25,5 +24,10 @@ public class UserController {
     public Result<Void> add(@RequestBody @Valid UserDTO userDTO){
         userService.insert(userDTO);
         return Result.ok();
+    }
+
+    @GetMapping("/query")
+    public Result<PageResult<?>> getUsers(UserQueryDTO userQuery) {
+        return Result.ok(userService.getUsers(userQuery));
     }
 }

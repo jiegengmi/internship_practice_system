@@ -1,22 +1,24 @@
 package com.ikikyou.practice.service.impl;
 
-import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ikikyou.practice.common.BusinessException;
 import com.ikikyou.practice.dto.UserDTO;
+import com.ikikyou.practice.dto.query.UserQueryDTO;
 import com.ikikyou.practice.entity.SysUser;
 import com.ikikyou.practice.service.SysUserService;
 import com.ikikyou.practice.mapper.SysUserMapper;
+import com.ikikyou.practice.utils.PageResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Objects;
 
 import static com.ikikyou.practice.constant.CommonConstant.BCRYPT_SALT;
@@ -57,6 +59,18 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         userInfo.setStatus(1);
         userInfo.setPassword(BCrypt.hashpw(user.getPassword(), BCRYPT_SALT));
         this.save(userInfo);
+    }
+
+    @Override
+    public PageResult<UserDTO> getUsers(UserQueryDTO userQueryDTO) {
+        Page<SysUser> page = new Page<>(userQueryDTO.getPageNum(), userQueryDTO.getPageSize());
+        Page<SysUser> sysUserPage = userMapper.selectPage(page, new LambdaQueryWrapper<SysUser>()
+                .like(StrUtil.isNotBlank(userQueryDTO.getNickName()), SysUser::getNickName, userQueryDTO.getNickName())
+                .like(StrUtil.isNotBlank(userQueryDTO.getEmail()), SysUser::getEmail, userQueryDTO.getEmail())
+                .like(StrUtil.isNotBlank(userQueryDTO.getUsername()), SysUser::getName, userQueryDTO.getUsername()));
+        PageResult<UserDTO> pageResult = new PageResult<>();
+        BeanUtils.copyProperties(sysUserPage, pageResult);
+        return pageResult;
     }
 
     /**

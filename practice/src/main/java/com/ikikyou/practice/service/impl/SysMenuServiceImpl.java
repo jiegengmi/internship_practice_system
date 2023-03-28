@@ -5,7 +5,7 @@ import com.ikikyou.practice.entity.SysMenu;
 import com.ikikyou.practice.service.SysMenuService;
 import com.ikikyou.practice.mapper.SysMenuMapper;
 import com.ikikyou.practice.utils.SecurityUtil;
-import com.ikikyou.practice.dto.UserMenuDTO;
+import com.ikikyou.practice.dto.MenuDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -25,22 +25,22 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     final SysMenuMapper menuMapper;
 
     @Override
-    public List<UserMenuDTO> buildMenus() {
+    public List<MenuDTO> buildMenus() {
 
         List<SysMenu> userSysMenus = menuMapper.getByRoleIds(SecurityUtil.getRoles());
         //构建树级菜单
-        List<UserMenuDTO> menuList = new ArrayList<>();
+        List<MenuDTO> menuList = new ArrayList<>();
         // 先找到所有的一级菜单
         for (SysMenu menu : userSysMenus) {
             // 一级菜单没有parentId
             if (menu.getParentId() == null) {
-                UserMenuDTO menuDTO = new UserMenuDTO();
+                MenuDTO menuDTO = new MenuDTO();
                 BeanUtils.copyProperties(menu, menuDTO);
                 menuList.add(menuDTO);
             }
         }
         // 为一级菜单设置子菜单
-        for (UserMenuDTO menuDTO : menuList) {
+        for (MenuDTO menuDTO : menuList) {
             menuDTO.setChildren(getChild(menuDTO.getId(), userSysMenus));
         }
         return menuList;
@@ -52,19 +52,19 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
      * @param rootMenu 根
      * @return list
      */
-    private List<UserMenuDTO> getChild(Long id, List<SysMenu> rootMenu) {
-        List<UserMenuDTO> childList = new ArrayList<>();
+    private List<MenuDTO> getChild(Long id, List<SysMenu> rootMenu) {
+        List<MenuDTO> childList = new ArrayList<>();
         for (SysMenu menu : rootMenu) {
             // 遍历所有节点，将父菜单id与传过来的id比较
-            if (menu.getId() != null) {
+            if (menu.getId() != null && menu.getParentId() != null) {
                 if (menu.getParentId().equals(id)) {
-                    UserMenuDTO userMenuDTO = new UserMenuDTO();
-                    BeanUtils.copyProperties(menu, userMenuDTO);
-                    childList.add(userMenuDTO);
+                    MenuDTO menuDTO = new MenuDTO();
+                    BeanUtils.copyProperties(menu, menuDTO);
+                    childList.add(menuDTO);
                 }
             }
         }
-        for (UserMenuDTO menu : childList) {
+        for (MenuDTO menu : childList) {
             menu.setChildren(getChild(menu.getId(), rootMenu));
         }
         //退出循环
