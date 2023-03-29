@@ -1,0 +1,34 @@
+// 样式前缀，做微前端，防止各个系统样式冲突时，各个系统修改为不同的值
+@packageName: ''; // lessLoader 会改为 package.json name属性
+@ant-prefix: ~'@{packageName}';
+@ra-lib-prefix: ~'@{packageName}-ra';
+
+// 自定义变量
+//@page-content-margin: 0;
+//@page-content-padding: 0;
+//@content-margin: 0px;
+//@content-padding: 8px;
+//@layout-z-index: 999;
+//@layout-transition-duration: 0;
+
+// ant 官方变量
+// https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
+@border-color-base: hsv(0, 0, 85%);
+
+//@primary-color: #42b983;
+//@layout-header-background: #42b983;
+//@menu-dark-inline-submenu-bg: #349368;
+
+@primary-color: #1890ff; // 主题色
+@layout-header-background: #001529; // 头部背景色
+@menu-dark-inline-submenu-bg: #000c17; // 菜单背景色
+
+// 字体颜色
+@text-color: fade(#000, 65%);
+@body-background: #f0f2f5;
+
+:export {
+    antPrefix: @ant-prefix;
+    raLibPrefix: @ra-lib-prefix;
+    primaryColor: @primary-color;
+}

@@ -1,0 +1,88 @@
+@import "src/theme";
+
+.root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: 100vh;
+    background-image: url("./login-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.logo {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+}
+
+.proxy {
+    position: absolute;
+    cursor: pointer;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 8px 16px;
+    border-radius: 3px;
+}
+
+.box {
+    padding: 16px 40px;
+    width: 350px;
+
+    border-radius: 0;
+    // background: #f8f8f9;
+    z-index: 100;
+
+    .header {
+        font-size: 25px;
+        text-align: center;
+        color: #fff;
+        font-weight: bolder;
+    }
+
+    .submitBtn {
+        width: 100%;
+    }
+
+    .errorTip {
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        color: red;
+    }
+
+    .formItem {
+        transition-delay: 5s;
+        transition: 500ms;
+        transform: translateX(100%);
+        margin-bottom: 24px;
+
+        &:nth-child(2n) {
+            transform: translateX(-100%);
+        }
+
+        &.active {
+            transform: translateX(0);
+        }
+    }
+
+    :global {
+        .@{ant-prefix}-input {
+            height: 34px;
+        }
+
+        .@{ant-prefix}-btn {
+            height: 44px;
+        }
+
+        .@{ant-prefix}-form-item-explain {
+            position: absolute !important;
+            bottom: -24px !important;
+        }
+    }
+}

@@ -1,0 +1,570 @@
+2023-03-28 08:54:15,601 [background-preinit] INFO  [org.hibernate.validator.internal.util.Version] Version.java:21 - HV000001: Hibernate Validator 8.0.0.Final
+2023-03-28 08:54:15,667 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:51 - Starting PracticeApplication using Java 17.0.6 with PID 7468 (D:\java\internship_practice_system\practice\target\classes started by 25726 in D:\java\internship_practice_system\practice)
+2023-03-28 08:54:15,668 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] SpringApplication.java:632 - No active profile set, falling back to 1 default profile: "default"
+2023-03-28 08:54:15,837 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-03-28 08:54:15,838 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-03-28 08:54:20,733 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 8080 (http)
+2023-03-28 08:54:20,773 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2023-03-28 08:54:20,775 [restartedMain] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2023-03-28 08:54:20,776 [restartedMain] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-28 08:54:21,080 [restartedMain] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2023-03-28 08:54:21,081 [restartedMain] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:291 - Root WebApplicationContext: initialization completed in 5242 ms
+2023-03-28 08:54:22,432 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.RoleMenu ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 08:54:22,830 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.UserRole ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 08:54:23,844 [restartedMain] INFO  [o.s.security.web.DefaultSecurityFilterChain] DefaultSecurityFilterChain.java:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@eb4ade7, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5cdbb00b, org.springframework.security.web.context.SecurityContextHolderFilter@42b3aa47, org.springframework.security.web.header.HeaderWriterFilter@2bae79eb, org.springframework.security.web.csrf.CsrfFilter@793444e9, org.springframework.security.web.authentication.logout.LogoutFilter@1f629472, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@7975690b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3aa230d1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@59de1569, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@44a764d2, org.springframework.security.web.access.ExceptionTranslationFilter@7cb3921c, org.springframework.security.web.access.intercept.AuthorizationFilter@4f00b77c]
+2023-03-28 08:54:24,129 [restartedMain] INFO  [o.s.b.d.autoconfigure.OptionalLiveReloadServer] OptionalLiveReloadServer.java:59 - LiveReload server is running on port 35729
+2023-03-28 08:54:24,158 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Starting ProtocolHandler ["http-nio-8080"]
+2023-03-28 08:54:24,184 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-28 08:54:24,199 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:57 - Started PracticeApplication in 9.708 seconds (process running for 14.643)
+2023-03-28 08:54:37,743 [http-nio-8080-exec-1] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-28 08:54:37,744 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:532 - Initializing Servlet 'dispatcherServlet'
+2023-03-28 08:54:37,745 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:554 - Completed initialization in 1 ms
+2023-03-28 08:54:39,344 [http-nio-8080-exec-2] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:110 - HikariPool-1 - Starting...
+2023-03-28 08:54:39,843 [http-nio-8080-exec-2] INFO  [com.zaxxer.hikari.pool.HikariPool] HikariPool.java:565 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@66cec0d3
+2023-03-28 08:54:39,847 [http-nio-8080-exec-2] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:123 - HikariPool-1 - Start completed.
+2023-03-28 08:57:12,971 [http-nio-8080-exec-6] WARN  [org.springframework.web.servlet.PageNotFound] DispatcherServlet.java:1292 - No mapping for GET /user/getUserById
+2023-03-28 08:57:13,230 [http-nio-8080-exec-7] WARN  [org.springframework.web.servlet.PageNotFound] DispatcherServlet.java:1292 - No mapping for GET /role/queryEnabledRoles
+2023-03-28 09:08:44,060 [http-nio-8080-exec-8] WARN  [org.springframework.web.servlet.PageNotFound] DispatcherServlet.java:1292 - No mapping for GET /role/queryEnabledRoles
+2023-03-28 09:08:44,124 [http-nio-8080-exec-9] WARN  [org.springframework.web.servlet.PageNotFound] DispatcherServlet.java:1292 - No mapping for GET /user/getUserById
+2023-03-28 09:09:00,592 [SpringApplicationShutdownHook] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:350 - HikariPool-1 - Shutdown initiated...
+2023-03-28 09:09:00,603 [SpringApplicationShutdownHook] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:352 - HikariPool-1 - Shutdown completed.
+2023-03-28 09:09:08,402 [background-preinit] INFO  [org.hibernate.validator.internal.util.Version] Version.java:21 - HV000001: Hibernate Validator 8.0.0.Final
+2023-03-28 09:09:08,453 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:51 - Starting PracticeApplication using Java 17.0.6 with PID 21648 (D:\java\internship_practice_system\practice\target\classes started by 25726 in D:\java\internship_practice_system\practice)
+2023-03-28 09:09:08,454 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] SpringApplication.java:632 - No active profile set, falling back to 1 default profile: "default"
+2023-03-28 09:09:08,526 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-03-28 09:09:08,527 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-03-28 09:09:10,177 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 8080 (http)
+2023-03-28 09:09:10,186 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2023-03-28 09:09:10,187 [restartedMain] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2023-03-28 09:09:10,188 [restartedMain] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-28 09:09:10,240 [restartedMain] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2023-03-28 09:09:10,240 [restartedMain] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:291 - Root WebApplicationContext: initialization completed in 1712 ms
+2023-03-28 09:09:10,502 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.RoleMenu ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 09:09:10,689 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.UserRole ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 09:09:11,251 [restartedMain] INFO  [o.s.security.web.DefaultSecurityFilterChain] DefaultSecurityFilterChain.java:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1cd429e3, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@19ff3dcf, org.springframework.security.web.context.SecurityContextHolderFilter@74235f5d, org.springframework.security.web.header.HeaderWriterFilter@74baebf0, org.springframework.security.web.csrf.CsrfFilter@1e943b1f, org.springframework.security.web.authentication.logout.LogoutFilter@6524453f, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@33a6c10f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6a4193a6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@13d624f0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@545bf252, org.springframework.security.web.access.ExceptionTranslationFilter@4e3c5c74, org.springframework.security.web.access.intercept.AuthorizationFilter@49aa7b95]
+2023-03-28 09:09:11,467 [restartedMain] INFO  [o.s.b.d.autoconfigure.OptionalLiveReloadServer] OptionalLiveReloadServer.java:59 - LiveReload server is running on port 35729
+2023-03-28 09:09:11,501 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Starting ProtocolHandler ["http-nio-8080"]
+2023-03-28 09:09:11,523 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-28 09:09:11,532 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:57 - Started PracticeApplication in 3.671 seconds (process running for 4.725)
+2023-03-28 09:10:53,036 [http-nio-8080-exec-1] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-28 09:10:53,036 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:532 - Initializing Servlet 'dispatcherServlet'
+2023-03-28 09:10:53,037 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:554 - Completed initialization in 0 ms
+2023-03-28 09:10:53,334 [http-nio-8080-exec-1] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:110 - HikariPool-1 - Starting...
+2023-03-28 09:10:53,574 [http-nio-8080-exec-1] INFO  [com.zaxxer.hikari.pool.HikariPool] HikariPool.java:565 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2420fb65
+2023-03-28 09:10:53,578 [http-nio-8080-exec-1] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:123 - HikariPool-1 - Start completed.
+2023-03-28 09:10:57,731 [http-nio-8080-exec-3] WARN  [org.springframework.web.servlet.PageNotFound] DispatcherServlet.java:1292 - No mapping for GET /role/queryEnabledRoles
+2023-03-28 09:27:40,220 [SpringApplicationShutdownHook] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:350 - HikariPool-1 - Shutdown initiated...
+2023-03-28 09:27:40,226 [SpringApplicationShutdownHook] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:352 - HikariPool-1 - Shutdown completed.
+2023-03-28 09:27:47,388 [background-preinit] INFO  [org.hibernate.validator.internal.util.Version] Version.java:21 - HV000001: Hibernate Validator 8.0.0.Final
+2023-03-28 09:27:47,463 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:51 - Starting PracticeApplication using Java 17.0.6 with PID 7620 (D:\java\internship_practice_system\practice\target\classes started by 25726 in D:\java\internship_practice_system\practice)
+2023-03-28 09:27:47,465 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] SpringApplication.java:632 - No active profile set, falling back to 1 default profile: "default"
+2023-03-28 09:27:47,572 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-03-28 09:27:47,573 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-03-28 09:27:49,052 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 8080 (http)
+2023-03-28 09:27:49,098 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2023-03-28 09:27:49,099 [restartedMain] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2023-03-28 09:27:49,101 [restartedMain] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-28 09:27:49,153 [restartedMain] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2023-03-28 09:27:49,153 [restartedMain] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:291 - Root WebApplicationContext: initialization completed in 1579 ms
+2023-03-28 09:27:49,424 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.RoleMenu ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 09:27:49,602 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.UserRole ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 09:27:50,037 [restartedMain] INFO  [o.s.security.web.DefaultSecurityFilterChain] DefaultSecurityFilterChain.java:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@274a3367, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@79d228d2, org.springframework.security.web.context.SecurityContextHolderFilter@7f613159, org.springframework.security.web.header.HeaderWriterFilter@665ae6df, org.springframework.security.web.csrf.CsrfFilter@599d383a, org.springframework.security.web.authentication.logout.LogoutFilter@1ddefa8a, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@2dce7105, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@78744b3f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@74235f5d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@32707d1c, org.springframework.security.web.access.ExceptionTranslationFilter@7c6ec651, org.springframework.security.web.access.intercept.AuthorizationFilter@4e3073c1]
+2023-03-28 09:27:50,208 [restartedMain] INFO  [o.s.b.d.autoconfigure.OptionalLiveReloadServer] OptionalLiveReloadServer.java:59 - LiveReload server is running on port 35729
+2023-03-28 09:27:50,234 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Starting ProtocolHandler ["http-nio-8080"]
+2023-03-28 09:27:50,261 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-28 09:27:50,272 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:57 - Started PracticeApplication in 3.58 seconds (process running for 4.477)
+2023-03-28 09:28:10,755 [http-nio-8080-exec-1] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-28 09:28:10,755 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:532 - Initializing Servlet 'dispatcherServlet'
+2023-03-28 09:28:10,757 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:554 - Completed initialization in 1 ms
+2023-03-28 09:28:11,042 [http-nio-8080-exec-1] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:110 - HikariPool-1 - Starting...
+2023-03-28 09:28:11,307 [http-nio-8080-exec-1] INFO  [com.zaxxer.hikari.pool.HikariPool] HikariPool.java:565 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1503ed4e
+2023-03-28 09:28:11,309 [http-nio-8080-exec-1] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:123 - HikariPool-1 - Start completed.
+2023-03-28 09:28:15,732 [http-nio-8080-exec-2] WARN  [c.b.m.core.toolkit.support.ReflectLambdaMeta] ReflectLambdaMeta.java:41 - Unable to make field private final java.lang.Class java.lang.invoke.SerializedLambda.capturingClass accessible: module java.base does not "opens java.lang.invoke" to unnamed module @3eba1829
+2023-03-28 09:37:01,223 [SpringApplicationShutdownHook] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:350 - HikariPool-1 - Shutdown initiated...
+2023-03-28 09:37:01,229 [SpringApplicationShutdownHook] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:352 - HikariPool-1 - Shutdown completed.
+2023-03-28 09:37:04,299 [background-preinit] INFO  [org.hibernate.validator.internal.util.Version] Version.java:21 - HV000001: Hibernate Validator 8.0.0.Final
+2023-03-28 09:37:04,334 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:51 - Starting PracticeApplication using Java 17.0.6 with PID 21012 (D:\java\internship_practice_system\practice\target\classes started by 25726 in D:\java\internship_practice_system\practice)
+2023-03-28 09:37:04,335 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] SpringApplication.java:632 - No active profile set, falling back to 1 default profile: "default"
+2023-03-28 09:37:04,391 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-03-28 09:37:04,391 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-03-28 09:37:05,648 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 8080 (http)
+2023-03-28 09:37:05,658 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2023-03-28 09:37:05,659 [restartedMain] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2023-03-28 09:37:05,659 [restartedMain] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-28 09:37:05,716 [restartedMain] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2023-03-28 09:37:05,716 [restartedMain] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:291 - Root WebApplicationContext: initialization completed in 1324 ms
+2023-03-28 09:37:05,990 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.RoleMenu ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 09:37:06,164 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.UserRole ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 09:37:06,595 [restartedMain] INFO  [o.s.security.web.DefaultSecurityFilterChain] DefaultSecurityFilterChain.java:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2654a000, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3e9c86cd, org.springframework.security.web.context.SecurityContextHolderFilter@7b184824, org.springframework.security.web.header.HeaderWriterFilter@223e7bc, org.springframework.security.web.csrf.CsrfFilter@6a011191, org.springframework.security.web.authentication.logout.LogoutFilter@71a94eb4, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@2034a65, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@596ee56a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6a4b8280, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3fc92c1b, org.springframework.security.web.access.ExceptionTranslationFilter@5a4f53ef, org.springframework.security.web.access.intercept.AuthorizationFilter@47717d95]
+2023-03-28 09:37:06,762 [restartedMain] INFO  [o.s.b.d.autoconfigure.OptionalLiveReloadServer] OptionalLiveReloadServer.java:59 - LiveReload server is running on port 35729
+2023-03-28 09:37:06,793 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Starting ProtocolHandler ["http-nio-8080"]
+2023-03-28 09:37:06,813 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-28 09:37:06,827 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:57 - Started PracticeApplication in 3.006 seconds (process running for 3.837)
+2023-03-28 09:38:24,310 [background-preinit] INFO  [org.hibernate.validator.internal.util.Version] Version.java:21 - HV000001: Hibernate Validator 8.0.0.Final
+2023-03-28 09:38:24,344 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:51 - Starting PracticeApplication using Java 17.0.6 with PID 15684 (D:\java\internship_practice_system\practice\target\classes started by 25726 in D:\java\internship_practice_system\practice)
+2023-03-28 09:38:24,345 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] SpringApplication.java:632 - No active profile set, falling back to 1 default profile: "default"
+2023-03-28 09:38:24,399 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-03-28 09:38:24,399 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-03-28 09:38:25,487 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 8080 (http)
+2023-03-28 09:38:25,496 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2023-03-28 09:38:25,496 [restartedMain] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2023-03-28 09:38:25,497 [restartedMain] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-28 09:38:25,546 [restartedMain] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2023-03-28 09:38:25,546 [restartedMain] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:291 - Root WebApplicationContext: initialization completed in 1147 ms
+2023-03-28 09:38:25,804 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.RoleMenu ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 09:38:25,952 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.UserRole ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 09:38:26,325 [restartedMain] INFO  [o.s.security.web.DefaultSecurityFilterChain] DefaultSecurityFilterChain.java:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@648a1607, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@57f1687, org.springframework.security.web.context.SecurityContextHolderFilter@5baa2c8b, org.springframework.security.web.header.HeaderWriterFilter@6e135d31, org.springframework.security.web.csrf.CsrfFilter@51507189, org.springframework.security.web.authentication.logout.LogoutFilter@41aa9fe5, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@43945009, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1d6717a4, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@66608135, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6cd3e91c, org.springframework.security.web.access.ExceptionTranslationFilter@660bf906, org.springframework.security.web.access.intercept.AuthorizationFilter@58a1e221]
+2023-03-28 09:38:26,485 [restartedMain] INFO  [o.s.b.d.autoconfigure.OptionalLiveReloadServer] OptionalLiveReloadServer.java:59 - LiveReload server is running on port 35729
+2023-03-28 09:38:26,508 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Starting ProtocolHandler ["http-nio-8080"]
+2023-03-28 09:38:26,525 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-28 09:38:26,533 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:57 - Started PracticeApplication in 2.693 seconds (process running for 3.532)
+2023-03-28 09:38:34,246 [http-nio-8080-exec-3] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-28 09:38:34,247 [http-nio-8080-exec-3] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:532 - Initializing Servlet 'dispatcherServlet'
+2023-03-28 09:38:34,248 [http-nio-8080-exec-3] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:554 - Completed initialization in 1 ms
+2023-03-28 09:38:34,408 [http-nio-8080-exec-3] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:110 - HikariPool-1 - Starting...
+2023-03-28 09:38:34,569 [http-nio-8080-exec-3] INFO  [com.zaxxer.hikari.pool.HikariPool] HikariPool.java:565 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4a0ecab4
+2023-03-28 09:38:34,571 [http-nio-8080-exec-3] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:123 - HikariPool-1 - Start completed.
+2023-03-28 09:38:34,795 [http-nio-8080-exec-1] WARN  [c.b.m.core.toolkit.support.ReflectLambdaMeta] ReflectLambdaMeta.java:41 - Unable to make field private final java.lang.Class java.lang.invoke.SerializedLambda.capturingClass accessible: module java.base does not "opens java.lang.invoke" to unnamed module @9d41a05
+2023-03-28 09:47:58,556 [http-nio-8080-exec-2] WARN  [org.springframework.web.servlet.PageNotFound] DispatcherServlet.java:1292 - No mapping for GET /user/getOneUser
+2023-03-28 10:02:41,088 [SpringApplicationShutdownHook] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:350 - HikariPool-1 - Shutdown initiated...
+2023-03-28 10:02:41,095 [SpringApplicationShutdownHook] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:352 - HikariPool-1 - Shutdown completed.
+2023-03-28 10:02:48,549 [background-preinit] INFO  [org.hibernate.validator.internal.util.Version] Version.java:21 - HV000001: Hibernate Validator 8.0.0.Final
+2023-03-28 10:02:48,585 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:51 - Starting PracticeApplication using Java 17.0.6 with PID 7332 (D:\java\internship_practice_system\practice\target\classes started by 25726 in D:\java\internship_practice_system\practice)
+2023-03-28 10:02:48,586 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] SpringApplication.java:632 - No active profile set, falling back to 1 default profile: "default"
+2023-03-28 10:02:48,648 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-03-28 10:02:48,649 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-03-28 10:02:49,911 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 8080 (http)
+2023-03-28 10:02:49,921 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2023-03-28 10:02:49,921 [restartedMain] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2023-03-28 10:02:49,922 [restartedMain] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-28 10:02:49,980 [restartedMain] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2023-03-28 10:02:49,981 [restartedMain] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:291 - Root WebApplicationContext: initialization completed in 1332 ms
+2023-03-28 10:02:50,316 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.RoleMenu ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 10:02:50,505 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.UserRole ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 10:02:51,182 [restartedMain] INFO  [o.s.security.web.DefaultSecurityFilterChain] DefaultSecurityFilterChain.java:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2d0ab202, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4d7bf329, org.springframework.security.web.context.SecurityContextHolderFilter@c0a8454, org.springframework.security.web.header.HeaderWriterFilter@57e5df42, org.springframework.security.web.csrf.CsrfFilter@62d515e0, org.springframework.security.web.authentication.logout.LogoutFilter@9faca85, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@19ff3dcf, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@13d624f0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@73231904, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@463941b6, org.springframework.security.web.access.ExceptionTranslationFilter@2e54c41b, org.springframework.security.web.access.intercept.AuthorizationFilter@576e58c1]
+2023-03-28 10:02:51,347 [restartedMain] INFO  [o.s.b.d.autoconfigure.OptionalLiveReloadServer] OptionalLiveReloadServer.java:59 - LiveReload server is running on port 35729
+2023-03-28 10:02:51,376 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Starting ProtocolHandler ["http-nio-8080"]
+2023-03-28 10:02:51,394 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-28 10:02:51,403 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:57 - Started PracticeApplication in 3.35 seconds (process running for 4.188)
+2023-03-28 10:02:56,347 [http-nio-8080-exec-1] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-28 10:02:56,348 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:532 - Initializing Servlet 'dispatcherServlet'
+2023-03-28 10:02:56,349 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:554 - Completed initialization in 1 ms
+2023-03-28 10:02:56,511 [http-nio-8080-exec-1] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:110 - HikariPool-1 - Starting...
+2023-03-28 10:02:56,691 [http-nio-8080-exec-1] INFO  [com.zaxxer.hikari.pool.HikariPool] HikariPool.java:565 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@524506f8
+2023-03-28 10:02:56,693 [http-nio-8080-exec-1] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:123 - HikariPool-1 - Start completed.
+2023-03-28 10:02:56,917 [http-nio-8080-exec-1] WARN  [c.b.m.core.toolkit.support.ReflectLambdaMeta] ReflectLambdaMeta.java:41 - Unable to make field private final java.lang.Class java.lang.invoke.SerializedLambda.capturingClass accessible: module java.base does not "opens java.lang.invoke" to unnamed module @3eba1829
+2023-03-28 10:03:40,125 [SpringApplicationShutdownHook] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:350 - HikariPool-1 - Shutdown initiated...
+2023-03-28 10:03:40,131 [SpringApplicationShutdownHook] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:352 - HikariPool-1 - Shutdown completed.
+2023-03-28 10:16:27,377 [background-preinit] INFO  [org.hibernate.validator.internal.util.Version] Version.java:21 - HV000001: Hibernate Validator 8.0.0.Final
+2023-03-28 10:16:27,449 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:51 - Starting PracticeApplication using Java 17.0.6 with PID 6488 (D:\java\internship_practice_system\practice\target\classes started by 25726 in D:\java\internship_practice_system\practice)
+2023-03-28 10:16:27,452 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] SpringApplication.java:632 - No active profile set, falling back to 1 default profile: "default"
+2023-03-28 10:16:27,559 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-03-28 10:16:27,560 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-03-28 10:16:30,164 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 8080 (http)
+2023-03-28 10:16:30,186 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2023-03-28 10:16:30,188 [restartedMain] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2023-03-28 10:16:30,189 [restartedMain] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-28 10:16:30,316 [restartedMain] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2023-03-28 10:16:30,317 [restartedMain] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:291 - Root WebApplicationContext: initialization completed in 2755 ms
+2023-03-28 10:16:30,966 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.RoleMenu ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 10:16:31,283 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.UserRole ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 10:16:32,198 [restartedMain] INFO  [o.s.security.web.DefaultSecurityFilterChain] DefaultSecurityFilterChain.java:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1cbcb253, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@54812fb6, org.springframework.security.web.context.SecurityContextHolderFilter@7ba050bd, org.springframework.security.web.header.HeaderWriterFilter@25d7fe2, org.springframework.security.web.csrf.CsrfFilter@13d624f0, org.springframework.security.web.authentication.logout.LogoutFilter@2d0ab202, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@216d3309, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2a53adbe, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@245118fc, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7e3270f, org.springframework.security.web.access.ExceptionTranslationFilter@5faac293, org.springframework.security.web.access.intercept.AuthorizationFilter@6eee5bfa]
+2023-03-28 10:16:32,599 [restartedMain] INFO  [o.s.b.d.autoconfigure.OptionalLiveReloadServer] OptionalLiveReloadServer.java:59 - LiveReload server is running on port 35729
+2023-03-28 10:16:32,659 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Starting ProtocolHandler ["http-nio-8080"]
+2023-03-28 10:16:32,698 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-28 10:16:32,721 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:57 - Started PracticeApplication in 6.331 seconds (process running for 7.975)
+2023-03-28 10:18:52,216 [http-nio-8080-exec-3] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-28 10:18:52,216 [http-nio-8080-exec-3] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:532 - Initializing Servlet 'dispatcherServlet'
+2023-03-28 10:18:52,217 [http-nio-8080-exec-3] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:554 - Completed initialization in 1 ms
+2023-03-28 10:26:41,228 [http-nio-8080-exec-1] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:110 - HikariPool-1 - Starting...
+2023-03-28 10:26:41,809 [http-nio-8080-exec-1] INFO  [com.zaxxer.hikari.pool.HikariPool] HikariPool.java:565 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@452ce12
+2023-03-28 10:26:41,812 [http-nio-8080-exec-1] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:123 - HikariPool-1 - Start completed.
+2023-03-28 10:42:31,992 [http-nio-8080-exec-3] WARN  [org.springframework.web.servlet.PageNotFound] DispatcherServlet.java:1292 - No mapping for GET /role/queryRoleByPage
+2023-03-28 10:42:38,928 [http-nio-8080-exec-1] WARN  [c.b.m.core.toolkit.support.ReflectLambdaMeta] ReflectLambdaMeta.java:41 - Unable to make field private final java.lang.Class java.lang.invoke.SerializedLambda.capturingClass accessible: module java.base does not "opens java.lang.invoke" to unnamed module @3eba1829
+2023-03-28 10:43:08,142 [http-nio-8080-exec-8] WARN  [org.springframework.web.servlet.PageNotFound] DispatcherServlet.java:1292 - No mapping for GET /role/queryRoleByPage
+2023-03-28 10:43:11,287 [http-nio-8080-exec-10] WARN  [org.springframework.web.servlet.PageNotFound] DispatcherServlet.java:1292 - No mapping for GET /role/queryRoleByPage
+2023-03-28 12:28:10,147 [SpringApplicationShutdownHook] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:350 - HikariPool-1 - Shutdown initiated...
+2023-03-28 12:28:10,150 [SpringApplicationShutdownHook] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:352 - HikariPool-1 - Shutdown completed.
+2023-03-28 12:28:18,820 [background-preinit] INFO  [org.hibernate.validator.internal.util.Version] Version.java:21 - HV000001: Hibernate Validator 8.0.0.Final
+2023-03-28 12:28:18,877 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:51 - Starting PracticeApplication using Java 17.0.6 with PID 20448 (D:\java\internship_practice_system\practice\target\classes started by 25726 in D:\java\internship_practice_system\practice)
+2023-03-28 12:28:18,878 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] SpringApplication.java:632 - No active profile set, falling back to 1 default profile: "default"
+2023-03-28 12:28:18,978 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-03-28 12:28:18,978 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-03-28 12:28:20,861 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 8080 (http)
+2023-03-28 12:28:20,874 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2023-03-28 12:28:20,875 [restartedMain] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2023-03-28 12:28:20,875 [restartedMain] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-28 12:28:20,968 [restartedMain] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2023-03-28 12:28:20,969 [restartedMain] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:291 - Root WebApplicationContext: initialization completed in 1989 ms
+2023-03-28 12:28:21,406 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.RoleMenu ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 12:28:21,616 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.UserRole ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 12:28:22,094 [restartedMain] INFO  [o.s.security.web.DefaultSecurityFilterChain] DefaultSecurityFilterChain.java:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7ea93b2d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@668b9a89, org.springframework.security.web.context.SecurityContextHolderFilter@4af2c67e, org.springframework.security.web.header.HeaderWriterFilter@4213f56e, org.springframework.security.web.csrf.CsrfFilter@d4159ba, org.springframework.security.web.authentication.logout.LogoutFilter@1e45a555, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@51593c65, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6c08996a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@72852c5a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@210dfb3d, org.springframework.security.web.access.ExceptionTranslationFilter@11ffd74b, org.springframework.security.web.access.intercept.AuthorizationFilter@4ec18565]
+2023-03-28 12:28:22,301 [restartedMain] INFO  [o.s.b.d.autoconfigure.OptionalLiveReloadServer] OptionalLiveReloadServer.java:59 - LiveReload server is running on port 35729
+2023-03-28 12:28:22,369 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Starting ProtocolHandler ["http-nio-8080"]
+2023-03-28 12:28:22,394 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-28 12:28:22,434 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:57 - Started PracticeApplication in 4.5 seconds (process running for 5.831)
+2023-03-28 12:28:43,656 [http-nio-8080-exec-1] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-28 12:28:43,657 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:532 - Initializing Servlet 'dispatcherServlet'
+2023-03-28 12:28:43,659 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:554 - Completed initialization in 2 ms
+2023-03-28 12:28:44,120 [http-nio-8080-exec-1] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:110 - HikariPool-1 - Starting...
+2023-03-28 12:28:44,548 [http-nio-8080-exec-1] INFO  [com.zaxxer.hikari.pool.HikariPool] HikariPool.java:565 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@28dde593
+2023-03-28 12:28:44,552 [http-nio-8080-exec-1] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:123 - HikariPool-1 - Start completed.
+2023-03-28 12:28:45,725 [http-nio-8080-exec-2] WARN  [c.b.m.core.toolkit.support.ReflectLambdaMeta] ReflectLambdaMeta.java:41 - Unable to make field private final java.lang.Class java.lang.invoke.SerializedLambda.capturingClass accessible: module java.base does not "opens java.lang.invoke" to unnamed module @6b23583e
+2023-03-28 12:58:50,035 [SpringApplicationShutdownHook] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:350 - HikariPool-1 - Shutdown initiated...
+2023-03-28 12:58:50,038 [SpringApplicationShutdownHook] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:352 - HikariPool-1 - Shutdown completed.
+2023-03-28 12:58:58,451 [background-preinit] INFO  [org.hibernate.validator.internal.util.Version] Version.java:21 - HV000001: Hibernate Validator 8.0.0.Final
+2023-03-28 12:58:58,501 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:51 - Starting PracticeApplication using Java 17.0.6 with PID 20776 (D:\java\internship_practice_system\practice\target\classes started by 25726 in D:\java\internship_practice_system\practice)
+2023-03-28 12:58:58,502 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] SpringApplication.java:632 - No active profile set, falling back to 1 default profile: "default"
+2023-03-28 12:58:58,590 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-03-28 12:58:58,591 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-03-28 12:59:00,510 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 8080 (http)
+2023-03-28 12:59:00,521 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2023-03-28 12:59:00,522 [restartedMain] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2023-03-28 12:59:00,523 [restartedMain] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-28 12:59:00,582 [restartedMain] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2023-03-28 12:59:00,582 [restartedMain] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:291 - Root WebApplicationContext: initialization completed in 1990 ms
+2023-03-28 12:59:00,873 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.RoleMenu ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 12:59:01,061 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.UserRole ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 12:59:01,511 [restartedMain] INFO  [o.s.security.web.DefaultSecurityFilterChain] DefaultSecurityFilterChain.java:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@74b145b, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@725e93a5, org.springframework.security.web.context.SecurityContextHolderFilter@5a487283, org.springframework.security.web.header.HeaderWriterFilter@5c73ff11, org.springframework.security.web.csrf.CsrfFilter@7d011ecb, org.springframework.security.web.authentication.logout.LogoutFilter@60f42863, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@e5f67f0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5124d72f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3a27cb8f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@c25a2fc, org.springframework.security.web.access.ExceptionTranslationFilter@5313e788, org.springframework.security.web.access.intercept.AuthorizationFilter@3bafc7cc]
+2023-03-28 12:59:01,685 [restartedMain] INFO  [o.s.b.d.autoconfigure.OptionalLiveReloadServer] OptionalLiveReloadServer.java:59 - LiveReload server is running on port 35729
+2023-03-28 12:59:01,710 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Starting ProtocolHandler ["http-nio-8080"]
+2023-03-28 12:59:01,733 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-28 12:59:01,745 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:57 - Started PracticeApplication in 3.925 seconds (process running for 5.107)
+2023-03-28 13:05:51,200 [background-preinit] INFO  [org.hibernate.validator.internal.util.Version] Version.java:21 - HV000001: Hibernate Validator 8.0.0.Final
+2023-03-28 13:05:51,244 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:51 - Starting PracticeApplication using Java 17.0.6 with PID 17172 (D:\java\internship_practice_system\practice\target\classes started by 25726 in D:\java\internship_practice_system\practice)
+2023-03-28 13:05:51,245 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] SpringApplication.java:632 - No active profile set, falling back to 1 default profile: "default"
+2023-03-28 13:05:51,316 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-03-28 13:05:51,316 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-03-28 13:05:52,877 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 8080 (http)
+2023-03-28 13:05:52,888 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2023-03-28 13:05:52,889 [restartedMain] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2023-03-28 13:05:52,889 [restartedMain] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-28 13:05:52,952 [restartedMain] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2023-03-28 13:05:52,953 [restartedMain] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:291 - Root WebApplicationContext: initialization completed in 1635 ms
+2023-03-28 13:05:53,258 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.RoleMenu ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 13:05:53,451 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.UserRole ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 13:05:53,892 [restartedMain] INFO  [o.s.security.web.DefaultSecurityFilterChain] DefaultSecurityFilterChain.java:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@48222669, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@76466bc, org.springframework.security.web.context.SecurityContextHolderFilter@1ddefa8a, org.springframework.security.web.header.HeaderWriterFilter@5d6f292f, org.springframework.security.web.csrf.CsrfFilter@7866299d, org.springframework.security.web.authentication.logout.LogoutFilter@7e8ca15f, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@5c94811, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@691fc349, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6524453f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1e49f1e2, org.springframework.security.web.access.ExceptionTranslationFilter@2a53adbe, org.springframework.security.web.access.intercept.AuthorizationFilter@72440514]
+2023-03-28 13:05:54,069 [restartedMain] INFO  [o.s.b.d.autoconfigure.OptionalLiveReloadServer] OptionalLiveReloadServer.java:59 - LiveReload server is running on port 35729
+2023-03-28 13:05:54,093 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Starting ProtocolHandler ["http-nio-8080"]
+2023-03-28 13:05:54,119 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-28 13:05:54,130 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:57 - Started PracticeApplication in 3.662 seconds (process running for 4.76)
+2023-03-28 13:06:05,759 [http-nio-8080-exec-1] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-28 13:06:05,760 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:532 - Initializing Servlet 'dispatcherServlet'
+2023-03-28 13:06:05,761 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:554 - Completed initialization in 1 ms
+2023-03-28 13:06:05,950 [http-nio-8080-exec-2] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:110 - HikariPool-1 - Starting...
+2023-03-28 13:06:06,159 [http-nio-8080-exec-2] INFO  [com.zaxxer.hikari.pool.HikariPool] HikariPool.java:565 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@291c1ab4
+2023-03-28 13:06:06,161 [http-nio-8080-exec-2] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:123 - HikariPool-1 - Start completed.
+2023-03-28 13:06:06,417 [http-nio-8080-exec-1] WARN  [c.b.m.core.toolkit.support.ReflectLambdaMeta] ReflectLambdaMeta.java:41 - Unable to make field private final java.lang.Class java.lang.invoke.SerializedLambda.capturingClass accessible: module java.base does not "opens java.lang.invoke" to unnamed module @3eba1829
+2023-03-28 13:23:54,048 [SpringApplicationShutdownHook] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:350 - HikariPool-1 - Shutdown initiated...
+2023-03-28 13:23:54,054 [SpringApplicationShutdownHook] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:352 - HikariPool-1 - Shutdown completed.
+2023-03-28 13:23:59,196 [background-preinit] INFO  [org.hibernate.validator.internal.util.Version] Version.java:21 - HV000001: Hibernate Validator 8.0.0.Final
+2023-03-28 13:23:59,244 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:51 - Starting PracticeApplication using Java 17.0.6 with PID 22268 (D:\java\internship_practice_system\practice\target\classes started by 25726 in D:\java\internship_practice_system\practice)
+2023-03-28 13:23:59,245 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] SpringApplication.java:632 - No active profile set, falling back to 1 default profile: "default"
+2023-03-28 13:23:59,309 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-03-28 13:23:59,309 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-03-28 13:24:00,577 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 8080 (http)
+2023-03-28 13:24:00,585 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2023-03-28 13:24:00,587 [restartedMain] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2023-03-28 13:24:00,587 [restartedMain] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-28 13:24:00,642 [restartedMain] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2023-03-28 13:24:00,642 [restartedMain] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:291 - Root WebApplicationContext: initialization completed in 1332 ms
+2023-03-28 13:24:00,903 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.RoleMenu ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 13:24:01,059 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.UserRole ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 13:24:01,461 [restartedMain] INFO  [o.s.security.web.DefaultSecurityFilterChain] DefaultSecurityFilterChain.java:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5bb1be8e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3488a27a, org.springframework.security.web.context.SecurityContextHolderFilter@74616ead, org.springframework.security.web.header.HeaderWriterFilter@cd7fe9a, org.springframework.security.web.csrf.CsrfFilter@3f5e03ad, org.springframework.security.web.authentication.logout.LogoutFilter@32603925, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@2918c9d3, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@26c9f7d4, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@47486f44, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@29060a11, org.springframework.security.web.access.ExceptionTranslationFilter@141677cf, org.springframework.security.web.access.intercept.AuthorizationFilter@56b1d5d1]
+2023-03-28 13:24:01,617 [restartedMain] INFO  [o.s.b.d.autoconfigure.OptionalLiveReloadServer] OptionalLiveReloadServer.java:59 - LiveReload server is running on port 35729
+2023-03-28 13:24:01,638 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Starting ProtocolHandler ["http-nio-8080"]
+2023-03-28 13:24:01,656 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-28 13:24:01,666 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:57 - Started PracticeApplication in 3.071 seconds (process running for 3.891)
+2023-03-28 13:24:10,938 [http-nio-8080-exec-1] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-28 13:24:10,939 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:532 - Initializing Servlet 'dispatcherServlet'
+2023-03-28 13:24:10,941 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:554 - Completed initialization in 2 ms
+2023-03-28 13:24:11,244 [http-nio-8080-exec-2] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:110 - HikariPool-1 - Starting...
+2023-03-28 13:24:11,540 [http-nio-8080-exec-2] INFO  [com.zaxxer.hikari.pool.HikariPool] HikariPool.java:565 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@65df727c
+2023-03-28 13:24:11,544 [http-nio-8080-exec-2] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:123 - HikariPool-1 - Start completed.
+2023-03-28 13:24:12,514 [http-nio-8080-exec-3] WARN  [c.b.m.core.toolkit.support.ReflectLambdaMeta] ReflectLambdaMeta.java:41 - Unable to make field private final java.lang.Class java.lang.invoke.SerializedLambda.capturingClass accessible: module java.base does not "opens java.lang.invoke" to unnamed module @3cf35172
+2023-03-28 13:31:03,555 [SpringApplicationShutdownHook] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:350 - HikariPool-1 - Shutdown initiated...
+2023-03-28 13:31:03,567 [SpringApplicationShutdownHook] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:352 - HikariPool-1 - Shutdown completed.
+2023-03-28 13:31:16,392 [background-preinit] INFO  [org.hibernate.validator.internal.util.Version] Version.java:21 - HV000001: Hibernate Validator 8.0.0.Final
+2023-03-28 13:31:16,412 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:51 - Starting PracticeApplication using Java 17.0.6 with PID 12780 (D:\java\internship_practice_system\practice\target\classes started by 25726 in D:\java\internship_practice_system\practice)
+2023-03-28 13:31:16,413 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] SpringApplication.java:632 - No active profile set, falling back to 1 default profile: "default"
+2023-03-28 13:31:16,509 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-03-28 13:31:16,510 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-03-28 13:31:18,244 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 8080 (http)
+2023-03-28 13:31:18,254 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2023-03-28 13:31:18,255 [restartedMain] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2023-03-28 13:31:18,256 [restartedMain] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-28 13:31:18,324 [restartedMain] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2023-03-28 13:31:18,325 [restartedMain] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:291 - Root WebApplicationContext: initialization completed in 1814 ms
+2023-03-28 13:31:18,642 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.RoleMenu ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 13:31:18,822 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.UserRole ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 13:31:19,275 [restartedMain] INFO  [o.s.security.web.DefaultSecurityFilterChain] DefaultSecurityFilterChain.java:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4c72f22, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@347674a7, org.springframework.security.web.context.SecurityContextHolderFilter@151e061b, org.springframework.security.web.header.HeaderWriterFilter@4117aef2, org.springframework.security.web.csrf.CsrfFilter@6ffe8907, org.springframework.security.web.authentication.logout.LogoutFilter@5478a417, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@f97e2c7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@776eb11c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2918c9d3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1c2d5ba0, org.springframework.security.web.access.ExceptionTranslationFilter@7cb75046, org.springframework.security.web.access.intercept.AuthorizationFilter@66b0d7b5]
+2023-03-28 13:31:19,451 [restartedMain] INFO  [o.s.b.d.autoconfigure.OptionalLiveReloadServer] OptionalLiveReloadServer.java:59 - LiveReload server is running on port 35729
+2023-03-28 13:31:19,475 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Starting ProtocolHandler ["http-nio-8080"]
+2023-03-28 13:31:19,497 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-28 13:31:19,509 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:57 - Started PracticeApplication in 4.331 seconds (process running for 5.671)
+2023-03-28 13:31:46,154 [http-nio-8080-exec-1] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-28 13:31:46,154 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:532 - Initializing Servlet 'dispatcherServlet'
+2023-03-28 13:31:46,155 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:554 - Completed initialization in 1 ms
+2023-03-28 13:31:46,313 [http-nio-8080-exec-1] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:110 - HikariPool-1 - Starting...
+2023-03-28 13:31:46,472 [http-nio-8080-exec-1] INFO  [com.zaxxer.hikari.pool.HikariPool] HikariPool.java:565 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@70674bf2
+2023-03-28 13:31:46,474 [http-nio-8080-exec-1] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:123 - HikariPool-1 - Start completed.
+2023-03-28 13:35:07,070 [http-nio-8080-exec-3] WARN  [c.b.m.core.toolkit.support.ReflectLambdaMeta] ReflectLambdaMeta.java:41 - Unable to make field private final java.lang.Class java.lang.invoke.SerializedLambda.capturingClass accessible: module java.base does not "opens java.lang.invoke" to unnamed module @3cf35172
+2023-03-28 15:27:02,084 [http-nio-8080-exec-9] ERROR [c.ikikyou.practice.common.CommonExceptionHandler] CommonExceptionHandler.java:32 - Exception
+java.lang.IllegalArgumentException: Source must not be null
+	at org.springframework.util.Assert.notNull(Assert.java:204)
+	at org.springframework.beans.BeanUtils.copyProperties(BeanUtils.java:782)
+	at org.springframework.beans.BeanUtils.copyProperties(BeanUtils.java:719)
+	at com.ikikyou.practice.service.impl.SysUserServiceImpl.getUserByName(SysUserServiceImpl.java:115)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:698)
+	at com.ikikyou.practice.service.impl.SysUserServiceImpl$$SpringCGLIB$$0.getUserByName(<generated>)
+	at com.ikikyou.practice.controller.UserController.getByName(UserController.java:42)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:207)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:152)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:884)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1081)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:705)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:814)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:223)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:202)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.csrf.CsrfFilter.doFilterInternal(CsrfFilter.java:117)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:177)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:119)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:400)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:859)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1734)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-03-28 15:27:13,324 [http-nio-8080-exec-4] ERROR [c.ikikyou.practice.common.CommonExceptionHandler] CommonExceptionHandler.java:32 - Exception
+java.lang.IllegalArgumentException: Source must not be null
+	at org.springframework.util.Assert.notNull(Assert.java:204)
+	at org.springframework.beans.BeanUtils.copyProperties(BeanUtils.java:782)
+	at org.springframework.beans.BeanUtils.copyProperties(BeanUtils.java:719)
+	at com.ikikyou.practice.service.impl.SysUserServiceImpl.getUserByName(SysUserServiceImpl.java:115)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:698)
+	at com.ikikyou.practice.service.impl.SysUserServiceImpl$$SpringCGLIB$$0.getUserByName(<generated>)
+	at com.ikikyou.practice.controller.UserController.getByName(UserController.java:42)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:207)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:152)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:884)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1081)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:705)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:814)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:223)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:202)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.csrf.CsrfFilter.doFilterInternal(CsrfFilter.java:117)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:177)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:119)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:400)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:859)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1734)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-03-28 16:59:15,236 [http-nio-8080-exec-9] WARN  [org.springframework.web.servlet.PageNotFound] DispatcherServlet.java:1292 - No mapping for GET /role/queryRoleByPage
+2023-03-28 17:41:01,372 [SpringApplicationShutdownHook] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:350 - HikariPool-1 - Shutdown initiated...
+2023-03-28 17:41:01,378 [SpringApplicationShutdownHook] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:352 - HikariPool-1 - Shutdown completed.
+2023-03-28 17:41:15,713 [background-preinit] INFO  [org.hibernate.validator.internal.util.Version] Version.java:21 - HV000001: Hibernate Validator 8.0.0.Final
+2023-03-28 17:41:15,762 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:51 - Starting PracticeApplication using Java 17.0.6 with PID 8840 (D:\java\internship_practice_system\practice\target\classes started by 25726 in D:\java\internship_practice_system\practice)
+2023-03-28 17:41:15,763 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] SpringApplication.java:632 - No active profile set, falling back to 1 default profile: "default"
+2023-03-28 17:41:15,833 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-03-28 17:41:15,834 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-03-28 17:41:17,431 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 8080 (http)
+2023-03-28 17:41:17,440 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2023-03-28 17:41:17,441 [restartedMain] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2023-03-28 17:41:17,442 [restartedMain] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-28 17:41:17,498 [restartedMain] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2023-03-28 17:41:17,498 [restartedMain] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:291 - Root WebApplicationContext: initialization completed in 1663 ms
+2023-03-28 17:41:17,800 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.RoleMenu ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 17:41:18,047 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.UserRole ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 17:41:18,636 [restartedMain] INFO  [o.s.security.web.DefaultSecurityFilterChain] DefaultSecurityFilterChain.java:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@409c3ceb, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@32d12f8a, org.springframework.security.web.context.SecurityContextHolderFilter@368a4410, org.springframework.security.web.header.HeaderWriterFilter@22ba449c, org.springframework.security.web.csrf.CsrfFilter@6827ea1b, org.springframework.security.web.authentication.logout.LogoutFilter@543f9796, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@1e9d9456, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6d39cee5, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7a835769, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3c332599, org.springframework.security.web.access.ExceptionTranslationFilter@377ceaa1, org.springframework.security.web.access.intercept.AuthorizationFilter@255e503e]
+2023-03-28 17:41:18,932 [restartedMain] INFO  [o.s.b.d.autoconfigure.OptionalLiveReloadServer] OptionalLiveReloadServer.java:59 - LiveReload server is running on port 35729
+2023-03-28 17:41:18,970 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Starting ProtocolHandler ["http-nio-8080"]
+2023-03-28 17:41:18,996 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-28 17:41:19,012 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:57 - Started PracticeApplication in 3.878 seconds (process running for 5.27)
+2023-03-28 17:41:35,308 [http-nio-8080-exec-1] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-28 17:41:35,308 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:532 - Initializing Servlet 'dispatcherServlet'
+2023-03-28 17:41:35,310 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:554 - Completed initialization in 1 ms
+2023-03-28 17:41:35,642 [http-nio-8080-exec-1] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:110 - HikariPool-1 - Starting...
+2023-03-28 17:41:36,344 [http-nio-8080-exec-1] INFO  [com.zaxxer.hikari.pool.HikariPool] HikariPool.java:565 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@550da683
+2023-03-28 17:41:36,349 [http-nio-8080-exec-1] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:123 - HikariPool-1 - Start completed.
+2023-03-28 17:41:36,953 [http-nio-8080-exec-2] WARN  [c.b.m.core.toolkit.support.ReflectLambdaMeta] ReflectLambdaMeta.java:41 - Unable to make field private final java.lang.Class java.lang.invoke.SerializedLambda.capturingClass accessible: module java.base does not "opens java.lang.invoke" to unnamed module @636af540
+2023-03-28 17:42:22,577 [SpringApplicationShutdownHook] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:350 - HikariPool-1 - Shutdown initiated...
+2023-03-28 17:42:22,682 [SpringApplicationShutdownHook] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:352 - HikariPool-1 - Shutdown completed.
+2023-03-28 17:42:37,635 [background-preinit] INFO  [org.hibernate.validator.internal.util.Version] Version.java:21 - HV000001: Hibernate Validator 8.0.0.Final
+2023-03-28 17:42:37,729 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:51 - Starting PracticeApplication using Java 17.0.6 with PID 9096 (D:\java\internship_practice_system\practice\target\classes started by 25726 in D:\java\internship_practice_system\practice)
+2023-03-28 17:42:37,731 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] SpringApplication.java:632 - No active profile set, falling back to 1 default profile: "default"
+2023-03-28 17:42:37,835 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-03-28 17:42:37,836 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-03-28 17:42:40,714 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 8080 (http)
+2023-03-28 17:42:40,757 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2023-03-28 17:42:40,762 [restartedMain] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2023-03-28 17:42:40,857 [restartedMain] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-28 17:42:41,037 [restartedMain] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2023-03-28 17:42:41,038 [restartedMain] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:291 - Root WebApplicationContext: initialization completed in 3201 ms
+2023-03-28 17:42:42,300 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.RoleMenu ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 17:42:42,647 [restartedMain] WARN  [c.b.mybatisplus.core.injector.DefaultSqlInjector] DefaultSqlInjector.java:56 - class com.ikikyou.practice.entity.UserRole ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-03-28 17:42:43,790 [restartedMain] INFO  [o.s.security.web.DefaultSecurityFilterChain] DefaultSecurityFilterChain.java:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@27cc7d9d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6000a58c, org.springframework.security.web.context.SecurityContextHolderFilter@5978ab51, org.springframework.security.web.header.HeaderWriterFilter@37b2903c, org.springframework.security.web.csrf.CsrfFilter@ce2f43f, org.springframework.security.web.authentication.logout.LogoutFilter@1c3de96a, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@72f6afbf, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@13f9a20, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1d27addf, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@13159d18, org.springframework.security.web.access.ExceptionTranslationFilter@25a7f13d, org.springframework.security.web.access.intercept.AuthorizationFilter@40388de6]
+2023-03-28 17:42:44,432 [restartedMain] INFO  [o.s.b.d.autoconfigure.OptionalLiveReloadServer] OptionalLiveReloadServer.java:59 - LiveReload server is running on port 35729
+2023-03-28 17:42:44,469 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Starting ProtocolHandler ["http-nio-8080"]
+2023-03-28 17:42:44,500 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-28 17:42:44,518 [restartedMain] INFO  [com.ikikyou.practice.PracticeApplication] StartupInfoLogger.java:57 - Started PracticeApplication in 8.16 seconds (process running for 9.99)
+2023-03-28 17:42:51,066 [http-nio-8080-exec-1] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-28 17:42:51,067 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:532 - Initializing Servlet 'dispatcherServlet'
+2023-03-28 17:42:51,070 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:554 - Completed initialization in 2 ms
+2023-03-28 17:42:52,740 [http-nio-8080-exec-2] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:110 - HikariPool-1 - Starting...
+2023-03-28 17:42:53,102 [http-nio-8080-exec-2] INFO  [com.zaxxer.hikari.pool.HikariPool] HikariPool.java:565 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@151c25d2
+2023-03-28 17:42:53,106 [http-nio-8080-exec-2] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:123 - HikariPool-1 - Start completed.
+2023-03-28 17:42:54,125 [http-nio-8080-exec-4] WARN  [c.b.m.core.toolkit.support.ReflectLambdaMeta] ReflectLambdaMeta.java:41 - Unable to make field private final java.lang.Class java.lang.invoke.SerializedLambda.capturingClass accessible: module java.base does not "opens java.lang.invoke" to unnamed module @7d8df61e
+2023-03-28 18:00:46,557 [SpringApplicationShutdownHook] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:350 - HikariPool-1 - Shutdown initiated...
+2023-03-28 18:00:46,567 [SpringApplicationShutdownHook] INFO  [com.zaxxer.hikari.HikariDataSource] HikariDataSource.java:352 - HikariPool-1 - Shutdown completed.
