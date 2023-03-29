@@ -3,6 +3,8 @@ package com.ikikyou.practice.mapper;
 import com.ikikyou.practice.entity.SysUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.List;
+
 /**
 * @author ikikyou
 * @description 针对表【sys_user】的数据库操作Mapper
@@ -11,6 +13,11 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface SysUserMapper extends BaseMapper<SysUser> {
 
+    /**
+     * 根据角色获取用户
+     * @param roleId 角色id
+     */
+    List<SysUser> getUsersByRoleId(Long roleId);
 }
 
 

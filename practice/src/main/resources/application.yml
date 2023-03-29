@@ -1,8 +1,10 @@
 server:
   port: 8080
 
-
 spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT + 8
   devtools:
     livereload:
       enabled: true
@@ -17,7 +19,13 @@ spring:
       host: 127.0.0.1
       port: 6379
       password:
+#系统相关配置
+practice:
+  system:
 
+  user:
+    #删除用户时是否逻辑删除，默认为true
+    isLogicalDelete: true
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*Mapper.xml

@@ -1,7 +1,13 @@
 package com.ikikyou.practice.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.ikikyou.practice.dto.query.RoleQueryDTO;
 import com.ikikyou.practice.entity.SysRole;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ikikyou.practice.utils.PageResult;
+import com.ikikyou.practice.utils.Result;
+
+import java.util.List;
 
 /**
 * @author 25726
@@ -10,4 +16,16 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface SysRoleService extends IService<SysRole> {
 
+    /**
+     * 根据用户id获取对应角色
+     * @param uid 用户id
+     */
+    Result<List<SysRole>> getRolesByUid(Long uid);
+
+    /**
+     * 获取所有已启用的角色
+     */
+    Result<List<SysRole>> getAllEnableRoles();
+
+    Result<Page<SysRole>> getAllRoles(RoleQueryDTO roleQuery);
 }

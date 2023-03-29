@@ -12,11 +12,31 @@ public class UserQueryDTO extends BaseQueryDTO implements Serializable {
     @Serial
     private static final long serialVersionUID = -7994365087923583806L;
 
+    private String tel;
+
     private String email;
 
     private String username;
 
     private String nickName;
+
+    private long roleId;
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(long roleId) {
+        this.roleId = roleId;
+    }
 
     public String getEmail() {
         return email;

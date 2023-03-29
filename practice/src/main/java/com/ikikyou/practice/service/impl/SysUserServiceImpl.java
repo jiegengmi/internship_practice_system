@@ -1,5 +1,6 @@
 package com.ikikyou.practice.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -9,17 +10,28 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ikikyou.practice.common.BusinessException;
 import com.ikikyou.practice.dto.UserDTO;
 import com.ikikyou.practice.dto.query.UserQueryDTO;
+import com.ikikyou.practice.emun.UserStatusEmun;
 import com.ikikyou.practice.entity.SysUser;
+import com.ikikyou.practice.entity.UserRole;
+import com.ikikyou.practice.mapper.UserRoleMapper;
 import com.ikikyou.practice.service.SysUserService;
 import com.ikikyou.practice.mapper.SysUserMapper;
 import com.ikikyou.practice.utils.PageResult;
+import com.ikikyou.practice.utils.Result;
+import com.ikikyou.practice.utils.SecurityUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static com.ikikyou.practice.constant.CommonConstant.BCRYPT_SALT;
 
@@ -29,10 +41,14 @@ import static com.ikikyou.practice.constant.CommonConstant.BCRYPT_SALT;
 * @createDate 2023-03-21 10:02:03
 */
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService{
 
     final SysUserMapper userMapper;
+    final UserRoleMapper userRoleMapper;
+    @Value("${practice.user.isLogicalDelete}")
+    private String isLogicalDelete;
 
     @Override
     public SysUser findByName(String username) {
@@ -62,15 +78,78 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
-    public PageResult<UserDTO> getUsers(UserQueryDTO userQueryDTO) {
+    public Result<Void> update(UserDTO userDTO) {
+        if (ObjectUtil.isEmpty(userDTO) || userDTO.getId() == null){
+            return Result.fail("修改失败");
+        }
+        SysUser user = userMapper.selectById(userDTO.getId());
+        if (null == user) {
+            return Result.fail("修改失败");
+        }
+        user.setPassword(BCrypt.hashpw(userDTO.getPassword(), BCRYPT_SALT));
+        this.saveOrUpdate(user);
+        return Result.ok();
+    }
+
+    @Override
+    public PageResult<SysUser> getUsers(UserQueryDTO userQueryDTO) {
         Page<SysUser> page = new Page<>(userQueryDTO.getPageNum(), userQueryDTO.getPageSize());
+        List<Long> userIds = new ArrayList<>();
+        if (userQueryDTO.getRoleId() != 0) {
+            userIds = userRoleMapper.selectList(new LambdaQueryWrapper<UserRole>()
+                            .select(UserRole::getUserId).eq(UserRole::getRoleId, userQueryDTO.getRoleId()))
+                    .stream().map(UserRole::getUserId).collect(Collectors.toList());
+        }
         Page<SysUser> sysUserPage = userMapper.selectPage(page, new LambdaQueryWrapper<SysUser>()
+                .in(!userIds.isEmpty(), SysUser::getId, userIds)
                 .like(StrUtil.isNotBlank(userQueryDTO.getNickName()), SysUser::getNickName, userQueryDTO.getNickName())
+                .like(StrUtil.isNotBlank(userQueryDTO.getTel()), SysUser::getNickName, userQueryDTO.getTel())
                 .like(StrUtil.isNotBlank(userQueryDTO.getEmail()), SysUser::getEmail, userQueryDTO.getEmail())
                 .like(StrUtil.isNotBlank(userQueryDTO.getUsername()), SysUser::getName, userQueryDTO.getUsername()));
-        PageResult<UserDTO> pageResult = new PageResult<>();
+        PageResult<SysUser> pageResult = new PageResult<>();
         BeanUtils.copyProperties(sysUserPage, pageResult);
         return pageResult;
+    }
+
+    @Override
+    public Result<UserDTO> getUserById(Long uid) {
+        if (uid == null) {
+            return Result.fail();
+        }
+        SysUser user = getById(uid);
+        UserDTO userDTO = new UserDTO();
+        BeanUtils.copyProperties(user, userDTO);
+        return Result.ok(userDTO);
+    }
+
+    @Override
+    public Result<UserDTO> getUserByName(String username) {
+        Objects.requireNonNull(username, "null");
+        SysUser user = this.findByName(username);
+        UserDTO userDTO = new UserDTO();
+        BeanUtils.copyProperties(user, userDTO);
+        return Result.ok(userDTO);
+    }
+
+    @Override
+    public Result<Void> deleteById(Long id) {
+        if (null == id) {
+            return Result.fail("null");
+        }
+        SysUser user = userMapper.selectById(id);
+        if (StrUtil.isEmpty(isLogicalDelete) || Boolean.parseBoolean(isLogicalDelete)) {
+            if (null != user) {
+                user.setStatus(UserStatusEmun.CANCELLATION.getCode());
+                user.setUpdateTime(new Date());
+                saveOrUpdate(user);
+                log.warn("--用户{}注销账户{}----", SecurityUtil.getUserName(), user.getName());
+            }
+        } else {
+            if (userMapper.deleteById(id) != 0) {
+                log.warn("--用户{}删除账户{}----", SecurityUtil.getUserName(), user.getName());
+            }
+        }
+        return Result.ok();
     }
 
     /**

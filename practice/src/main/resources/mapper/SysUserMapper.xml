@@ -24,4 +24,12 @@
         password,create_time,update_time,
         status
     </sql>
+    <select id="getUsersByRoleId" resultType="com.ikikyou.practice.entity.SysUser">
+        select
+            id,name,nick_name,age,sex,tel,email,password,create_time,update_time,status
+        from
+            sys_user u left join user_role_link url on u.id = url.user_id
+        where
+            role_id=#{roleId}
+    </select>
 </mapper>

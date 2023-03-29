@@ -1,10 +1,18 @@
 package com.ikikyou.practice.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ikikyou.practice.dto.query.RoleQueryDTO;
 import com.ikikyou.practice.entity.SysRole;
 import com.ikikyou.practice.service.SysRoleService;
 import com.ikikyou.practice.mapper.SysRoleMapper;
+import com.ikikyou.practice.utils.Result;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
 * @author 25726
@@ -12,9 +20,30 @@ import org.springframework.stereotype.Service;
 * @createDate 2023-03-21 11:11:36
 */
 @Service
-public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole>
-    implements SysRoleService{
+@Slf4j
+@RequiredArgsConstructor
+public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> implements SysRoleService{
 
+    final SysRoleMapper roleMapper;
+
+    @Override
+    public Result<List<SysRole>> getRolesByUid(Long uid) {
+        if (uid == null) {
+            return Result.fail("查询失败");
+        }
+        return Result.ok(roleMapper.getRoleByUserId(uid));
+    }
+
+    @Override
+    public Result<List<SysRole>> getAllEnableRoles() {
+        return Result.ok(roleMapper.selectList(new LambdaQueryWrapper<SysRole>()
+                .eq(SysRole::getStatus, 1)));
+    }
+
+    @Override
+    public Result<Page<SysRole>> getAllRoles(RoleQueryDTO roleQuery) {
+        return null;
+    }
 }
 
 

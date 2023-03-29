@@ -1,6 +1,7 @@
 package com.ikikyou.practice.dto;
 
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
@@ -27,7 +28,6 @@ public class UserDTO {
     private String name;
 
     private String nickName;
-
     /**
      * 年龄
      */
@@ -52,6 +52,7 @@ public class UserDTO {
     /**
      *
      */
+    @Min(8)
     private String password;
 
     /**
