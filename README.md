@@ -12,3 +12,7 @@ JDK 17
 Maven 3.6.0+  
 MySQL 8.0+  
 SpringBoot 3.0+  
+
+## 前端
+
+基于[react-admin](https://github.com/sxfad/react-admin) 基础上开发
