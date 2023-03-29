@@ -1,5 +1,6 @@
 # internship_practice_system
-实习实训管理系统
+实习实训管理系统（待完善）
+1、正在开发基础用户部分；  
 
 # 项目结构
 internship_practice_system  
