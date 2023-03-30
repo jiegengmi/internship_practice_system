@@ -12,7 +12,8 @@ internship_practice_system
   └─portal 前端代码（react）  
   
  
-## 后端环境
+## 后端环境     
+部分实现和设计参考  [博客项目](https://github.com/X1192176811/blog.git)     
 JDK 17  
 Maven 3.6.0+  
 MySQL 8.0+  
