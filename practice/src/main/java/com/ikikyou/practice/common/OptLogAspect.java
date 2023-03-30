@@ -54,6 +54,7 @@ public class OptLogAspect {
         // 从获取RequestAttributes中获取HttpServletRequest的信息
         HttpServletRequest request = (HttpServletRequest) Objects.requireNonNull(requestAttributes).resolveReference(RequestAttributes.REFERENCE_REQUEST);
         SysLog operationLog = new SysLog();
+        operationLog.setId(System.currentTimeMillis());
         // 从切面织入点处通过反射机制获取织入点处的方法
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         // 获取切入点所在的方法
