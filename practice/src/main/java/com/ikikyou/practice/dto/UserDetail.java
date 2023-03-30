@@ -17,9 +17,12 @@ public class UserDetail extends User implements Serializable {
 
     private Long userId;
 
-    public UserDetail(Long userId, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    private String nickName;
+
+    public UserDetail(Long userId, String username, String nickName, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
         this.userId = userId;
+        this.nickName = nickName;
     }
 
     public Long getUserId() {
@@ -28,5 +31,13 @@ public class UserDetail extends User implements Serializable {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 }

@@ -35,7 +35,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         Collection<? extends GrantedAuthority> authorities = processRolePermissions(result.getData().getRoleIds(), result.getData().getPermissions());
         SysUser user = result.getData().getUser();
-        return new UserDetail(user.getId(), username, user.getPassword(), authorities);
+        return new UserDetail(user.getId(), username, user.getNickName(), user.getPassword(), authorities);
     }
 
     /**
