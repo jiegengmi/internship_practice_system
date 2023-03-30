@@ -13,7 +13,7 @@ internship_practice_system
   
  
 ## 后端环境     
-部分实现和设计参考  [博客项目](https://github.com/X1192176811/blog.git)
+部分实现和设计参考  [博客项目](https://github.com/X1192176811/blog.git)     
 JDK 17  
 Maven 3.6.0+  
 MySQL 8.0+  
