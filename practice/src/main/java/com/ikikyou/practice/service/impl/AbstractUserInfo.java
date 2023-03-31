@@ -16,16 +16,29 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
+ * 构建用户信息（基本信息、角色、权限）
  * @author ikikyou
  * @date 2023/03/21 11:15
  */
 @Slf4j
 public abstract class AbstractUserInfo {
-
+    /**
+     * 获取用户对应id 的角色集合
+     * @param userId 用户id
+     */
     protected abstract List<Long> getRoleIds(Long userId);
 
+    /**
+     * 获取角色集合所对应的可用菜单（status == 1）
+     * @param roleIds 角色集合
+     */
     protected abstract List<SysMenu> getMenu(List<Long> roleIds);
 
+    /**
+     * 获取用户信息
+     * @param username 用户名
+     * @return 用户对象
+     */
     protected abstract SysUser getSysUser(String username);
 
     /**

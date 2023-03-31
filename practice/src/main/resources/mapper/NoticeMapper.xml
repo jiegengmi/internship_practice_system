@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ikikyou.practice.mapper.NoticeMapper">
+
+    <resultMap id="BaseResultMap" type="com.ikikyou.practice.entity.Notice">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="noticeTitle" column="notice_title" jdbcType="VARCHAR"/>
+            <result property="noticeAuthorName" column="notice_author_name" jdbcType="BIGINT"/>
+            <result property="noticeAuthorId" column="notice_author_id" jdbcType="BIGINT"/>
+            <result property="noticeContent" column="notice_content" jdbcType="VARCHAR"/>
+            <result property="noticeType" column="notice_type" jdbcType="VARCHAR"/>
+            <result property="informType" column="inform_type" jdbcType="INTEGER"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,notice_title,notice_author_name,
+        notice_author_id,notice_content,notice_type,
+        inform_type,create_time,update_time,
+        status
+    </sql>
+</mapper>

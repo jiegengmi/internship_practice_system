@@ -3,6 +3,8 @@ package com.ikikyou.practice.controller;
 import com.ikikyou.practice.entity.SysRole;
 import com.ikikyou.practice.service.SysRoleService;
 import com.ikikyou.practice.utils.Result;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/role")
 @RequiredArgsConstructor
+@Api(tags = "角色")
 public class RoleController {
 
     final SysRoleService roleService;

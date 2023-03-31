@@ -1,9 +1,12 @@
 package com.ikikyou.practice.emun;
 
+import lombok.Getter;
+
 /**
  * @author hongx
  * @date 2023/03/28 12:51
  */
+@Getter
 public enum UserStatusEmun {
 
     ENABLE(1, "启用"),
@@ -14,28 +17,12 @@ public enum UserStatusEmun {
      */
     CANCELLATION(-1, "注销");
 
-    private int code;
+    private final int code;
 
-    private String message;
+    private final String message;
 
     UserStatusEmun(int code, String message) {
         this.code = code;
-        this.message = message;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
         this.message = message;
     }
 }

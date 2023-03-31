@@ -1,9 +1,6 @@
 package com.ikikyou.practice.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -77,13 +74,13 @@ public class SysMenu implements Serializable {
     /**
      * 
      */
-    @TableField("create_time")
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
     private Date createTime;
 
     /**
      * 
      */
-    @TableField("update_time")
+    @TableField(value = "update_time", fill = FieldFill.UPDATE)
     private Date updateTime;
 
     /**

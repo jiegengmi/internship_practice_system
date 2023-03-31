@@ -60,7 +60,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void insert(UserDTO user) {
+    public Result<Void> insert(UserDTO user) {
         if (ObjectUtil.isEmpty(user)) {
             throw new BusinessException("参数为空");
         }
@@ -74,7 +74,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         userInfo.setId(System.currentTimeMillis());
         userInfo.setStatus(1);
         userInfo.setPassword(BCrypt.hashpw(user.getPassword(), BCRYPT_SALT));
-        this.save(userInfo);
+        return this.save(userInfo) ? Result.ok("新增成功") : Result.fail("新增失败");
     }
 
     @Override

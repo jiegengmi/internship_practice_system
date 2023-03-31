@@ -1,12 +1,18 @@
 package com.ikikyou.practice.dto.query;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serial;
 import java.io.Serializable;
 
 /**
+ * 用户查询对象
  * @author hongx
  * @date 2023/03/27 15:21
  */
+@Setter
+@Getter
 public class UserQueryDTO extends BaseQueryDTO implements Serializable {
 
     @Serial
@@ -21,44 +27,4 @@ public class UserQueryDTO extends BaseQueryDTO implements Serializable {
     private String nickName;
 
     private long roleId;
-
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
-
-    public long getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(long roleId) {
-        this.roleId = roleId;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
 }

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
+ * 菜单对象
  * @author hongx
  * @date 2023/03/24 12:41
  */

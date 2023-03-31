@@ -1,13 +1,12 @@
 package com.ikikyou.practice.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 /**
@@ -24,42 +23,40 @@ public class SysRole implements Serializable {
     /**
      *
      */
-    @TableId("id")
+    @TableId
     private Long id;
 
     /**
      * 角色名称
      */
-    @TableField("name")
     private String name;
 
     /**
      * 角色编码
      */
-    @TableField("code")
     private Integer code;
 
     /**
      * 角色描述
      */
-    @TableField("description")
     private String description;
 
     /**
      * 角色状态（0：未启用；1：启用）
      */
-    @TableField("status")
     private Integer status;
 
     /**
      * 创建时间
      */
-    @TableField("create_time")
+    @TableField(fill = FieldFill.INSERT)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     /**
      * 更新时间
      */
-    @TableField("update_time")
+    @TableField(fill = FieldFill.UPDATE)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 }

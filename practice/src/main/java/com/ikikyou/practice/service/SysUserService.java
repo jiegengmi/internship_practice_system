@@ -14,9 +14,18 @@ import com.ikikyou.practice.utils.Result;
  */
 public interface SysUserService extends IService<SysUser> {
 
+    /**
+     * 根据用户名查找用户
+     * @param username 用户名
+     * @return 用户实体
+     */
     SysUser findByName(String username);
 
-    void insert(UserDTO userDTO);
+    /**
+     * 新增一个用户
+     * @param userDTO 用户信息
+     */
+    Result<Void> insert(UserDTO userDTO);
 
     Result<Void> update(UserDTO userDTO);
     /**
@@ -37,5 +46,10 @@ public interface SysUserService extends IService<SysUser> {
      */
     Result<UserDTO> getUserByName(String username);
 
+    /**
+     * 删除用户
+     * @param id 用户id
+     * @return 删除是否成功
+     */
     Result<Void> deleteById(Long id);
 }

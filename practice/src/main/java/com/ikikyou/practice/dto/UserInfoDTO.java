@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * 用户基本信息对象
  * @author ikikyou
  * @date 2023/03/21 10:40
  */

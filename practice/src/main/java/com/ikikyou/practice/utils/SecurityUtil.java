@@ -44,7 +44,7 @@ public final class SecurityUtil {
     }
 
     /**
-     * 角色
+     * 角色集合
      */
     public static List<Long> getRoles() {
         Authentication authentication = getAuthentication();
@@ -76,6 +76,10 @@ public final class SecurityUtil {
         return getUser(authentication);
     }
 
+    /**
+     * 获取自定义用户信息对象
+     * @param authentication 认证信息
+     */
     public static UserDetail getUser(Authentication authentication) {
         Object principal = authentication.getPrincipal();
         if ("anonymousUser".equals(principal)) {
