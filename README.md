@@ -7,9 +7,8 @@
 
 # 项目结构
 internship_practice_system  
-  └─practice 后端代码 （SpringBoot）
-    
-  └─portal 前端代码（react）  
+  └─practice 后端代码 （SpringBoot）      
+  └─portal 前端代码（react）      
   
  
 ## 后端环境     
