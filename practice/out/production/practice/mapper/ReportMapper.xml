@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ikikyou.practice.mapper.ReportMapper">
+
+    <resultMap id="BaseResultMap" type="com.ikikyou.practice.entity.Report">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="reportYear" column="report_year" jdbcType="SMALLINT"/>
+            <result property="reportNum" column="report_num" jdbcType="INTEGER"/>
+            <result property="reportTitle" column="report_title" jdbcType="VARCHAR"/>
+            <result property="reportSummary" column="report_summary" jdbcType="VARCHAR"/>
+            <result property="reportBody" column="report_body" jdbcType="VARCHAR"/>
+            <result property="reportType" column="report_type" jdbcType="VARCHAR"/>
+            <result property="reportAuthorId" column="report_author_id" jdbcType="BIGINT"/>
+            <result property="reportAuthorName" column="report_author_name" jdbcType="VARCHAR"/>
+            <result property="reportFileId" column="report_file_id" jdbcType="BIGINT"/>
+            <result property="reportFileName" column="report_file_name" jdbcType="VARCHAR"/>
+            <result property="reportFileDesc" column="report_file_desc" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,report_year,report_num,
+        report_title,report_summary,report_body,
+        report_type,report_author_id,report_author_name,
+        report_file_id,report_file_name,report_file_desc,
+        create_time,update_time,status
+    </sql>
+</mapper>
