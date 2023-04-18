@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ikikyou.practice.mapper.SysUserMapper">
 
-    <resultMap id="BaseResultMap" type="com.ikikyou.practice.entity.SysUser">
+    <resultMap id="BaseResultMap" type="com.ikikyou.practice.entity.system.SysUser">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="name" column="name" jdbcType="VARCHAR"/>
             <result property="nickName" column="nickName" jdbcType="VARCHAR"/>
@@ -24,7 +24,7 @@
         password,create_time,update_time,
         status
     </sql>
-    <select id="getUsersByRoleId" resultType="com.ikikyou.practice.entity.SysUser">
+    <select id="getUsersByRoleId" resultType="com.ikikyou.practice.entity.system.SysUser">
         select
             id,name,nick_name,age,sex,tel,email,password,create_time,update_time,status
         from

@@ -1,4 +1,4 @@
-package com.ikikyou.practice.entity;
+package com.ikikyou.practice.entity.system;
 
 import com.baomidou.mybatisplus.annotation.*;
 
@@ -26,49 +26,41 @@ public class SysMenu implements Serializable {
     /**
      * 菜单名称
      */
-    @TableField("title")
     private String title;
 
     /**
      * 菜单权限标识
      */
-    @TableField("permission")
     private String permission;
 
     /**
      * 父菜单id
      */
-    @TableField("parent_id")
     private Long parentId;
 
     /**
      * 图标
      */
-    @TableField("icon")
     private String icon;
 
     /**
      * 前端路由标识路径
      */
-    @TableField("path")
     private String path;
 
     /**
      * 路由名称
      */
-    @TableField("component")
     private String component;
 
     /**
      * 排序值
      */
-    @TableField("orders")
     private Integer orders;
 
     /**
      * 菜单类型
      */
-    @TableField("type")
     private Integer type;
 
     /**
@@ -92,6 +84,5 @@ public class SysMenu implements Serializable {
     /**
      * 状态
      */
-    @TableField("status")
     private Integer status;
 }

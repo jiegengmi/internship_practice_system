@@ -4,7 +4,7 @@ import lombok.Getter;
 
 /**
  * 系统操作日志类型
- * @author hongx
+ * @author ikikyou
  * @date 2023/03/30 11:52
  */
 @Getter

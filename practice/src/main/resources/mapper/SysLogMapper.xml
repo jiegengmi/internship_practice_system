@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ikikyou.practice.mapper.SysLogMapper">
 
-    <resultMap id="BaseResultMap" type="com.ikikyou.practice.entity.SysLog">
+    <resultMap id="BaseResultMap" type="com.ikikyou.practice.entity.system.SysLog">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="userId" column="user_id" jdbcType="BIGINT"/>
             <result property="userNickName" column="user_nick_name" jdbcType="VARCHAR"/>

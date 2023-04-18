@@ -1,10 +1,9 @@
 package com.ikikyou.practice.controller;
 
-import com.ikikyou.practice.entity.SysRole;
+import com.ikikyou.practice.entity.system.SysRole;
 import com.ikikyou.practice.service.SysRoleService;
 import com.ikikyou.practice.utils.Result;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +15,7 @@ import java.util.List;
 
 /**
  * 角色成立控制层
- * @author hongx
+ * @author ikikyou
  * @date 2023/03/27 10:05
  */
 @Slf4j

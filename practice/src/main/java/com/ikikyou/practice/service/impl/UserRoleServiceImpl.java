@@ -1,7 +1,7 @@
 package com.ikikyou.practice.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ikikyou.practice.entity.UserRole;
+import com.ikikyou.practice.entity.system.UserRole;
 import com.ikikyou.practice.service.UserRoleService;
 import com.ikikyou.practice.mapper.UserRoleMapper;
 import org.springframework.stereotype.Service;

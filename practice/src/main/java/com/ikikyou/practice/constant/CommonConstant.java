@@ -10,4 +10,5 @@ public class CommonConstant {
      * BCRYPT加解密所用的盐
      */
     public static final String BCRYPT_SALT = "ikikyou";
+    public static final String JSON_CONTENT_TYPE = "application/json;charset=utf-8";
 }

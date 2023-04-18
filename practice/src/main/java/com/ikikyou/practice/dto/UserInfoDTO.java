@@ -1,6 +1,6 @@
 package com.ikikyou.practice.dto;
 
-import com.ikikyou.practice.entity.SysUser;
+import com.ikikyou.practice.entity.system.SysUser;
 import lombok.Data;
 
 import java.util.List;

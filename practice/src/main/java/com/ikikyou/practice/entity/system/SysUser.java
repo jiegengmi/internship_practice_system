@@ -1,4 +1,4 @@
-package com.ikikyou.practice.entity;
+package com.ikikyou.practice.entity.system;
 
 import java.io.Serial;
 import java.io.Serializable;

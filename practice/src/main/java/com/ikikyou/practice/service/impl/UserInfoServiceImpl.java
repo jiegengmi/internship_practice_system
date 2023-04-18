@@ -1,9 +1,9 @@
 package com.ikikyou.practice.service.impl;
 
 import com.ikikyou.practice.dto.UserInfoDTO;
-import com.ikikyou.practice.entity.SysMenu;
-import com.ikikyou.practice.entity.SysRole;
-import com.ikikyou.practice.entity.SysUser;
+import com.ikikyou.practice.entity.system.SysMenu;
+import com.ikikyou.practice.entity.system.SysRole;
+import com.ikikyou.practice.entity.system.SysUser;
 import com.ikikyou.practice.mapper.SysMenuMapper;
 import com.ikikyou.practice.mapper.SysRoleMapper;
 import com.ikikyou.practice.service.SysUserService;

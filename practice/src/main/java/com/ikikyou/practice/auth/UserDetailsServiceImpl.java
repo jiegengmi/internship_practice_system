@@ -4,7 +4,7 @@ import cn.hutool.core.util.ArrayUtil;
 import com.ikikyou.practice.constant.SecurityConstants;
 import com.ikikyou.practice.dto.UserDetail;
 import com.ikikyou.practice.dto.UserInfoDTO;
-import com.ikikyou.practice.entity.SysUser;
+import com.ikikyou.practice.entity.system.SysUser;
 import com.ikikyou.practice.service.UserInfoService;
 import com.ikikyou.practice.utils.Result;
 import jakarta.annotation.Resource;
@@ -25,13 +25,13 @@ import java.util.*;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Resource
-    UserInfoService userService;
+    private UserInfoService userService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Result<UserInfoDTO> result = userService.getInfoByUserName(username);
         if (!result.isSuccess()) {
-            throw new UsernameNotFoundException("用户不存在");
+            throw new UsernameNotFoundException(result.getMessage());
         }
         Collection<? extends GrantedAuthority> authorities = processRolePermissions(result.getData().getRoleIds(), result.getData().getPermissions());
         SysUser user = result.getData().getUser();

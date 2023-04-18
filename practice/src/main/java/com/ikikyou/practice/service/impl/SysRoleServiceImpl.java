@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ikikyou.practice.dto.query.RoleQueryDTO;
-import com.ikikyou.practice.entity.SysRole;
+import com.ikikyou.practice.entity.system.SysRole;
 import com.ikikyou.practice.service.SysRoleService;
 import com.ikikyou.practice.mapper.SysRoleMapper;
 import com.ikikyou.practice.utils.Result;

@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8000
 
 spring:
   jackson:
@@ -22,7 +22,8 @@ spring:
 #系统相关配置
 practice:
   system:
-
+    captcha:
+      type: math
   user:
     #删除用户时是否逻辑删除，默认为true
     isLogicalDelete: true

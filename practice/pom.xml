@@ -16,11 +16,25 @@
 	<description>practice</description>
 	<properties>
 		<java.version>17</java.version>
+
+		<kaptcha.version>2.3.3</kaptcha.version>
 	</properties>
 
 	<packaging>jar</packaging>
 
 	<dependencies>
+		<!-- 验证码 -->
+		<dependency>
+			<groupId>pro.fessional</groupId>
+			<artifactId>kaptcha</artifactId>
+			<version>${kaptcha.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>javax.servlet-api</artifactId>
+					<groupId>javax.servlet</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 		<!-- swagger文档 -->
 		<dependency>
 			<groupId>com.github.xiaoymin</groupId>
@@ -71,6 +85,10 @@
 			<groupId>org.springframework.session</groupId>
 			<artifactId>spring-session-data-redis</artifactId>
 			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.lettuce</groupId>
+			<artifactId>lettuce-core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

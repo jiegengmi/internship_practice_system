@@ -1,6 +1,6 @@
 package com.ikikyou.practice.service;
 
-import com.ikikyou.practice.entity.SysMenu;
+import com.ikikyou.practice.entity.system.SysMenu;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ikikyou.practice.dto.MenuDTO;
 

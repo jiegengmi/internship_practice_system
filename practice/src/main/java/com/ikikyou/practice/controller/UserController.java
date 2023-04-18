@@ -1,11 +1,14 @@
 package com.ikikyou.practice.controller;
 
 import com.ikikyou.practice.dto.UserDTO;
+import com.ikikyou.practice.dto.UserInfoDTO;
 import com.ikikyou.practice.dto.query.UserQueryDTO;
-import com.ikikyou.practice.entity.SysUser;
+import com.ikikyou.practice.entity.system.SysUser;
 import com.ikikyou.practice.service.SysUserService;
+import com.ikikyou.practice.service.UserInfoService;
 import com.ikikyou.practice.utils.PageResult;
 import com.ikikyou.practice.utils.Result;
+import com.ikikyou.practice.utils.SecurityUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import jakarta.validation.Valid;
@@ -13,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author hongx
+ * @author ikikyou
  * @date 2023/03/24 08:48
  */
 @RestController
@@ -23,6 +26,15 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     final SysUserService userService;
+    final UserInfoService userInfoService;
+
+    /**
+     * 获取当前登录用户、角色、权限
+     */
+    @GetMapping("/info")
+    public Result<UserInfoDTO> getByCurrUser(){
+        return userInfoService.getInfoByUserName(SecurityUtil.getUserName());
+    }
 
     @PostMapping("/insert")
     @ApiOperation(value = "新增用户")

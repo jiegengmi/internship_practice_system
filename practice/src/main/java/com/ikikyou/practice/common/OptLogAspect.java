@@ -2,7 +2,7 @@ package com.ikikyou.practice.common;
 
 import com.alibaba.fastjson2.JSON;
 import com.ikikyou.practice.annotation.OptLog;
-import com.ikikyou.practice.entity.SysLog;
+import com.ikikyou.practice.entity.system.SysLog;
 import com.ikikyou.practice.mapper.SysLogMapper;
 import com.ikikyou.practice.utils.IpUtil;
 import com.ikikyou.practice.utils.SecurityUtil;
@@ -24,7 +24,7 @@ import java.util.Objects;
 
 /**
  * 操作日记录
- * @author hongx
+ * @author ikikyou
  * @date 2023/03/30 11:48
  */
 @Aspect

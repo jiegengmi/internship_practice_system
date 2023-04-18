@@ -3,7 +3,7 @@ package com.ikikyou.practice.emun;
 import lombok.Getter;
 
 /**
- * @author hongx
+ * @author ikikyou
  * @date 2023/03/28 12:51
  */
 @Getter

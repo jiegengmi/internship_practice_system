@@ -1,6 +1,6 @@
 package com.ikikyou.practice.service;
 
-import com.ikikyou.practice.entity.SysLog;
+import com.ikikyou.practice.entity.system.SysLog;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

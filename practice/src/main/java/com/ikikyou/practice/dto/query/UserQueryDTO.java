@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  * 用户查询对象
- * @author hongx
+ * @author ikikyou
  * @date 2023/03/27 15:21
  */
 @Setter

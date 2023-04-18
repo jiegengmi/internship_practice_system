@@ -2,9 +2,8 @@ package com.ikikyou.practice.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ikikyou.practice.dto.query.RoleQueryDTO;
-import com.ikikyou.practice.entity.SysRole;
+import com.ikikyou.practice.entity.system.SysRole;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ikikyou.practice.utils.PageResult;
 import com.ikikyou.practice.utils.Result;
 
 import java.util.List;

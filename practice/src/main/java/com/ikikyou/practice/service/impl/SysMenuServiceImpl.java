@@ -1,7 +1,7 @@
 package com.ikikyou.practice.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ikikyou.practice.entity.SysMenu;
+import com.ikikyou.practice.entity.system.SysMenu;
 import com.ikikyou.practice.service.SysMenuService;
 import com.ikikyou.practice.mapper.SysMenuMapper;
 import com.ikikyou.practice.utils.SecurityUtil;

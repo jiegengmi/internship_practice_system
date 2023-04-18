@@ -1,7 +1,7 @@
 package com.ikikyou.practice.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ikikyou.practice.entity.RoleMenu;
+import com.ikikyou.practice.entity.system.RoleMenu;
 import com.ikikyou.practice.service.RoleMenuService;
 import com.ikikyou.practice.mapper.RoleMenuMapper;
 import org.springframework.stereotype.Service;

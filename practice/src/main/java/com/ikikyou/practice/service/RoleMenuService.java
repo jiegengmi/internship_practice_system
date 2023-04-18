@@ -1,6 +1,6 @@
 package com.ikikyou.practice.service;
 
-import com.ikikyou.practice.entity.RoleMenu;
+import com.ikikyou.practice.entity.system.RoleMenu;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

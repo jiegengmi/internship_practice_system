@@ -28,6 +28,6 @@ public class CommonExceptionHandler {
     @ExceptionHandler(Exception.class)
     public Result<?> exceptionHandler(Exception exception){
         exception.printStackTrace();
-        return Result.fail("系统错误");
+        return Result.fail("发生异常");
     }
 }

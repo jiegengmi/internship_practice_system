@@ -1,6 +1,5 @@
 package com.ikikyou.practice.service.impl;
 
-import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -11,8 +10,8 @@ import com.ikikyou.practice.common.BusinessException;
 import com.ikikyou.practice.dto.UserDTO;
 import com.ikikyou.practice.dto.query.UserQueryDTO;
 import com.ikikyou.practice.emun.UserStatusEmun;
-import com.ikikyou.practice.entity.SysUser;
-import com.ikikyou.practice.entity.UserRole;
+import com.ikikyou.practice.entity.system.SysUser;
+import com.ikikyou.practice.entity.system.UserRole;
 import com.ikikyou.practice.mapper.UserRoleMapper;
 import com.ikikyou.practice.service.SysUserService;
 import com.ikikyou.practice.mapper.SysUserMapper;

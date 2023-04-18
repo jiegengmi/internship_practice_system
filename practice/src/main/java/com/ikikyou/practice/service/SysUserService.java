@@ -2,7 +2,7 @@ package com.ikikyou.practice.service;
 
 import com.ikikyou.practice.dto.UserDTO;
 import com.ikikyou.practice.dto.query.UserQueryDTO;
-import com.ikikyou.practice.entity.SysUser;
+import com.ikikyou.practice.entity.system.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ikikyou.practice.utils.PageResult;
 import com.ikikyou.practice.utils.Result;
