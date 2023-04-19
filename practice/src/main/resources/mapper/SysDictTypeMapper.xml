@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ikikyou.practice.mapper.SysDictTypeMapper">
+
+    <resultMap id="BaseResultMap" type="com.ikikyou.practice.entity.system.SysDictType">
+            <id property="dictId" column="dict_id" jdbcType="BIGINT"/>
+            <result property="dictName" column="dict_name" jdbcType="VARCHAR"/>
+            <result property="dictType" column="dict_type" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="CHAR"/>
+            <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        dict_id,dict_name,dict_type,
+        status,create_by,create_time,
+        update_by,update_time,remark
+    </sql>
+</mapper>
