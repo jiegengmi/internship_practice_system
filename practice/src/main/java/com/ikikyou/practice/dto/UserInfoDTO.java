@@ -18,5 +18,7 @@ public class UserInfoDTO {
 
     private List<Long> roleIds;
 
+    private Set<String> roles;
+
     private Set<String> permissions;
 }

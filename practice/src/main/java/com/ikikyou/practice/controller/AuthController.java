@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 /**
- * 验证码
+ * 校验控制层
  * @author ikikyou
  * @date 2023/04/13 14:05
  */
@@ -21,6 +21,8 @@ public class AuthController {
 
     /**
      * 获取验证码
+     *
+     * @return uuid（验证码redis的key）和验证码
      */
     @GetMapping("/captchaImage")
     private Result<Map<String, Object>> getCaptcha() {

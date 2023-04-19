@@ -18,7 +18,7 @@ public class CommonExceptionHandler {
     @ExceptionHandler(BusinessException.class)
     public Result<?> exceptionHandler(BusinessException exception){
         exception.printStackTrace();
-        return Result.fail(exception.getMessage());
+        return Result.fail("发生异常");
     }
 
 

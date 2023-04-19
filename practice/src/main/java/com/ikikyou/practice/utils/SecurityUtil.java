@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,7 +18,6 @@ import java.util.List;
  */
 @Slf4j
 public final class SecurityUtil {
-
     /**
      * 获取当前登录用户
      * @return 用户名

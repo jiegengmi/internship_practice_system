@@ -1,5 +1,6 @@
 package com.ikikyou.practice.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ikikyou.practice.dto.UserDTO;
 import com.ikikyou.practice.dto.UserInfoDTO;
 import com.ikikyou.practice.dto.query.UserQueryDTO;
@@ -13,6 +14,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -28,6 +30,12 @@ public class UserController {
     final SysUserService userService;
     final UserInfoService userInfoService;
 
+    @GetMapping("/list")
+    @PreAuthorize("hasAuthority('user:list')")
+    public PageResult<SysUser> getUserList(UserQueryDTO userQueryDTO){
+        return userService.getUsers(userQueryDTO);
+    }
+
     /**
      * 获取当前登录用户、角色、权限
      */
@@ -38,6 +46,7 @@ public class UserController {
 
     @PostMapping("/insert")
     @ApiOperation(value = "新增用户")
+    @PreAuthorize("hasAuthority('user:insert')")
     public Result<Void> add(@RequestBody @Valid UserDTO userDTO){
         return userService.insert(userDTO);
     }
@@ -48,6 +57,7 @@ public class UserController {
      */
     @PostMapping("/update")
     @ApiOperation(value = "修改用户")
+    @PreAuthorize("hasAuthority('user:update')")
     public Result<Void> update(@RequestBody @Valid UserDTO userDTO) {
         return userService.update(userDTO);
     }
@@ -57,6 +67,7 @@ public class UserController {
      * @param userQuery 用户查询对象
      */
     @GetMapping("/query")
+    @PreAuthorize("hasAuthority('user:query')")
     public Result<PageResult<SysUser>> getUsers(UserQueryDTO userQuery) {
         return Result.ok(userService.getUsers(userQuery));
     }
@@ -66,6 +77,7 @@ public class UserController {
      * @param id 用户id
      */
     @GetMapping("/getById")
+    @PreAuthorize("hasAuthority('user:info')")
     public Result<UserDTO> getById(@RequestParam Long id){
         return userService.getUserById(id);
     }
@@ -75,6 +87,7 @@ public class UserController {
      * @param username 用户账户
      */
     @GetMapping("/getByName")
+    @PreAuthorize("hasAuthority('user:info')")
     public Result<UserDTO> getByName(@RequestParam String username) {
         return userService.getUserByName(username);
     }
@@ -86,6 +99,7 @@ public class UserController {
      */
     @DeleteMapping("/delete/{id}")
     @ApiOperation(value = "删除用户")
+    @PreAuthorize("hasAuthority('user:delete')")
     public Result<Void> deleteById(@PathVariable Long id) {
         return userService.deleteById(id);
     }

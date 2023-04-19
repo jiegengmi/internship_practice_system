@@ -1,35 +1,29 @@
-package com.ikikyou.practice.entity.system;
+package com.ikikyou.practice.vo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 /**
- * 菜单权限表
- * @TableName sys_menu
+ * 菜单对象
+ * @author ikikyou
+ * @date 2023/03/24 12:41
  */
-@TableName(value ="sys_menu")
 @Data
-public class SysMenu implements Serializable {
-    @Serial
-    @TableField(exist = false)
-    private static final long serialVersionUID = -6669479566669960409L;
-    /**
-     * 菜单ID
-     */
-    @TableId(type = IdType.AUTO)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class MenuVO {
+
     private Long menuId;
 
     /**
      * 菜单名称
      */
-    private String menuName;
+    private String name;
 
     /**
      * 父菜单ID
@@ -74,7 +68,7 @@ public class SysMenu implements Serializable {
     /**
      * 菜单状态（0显示 1隐藏）
      */
-    private String visible;
+    private Boolean hidden;
 
     /**
      * 菜单状态（0正常 1停用）
@@ -90,29 +84,24 @@ public class SysMenu implements Serializable {
      * 菜单图标
      */
     private String icon;
-
-    /**
-     * 创建者
-     */
-    private String createBy;
-
-    /**
-     * 创建时间
-     */
-    private Date createTime;
-
-    /**
-     * 更新者
-     */
-    private String updateBy;
-
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
-
     /**
      * 备注
      */
     private String remark;
+
+    /**
+     * 当你一个路由下面的 children 声明的路由大于1个时，自动会变成嵌套的模式--如组件页面
+     */
+    private Boolean alwaysShow;
+
+    /**
+     * 重定向地址，当设置 noRedirect 的时候该路由在面包屑导航中不可被点击
+     */
+    private String redirect;
+    /**
+     * 子菜单列表
+     */
+    private List<MenuVO> children;
+
+    private MenuRouteVO meta;
 }

@@ -5,24 +5,34 @@
 <mapper namespace="com.ikikyou.practice.mapper.SysRoleMapper">
 
     <resultMap id="BaseResultMap" type="com.ikikyou.practice.entity.system.SysRole">
-        <id property="id" column="id" jdbcType="BIGINT"/>
-        <result property="name" column="name" jdbcType="VARCHAR"/>
-        <result property="code" column="code" jdbcType="INTEGER"/>
-        <result property="description" column="description" jdbcType="VARCHAR"/>
-        <result property="status" column="status" jdbcType="SMALLINT"/>
-        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <id property="roleId" column="role_id" jdbcType="BIGINT"/>
+            <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
+            <result property="roleKey" column="role_key" jdbcType="VARCHAR"/>
+            <result property="roleSort" column="role_sort" jdbcType="INTEGER"/>
+            <result property="dataScope" column="data_scope" jdbcType="CHAR"/>
+            <result property="menuCheckStrictly" column="menu_check_strictly" jdbcType="TINYINT"/>
+            <result property="deptCheckStrictly" column="dept_check_strictly" jdbcType="TINYINT"/>
+            <result property="status" column="status" jdbcType="CHAR"/>
+            <result property="delFlag" column="del_flag" jdbcType="CHAR"/>
+            <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,name,code,
-        description,status,create_time,
-        update_time
+        role_id,role_name,role_key,
+        role_sort,data_scope,menu_check_strictly,
+        dept_check_strictly,status,del_flag,
+        create_by,create_time,update_by,
+        update_time,remark
     </sql>
     <select id="getRoleByUserId" resultType="com.ikikyou.practice.entity.system.SysRole" parameterType="java.lang.Long">
-        select id, name, code, description, status, create_time, update_time
+        select r.role_id,role_name,role_key,role_sort,data_scope,menu_check_strictly,dept_check_strictly,status,del_flag,
+               create_by,create_time,update_by,update_time,remark
         from sys_role r
-                 left join user_role_link link on link.role_id = r.id
+                 left join sys_user_role link on link.role_id = r.role_id
         where
             link.user_id = #{userId}
     </select>

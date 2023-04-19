@@ -1,16 +1,13 @@
 package com.ikikyou.practice.service.impl;
 
-import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ikikyou.practice.entity.system.SysConfig;
 import com.ikikyou.practice.service.SysConfigService;
 import com.ikikyou.practice.mapper.SysConfigMapper;
-import jakarta.annotation.Resource;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;

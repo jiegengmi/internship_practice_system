@@ -61,22 +61,23 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public Result<Void> insert(UserDTO user) {
         if (ObjectUtil.isEmpty(user)) {
-            throw new BusinessException("参数为空");
+            return Result.fail("参数为空");
         }
         // 校验账号是否合法
         if (checkUser(user)) {
-            throw new BusinessException("用户名已被注册！");
+            return Result.fail("用户名已被注册！");
         }
         // 新增用户信息
         SysUser userInfo = new SysUser();
         BeanUtils.copyProperties(user, userInfo);
         userInfo.setId(System.currentTimeMillis());
         userInfo.setStatus(1);
-        userInfo.setPassword(BCrypt.hashpw(user.getPassword(), BCRYPT_SALT));
+        userInfo.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
         return this.save(userInfo) ? Result.ok("新增成功") : Result.fail("新增失败");
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Result<Void> update(UserDTO userDTO) {
         if (ObjectUtil.isEmpty(userDTO) || userDTO.getId() == null){
             return Result.fail("修改失败");
@@ -86,8 +87,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             return Result.fail("修改失败");
         }
         user.setPassword(BCrypt.hashpw(userDTO.getPassword(), BCRYPT_SALT));
-        this.saveOrUpdate(user);
-        return Result.ok();
+        return this.saveOrUpdate(user) ? Result.ok() : Result.fail();
     }
 
     @Override
@@ -131,6 +131,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Result<Void> deleteById(Long id) {
         if (null == id) {
             return Result.fail("null");

@@ -11,9 +11,11 @@ import com.ikikyou.practice.service.UserInfoService;
 import com.ikikyou.practice.utils.Result;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -30,20 +32,20 @@ public class UserInfoServiceImpl extends AbstractUserInfo implements UserInfoSer
     final SysRoleMapper roleMapper;
 
     @Override
-    protected List<Long> getRoleIds(Long userId) {
-        return roleMapper.getRoleByUserId(userId)
-                .stream()
-                .map(SysRole::getId)
-                .collect(Collectors.toList());
+    @Cacheable(cacheNames = "roles")
+    public List<SysRole> getRoles(Long userId) {
+        return roleMapper.getRoleByUserId(userId);
     }
 
     @Override
-    protected List<SysMenu> getMenu(List<Long> roleIds) {
+    @Cacheable(cacheNames = "menus")
+    public List<SysMenu> getMenu(List<Long> roleIds) {
         return this.menuMapper.getByRoleIds(roleIds);
     }
 
     @Override
-    protected SysUser getSysUser(String username) {
+    @Cacheable(cacheNames = "userInfo")
+    public SysUser getSysUser(String username) {
         return this.userService.findByName(username);
     }
 

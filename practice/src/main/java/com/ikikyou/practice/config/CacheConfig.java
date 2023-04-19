@@ -14,6 +14,7 @@ import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSeriali
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -31,13 +32,13 @@ public class CacheConfig implements CachingConfigurer {
 
     /**
      * 自定义生成redis-key
-     *
+     *      格式：value::com.example.method[paramsValue]
      * @return key
      */
     @Override
     @Bean
     public KeyGenerator keyGenerator() {
-        return (object, method, objects) -> object.getClass().getName() + method.getName() + "[" + Arrays.toString(objects) + "]";
+        return (object, method, objects) -> object.getClass().getName() + "." + method.getName() + Arrays.toString(objects);
     }
 
     @Bean
@@ -71,7 +72,8 @@ public class CacheConfig implements CachingConfigurer {
     @Override
     public CacheManager cacheManager() {
         RedisCacheConfiguration cacheConfiguration = defaultCacheConfig().disableCachingNullValues()
-                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()))
+                .entryTtl(Duration.ofDays(1L));
         return RedisCacheManager.builder(connectionFactory).cacheDefaults(cacheConfiguration).build();
     }
 }

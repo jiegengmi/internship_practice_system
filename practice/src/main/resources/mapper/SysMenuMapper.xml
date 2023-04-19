@@ -5,37 +5,47 @@
 <mapper namespace="com.ikikyou.practice.mapper.SysMenuMapper">
 
     <resultMap id="BaseResultMap" type="com.ikikyou.practice.entity.system.SysMenu">
-            <id property="id" column="id" jdbcType="BIGINT"/>
-            <result property="title" column="title" jdbcType="VARCHAR"/>
-            <result property="permission" column="permission" jdbcType="VARCHAR"/>
+            <id property="menuId" column="menu_id" jdbcType="BIGINT"/>
+            <result property="menuName" column="menu_name" jdbcType="VARCHAR"/>
             <result property="parentId" column="parent_id" jdbcType="BIGINT"/>
-            <result property="icon" column="icon" jdbcType="VARCHAR"/>
+            <result property="orderNum" column="order_num" jdbcType="INTEGER"/>
             <result property="path" column="path" jdbcType="VARCHAR"/>
             <result property="component" column="component" jdbcType="VARCHAR"/>
-            <result property="orders" column="orders" jdbcType="SMALLINT"/>
-            <result property="type" column="type" jdbcType="INTEGER"/>
+            <result property="query" column="query" jdbcType="VARCHAR"/>
+            <result property="isFrame" column="is_frame" jdbcType="INTEGER"/>
+            <result property="isCache" column="is_cache" jdbcType="INTEGER"/>
+            <result property="menuType" column="menu_type" jdbcType="CHAR"/>
+            <result property="visible" column="visible" jdbcType="CHAR"/>
+            <result property="status" column="status" jdbcType="CHAR"/>
+            <result property="perms" column="perms" jdbcType="VARCHAR"/>
+            <result property="icon" column="icon" jdbcType="VARCHAR"/>
+            <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-            <result property="isHidden" column="is_hidden" jdbcType="SMALLINT"/>
-            <result property="status" column="status" jdbcType="SMALLINT"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,title,permission,
-        parent_id,icon,path,
-        component,orders,type,
-        create_time,update_time,is_hidden,
-        status
+        menu_id,menu_name,parent_id,
+        order_num,path,component,
+        query,is_frame,is_cache,
+        menu_type,visible,status,
+        perms,icon,create_by,
+        create_time,update_by,update_time,
+        remark
     </sql>
+
     <select id="getByRoleIds" resultType="com.ikikyou.practice.entity.system.SysMenu">
         SELECT
-            id, title, permission, parent_id, icon, path, component, orders, type, create_time, update_time, is_hidden, status
+            menu.menu_id,menu_name,parent_id, order_num,path,component,query,is_frame,is_cache,menu_type,visible,status,
+            perms,icon,create_by,create_time,update_by,update_time,remark
         FROM
-        sys_menu menu left join role_menu_link link on link.menu_id = id
+            sys_menu menu left join sys_role_menu link on link.menu_id = menu.menu_id
         where
-        link.role_id in
-        <foreach collection="roleIds" item="roleId" separator="," open="(" close=")" >
-            #{roleId}
-        </foreach>
+            link.role_id in
+            <foreach collection="roleIds" item="roleId" separator="," open="(" close=")" >
+                #{roleId}
+            </foreach>
     </select>
 </mapper>

@@ -6,6 +6,7 @@ import com.ikikyou.practice.utils.Result;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,11 +29,13 @@ public class RoleController {
     final SysRoleService roleService;
 
     @GetMapping("/getByUserId")
+    @PreAuthorize("hasAuthority('role:info')")
     public Result<List<SysRole>> getRolesByUid(@RequestParam Long uid) {
         return roleService.getRolesByUid(uid);
     }
 
     @GetMapping("/getEnableRoles")
+    @PreAuthorize("hasAuthority('user:list')")
     public Result<List<SysRole>> getAllEnableRoles(){
         return roleService.getAllEnableRoles();
     }

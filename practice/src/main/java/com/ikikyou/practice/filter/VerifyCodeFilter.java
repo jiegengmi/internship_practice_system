@@ -2,7 +2,6 @@ package com.ikikyou.practice.filter;
 
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ikikyou.practice.common.BusinessException;
 import com.ikikyou.practice.constant.CacheConstants;
 import com.ikikyou.practice.utils.Result;
 import jakarta.annotation.Resource;
@@ -13,13 +12,12 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.security.authentication.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.GenericFilterBean;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import static com.ikikyou.practice.constant.CommonConstant.FORM_CONTENT_TYPE;
 import static com.ikikyou.practice.constant.CommonConstant.JSON_CONTENT_TYPE;
 
 
@@ -39,11 +37,11 @@ public class VerifyCodeFilter extends GenericFilterBean {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        if ("/login".equals(request.getServletPath())) {
+        response.setContentType(JSON_CONTENT_TYPE);
+        //校验登录表单请求
+        if ("/login".equals(request.getServletPath()) && FORM_CONTENT_TYPE.equals(request.getContentType())) {
             String uuid = request.getParameter("uuid");
             String code = request.getParameter("code");
-            response.setContentType(JSON_CONTENT_TYPE);
-            PrintWriter out = response.getWriter();
             Object result = null;
             if (StrUtil.isAllEmpty(uuid)) {
                 result = Result.fail("缺少登录参数");
@@ -55,7 +53,7 @@ public class VerifyCodeFilter extends GenericFilterBean {
                 result = Result.fail("无效的验证码");
             }
             if (result != null) {
-                out.write(new ObjectMapper().writeValueAsString(result));
+                response.getOutputStream().write(new ObjectMapper().writeValueAsString(result).getBytes());
                 return;
             }
         }

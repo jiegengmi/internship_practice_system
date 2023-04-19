@@ -8,6 +8,7 @@ import com.ikikyou.practice.entity.system.SysUser;
 import com.ikikyou.practice.service.UserInfoService;
 import com.ikikyou.practice.utils.Result;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +23,7 @@ import java.util.*;
  * @date 2023/03/21 10:20
  */
 @Component(value = "UserDetailsServiceImpl")
+@Slf4j
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Resource
@@ -31,6 +33,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Result<UserInfoDTO> result = userService.getInfoByUserName(username);
         if (!result.isSuccess()) {
+            log.warn("账户：{} 校验异常:{}", username, result.getMessage());
             throw new UsernameNotFoundException(result.getMessage());
         }
         Collection<? extends GrantedAuthority> authorities = processRolePermissions(result.getData().getRoleIds(), result.getData().getPermissions());

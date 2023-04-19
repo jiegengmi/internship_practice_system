@@ -1,12 +1,11 @@
 package com.ikikyou.practice.config;
 
-import cn.hutool.core.util.IdUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ikikyou.practice.auth.UserDetailsServiceImpl;
 import com.ikikyou.practice.filter.VerifyCodeFilter;
 import com.ikikyou.practice.utils.Result;
-import com.ikikyou.practice.utils.SecurityUtil;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.*;
@@ -20,9 +19,6 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.ikikyou.practice.constant.CommonConstant.JSON_CONTENT_TYPE;
 
@@ -31,6 +27,7 @@ import static com.ikikyou.practice.constant.CommonConstant.JSON_CONTENT_TYPE;
  * @date 2023/03/21 14:09
  */
 @Configuration
+@Slf4j
 public class SecurityConfig {
 
     @Resource
@@ -53,6 +50,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                //验证码校验
                 .addFilterBefore(verifyCodeFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests((auth) -> auth
                         //登录和验证码接口放过
@@ -61,31 +59,29 @@ public class SecurityConfig {
                 .authenticationProvider(systemAuthenticationProvider())
                 .csrf().disable()
                 .cors(Customizer.withDefaults())
+                //表单登录
                 .formLogin()
-                .successHandler(successLoginHandler())
-                .failureHandler(failLoginHandler());
+                //登录成功或者失败处理
+                .successHandler(successLoginHandler()).failureHandler(failLoginHandler());
         return http.build();
     }
 
+    /**
+     * 登录成功 TODO token处理 ？ jwt还是？
+     */
     @Bean
     public AuthenticationSuccessHandler successLoginHandler() {
         return (request, response, authentication) -> {
             response.setContentType(JSON_CONTENT_TYPE);
-            PrintWriter out = response.getWriter();
-            Map<String, Object> resultMap = new HashMap<>();
-            resultMap.put("token", IdUtil.randomUUID());
-            resultMap.put("user", SecurityUtil.getBaseUser());
-            out.write(new ObjectMapper().writeValueAsString(Result.ok(resultMap,"登录成功")));
-            out.flush();
-            out.close();
+            response.getOutputStream().write(new ObjectMapper().writeValueAsString(Result.ok("登录成功")).getBytes());
         };
     }
 
     @Bean
     public AuthenticationFailureHandler failLoginHandler() {
         return ((request, response, exception) -> {
+            log.warn(exception.getMessage());
             response.setContentType(JSON_CONTENT_TYPE);
-            PrintWriter out = response.getWriter();
             Object result;
             if (exception instanceof LockedException) {
                 result = Result.fail("账户被锁定");
@@ -98,11 +94,9 @@ public class SecurityConfig {
             } else if (exception instanceof BadCredentialsException) {
                 result = Result.fail("用户名或者密码错误");
             } else {
-                result = Result.fail(exception.getMessage());
+                result = Result.fail("发生未知异常！");
             }
-            out.write(new ObjectMapper().writeValueAsString(result));
-            out.flush();
-            out.close();
+            response.getOutputStream().write(new ObjectMapper().writeValueAsString(result).getBytes());
         });
     }
 

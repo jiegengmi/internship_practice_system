@@ -2,7 +2,7 @@ package com.ikikyou.practice.controller;
 
 import com.ikikyou.practice.service.SysMenuService;
 import com.ikikyou.practice.utils.Result;
-import com.ikikyou.practice.dto.MenuDTO;
+import com.ikikyou.practice.vo.MenuVO;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +29,7 @@ public class MenuController {
      * @return 返回当前用户的菜单列表（父id为空则为一级菜单）
      */
     @GetMapping("/build")
-    public Result<List<MenuDTO>> buildUserMenus() {
+    public Result<List<MenuVO>> buildUserMenus() {
         return Result.ok(menuService.buildMenus());
     }
 }
