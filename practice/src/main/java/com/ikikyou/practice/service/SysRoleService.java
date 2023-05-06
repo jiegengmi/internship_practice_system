@@ -26,5 +26,32 @@ public interface SysRoleService extends IService<SysRole> {
      */
     Result<List<SysRole>> getAllEnableRoles();
 
+    /**
+     * 分页查询所有角色
+     *
+     * @param roleQuery 查询对象
+     */
     Result<Page<SysRole>> getAllRoles(RoleQueryDTO roleQuery);
+
+    /**
+     * 新增或者删除一个角色
+     *
+     * @param role 角色对象
+     * @return 新增结果
+     */
+    Result<Void> insertOrUpdate(SysRole role);
+
+    /**
+     * 删除一个角色
+     *
+     * @param roleId 角色id
+     */
+    Result<Void> deleteById(Long roleId);
+
+    /**
+     * 根据id获取角色
+     *
+     * @param roleId 角色id
+     */
+    Result<SysRole> getRoleById(Long roleId);
 }

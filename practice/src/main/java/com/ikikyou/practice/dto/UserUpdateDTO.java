@@ -1,38 +1,27 @@
-package com.ikikyou.practice.entity.system;
+package com.ikikyou.practice.dto;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.ikikyou.practice.entity.system.SysPost;
+import com.ikikyou.practice.entity.system.SysRole;
+import com.ikikyou.practice.entity.system.SysUser;
+import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
-
-import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.List;
 
 /**
- * 用户信息表
- * @TableName sys_user
+ * 用户新增或者更新时返回对象
+ * @author hongx
+ * @date 2023/04/23 10:09
  */
-@TableName(value ="sys_user")
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class SysUser implements Serializable {
+public class UserUpdateDTO implements Serializable {
 
     @Serial
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
-    /**
-     * 用户ID
-     */
-    @TableId(type = IdType.AUTO)
+    private static final long serialVersionUID = -7837474546991480525L;
+
     private Long userId;
 
     /**
@@ -126,4 +115,24 @@ public class SysUser implements Serializable {
      * 备注
      */
     private String remark;
+
+    /**
+     * 所有角色
+     */
+    private List<SysRole> roles;
+
+    /**
+     * 所有职位
+     */
+    private List<SysPost> posts;
+
+    /**
+     * 当前用户角色
+     */
+    private List<Long> roleIds;
+
+    /**
+     * 当前用户职位
+     */
+    private List<Long> postIds;
 }

@@ -1,6 +1,8 @@
 package com.ikikyou.practice.entity.system;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serial;
@@ -8,23 +10,23 @@ import java.io.Serializable;
 import lombok.Data;
 
 /**
- * 角色权限中间表
- * @TableName role_menu_link
+ * 用户与岗位关联表
+ * @TableName sys_user_post
  */
-@TableName(value ="role_menu_link")
+@TableName(value ="sys_user_post")
 @Data
-public class RoleMenu implements Serializable {
+public class SysUserPost implements Serializable {
     /**
-     * 
+     * 用户ID
      */
-    @TableField("role_id")
-    private Long roleId;
+    @TableId
+    private Long userId;
 
     /**
-     * 
+     * 岗位ID
      */
-    @TableField("menu_id")
-    private Long menuId;
+    @TableId
+    private Long postId;
 
     @Serial
     @TableField(exist = false)

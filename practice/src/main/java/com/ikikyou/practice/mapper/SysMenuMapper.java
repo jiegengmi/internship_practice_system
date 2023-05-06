@@ -1,5 +1,6 @@
 package com.ikikyou.practice.mapper;
 
+import com.ikikyou.practice.dto.query.MenuQueryDTO;
 import com.ikikyou.practice.entity.system.SysMenu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -19,6 +20,13 @@ public interface SysMenuMapper extends BaseMapper<SysMenu> {
      * @return 菜单
      */
     List<SysMenu> getByRoleIds(List<Long> roleIds);
+
+    /**
+     * 查询菜单
+     *
+     * @param menuQueryDTO 菜单查询对象
+     */
+    List<SysMenu> queryMenus(MenuQueryDTO menuQueryDTO);
 }
 
 

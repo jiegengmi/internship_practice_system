@@ -2,8 +2,11 @@ package com.ikikyou.practice.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ikikyou.practice.auth.UserDetailsServiceImpl;
+import com.ikikyou.practice.dto.UserDetail;
+import com.ikikyou.practice.filter.JWTAuthFilter;
 import com.ikikyou.practice.filter.VerifyCodeFilter;
 import com.ikikyou.practice.utils.Result;
+import com.ikikyou.practice.utils.SecurityUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +14,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.*;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -19,6 +24,9 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.ikikyou.practice.constant.CommonConstant.JSON_CONTENT_TYPE;
 
@@ -28,12 +36,15 @@ import static com.ikikyou.practice.constant.CommonConstant.JSON_CONTENT_TYPE;
  */
 @Configuration
 @Slf4j
+@EnableWebSecurity
 public class SecurityConfig {
 
     @Resource
     private UserDetailsServiceImpl userDetailsService;
     @Resource
     private VerifyCodeFilter verifyCodeFilter;
+    @Resource
+    private JWTAuthFilter jwtAuthFilter;
 
     @Bean
     public AuthenticationProvider systemAuthenticationProvider() {
@@ -50,6 +61,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                //jwt处理
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 //验证码校验
                 .addFilterBefore(verifyCodeFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests((auth) -> auth
@@ -67,13 +80,17 @@ public class SecurityConfig {
     }
 
     /**
-     * 登录成功 TODO token处理 ？ jwt还是？
+     * 登录成功
      */
     @Bean
     public AuthenticationSuccessHandler successLoginHandler() {
         return (request, response, authentication) -> {
             response.setContentType(JSON_CONTENT_TYPE);
-            response.getOutputStream().write(new ObjectMapper().writeValueAsString(Result.ok("登录成功")).getBytes());
+            UserDetail userDetail = SecurityUtil.getUser(authentication);
+            Map<String, Object> resultMap = new HashMap<>();
+            resultMap.put("token", jwtAuthFilter.createToken(userDetail));
+            response.getOutputStream()
+                    .write(new ObjectMapper().writeValueAsString(Result.ok(resultMap,"登录成功")).getBytes());
         };
     }
 

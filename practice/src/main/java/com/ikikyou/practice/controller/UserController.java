@@ -3,6 +3,7 @@ package com.ikikyou.practice.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ikikyou.practice.dto.UserDTO;
 import com.ikikyou.practice.dto.UserInfoDTO;
+import com.ikikyou.practice.dto.UserUpdateDTO;
 import com.ikikyou.practice.dto.query.UserQueryDTO;
 import com.ikikyou.practice.entity.system.SysUser;
 import com.ikikyou.practice.service.SysUserService;
@@ -32,8 +33,14 @@ public class UserController {
 
     @GetMapping("/list")
     @PreAuthorize("hasAuthority('user:list')")
-    public PageResult<SysUser> getUserList(UserQueryDTO userQueryDTO){
-        return userService.getUsers(userQueryDTO);
+    public Result<Page<UserDTO>> getUserList(UserQueryDTO userQueryDTO){
+        return Result.ok(userService.getUserList(userQueryDTO));
+    }
+
+    @GetMapping({"/{userId}", "/"})
+    @PreAuthorize("hasAuthority('user:info')")
+    public Result<UserUpdateDTO> getUserInfo(@PathVariable(required = false) Long userId){
+        return userService.getUserInfo(userId);
     }
 
     /**
@@ -44,10 +51,11 @@ public class UserController {
         return userInfoService.getInfoByUserName(SecurityUtil.getUserName());
     }
 
+
     @PostMapping("/insert")
     @ApiOperation(value = "新增用户")
     @PreAuthorize("hasAuthority('user:insert')")
-    public Result<Void> add(@RequestBody @Valid UserDTO userDTO){
+    public Result<Void> add(@RequestBody @Valid UserUpdateDTO userDTO){
         return userService.insert(userDTO);
     }
 
@@ -55,21 +63,11 @@ public class UserController {
      * 修改用户
      * @param userDTO 用户信息
      */
-    @PostMapping("/update")
+    @PutMapping("/update")
     @ApiOperation(value = "修改用户")
     @PreAuthorize("hasAuthority('user:update')")
-    public Result<Void> update(@RequestBody @Valid UserDTO userDTO) {
+    public Result<Void> update(@RequestBody @Valid UserUpdateDTO userDTO) {
         return userService.update(userDTO);
-    }
-
-    /**
-     * 分页用户查找
-     * @param userQuery 用户查询对象
-     */
-    @GetMapping("/query")
-    @PreAuthorize("hasAuthority('user:query')")
-    public Result<PageResult<SysUser>> getUsers(UserQueryDTO userQuery) {
-        return Result.ok(userService.getUsers(userQuery));
     }
 
     /**

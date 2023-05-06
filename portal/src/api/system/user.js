@@ -21,7 +21,7 @@ export function getUser(userId) {
 // 新增用户
 export function addUser(data) {
   return request({
-    url: '/user',
+    url: '/user/insert',
     method: 'post',
     data: data
   })
@@ -30,7 +30,7 @@ export function addUser(data) {
 // 修改用户
 export function updateUser(data) {
   return request({
-    url: '/user',
+    url: '/user/update',
     method: 'put',
     data: data
   })
@@ -39,7 +39,7 @@ export function updateUser(data) {
 // 删除用户
 export function delUser(userId) {
   return request({
-    url: '/user/' + userId,
+    url: '/user/delete/' + userId,
     method: 'delete'
   })
 }
@@ -129,7 +129,7 @@ export function updateAuthRole(data) {
 // 查询部门下拉树结构
 export function deptTreeSelect() {
   return request({
-    url: '/user/deptTree',
+    url: '/dept/tree',
     method: 'get'
   })
 }

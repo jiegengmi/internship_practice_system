@@ -38,9 +38,9 @@
                      @keyup.enter="handleQuery"
                   />
                </el-form-item>
-               <el-form-item label="手机号码" prop="phonenumber">
+               <el-form-item label="手机号码" prop="tel">
                   <el-input
-                     v-model="queryParams.phonenumber"
+                     v-model="queryParams.tel"
                      placeholder="请输入手机号码"
                      clearable
                      style="width: 240px"
@@ -135,7 +135,7 @@
                <el-table-column label="用户名称" align="center" key="userName" prop="userName" v-if="columns[1].visible" :show-overflow-tooltip="true" />
                <el-table-column label="用户昵称" align="center" key="nickName" prop="nickName" v-if="columns[2].visible" :show-overflow-tooltip="true" />
                <el-table-column label="部门" align="center" key="deptName" prop="dept.deptName" v-if="columns[3].visible" :show-overflow-tooltip="true" />
-               <el-table-column label="手机号码" align="center" key="phonenumber" prop="phonenumber" v-if="columns[4].visible" width="120" />
+               <el-table-column label="手机号码" align="center" key="tel" prop="tel" v-if="columns[4].visible" width="120" />
                <el-table-column label="状态" align="center" key="status" v-if="columns[5].visible">
                   <template #default="scope">
                      <el-switch
@@ -202,8 +202,8 @@
             </el-row>
             <el-row>
                <el-col :span="12">
-                  <el-form-item label="手机号码" prop="phonenumber">
-                     <el-input v-model="form.phonenumber" placeholder="请输入手机号码" maxlength="11" />
+                  <el-form-item label="手机号码" prop="tel">
+                     <el-input v-model="form.tel" placeholder="请输入手机号码" maxlength="11" />
                   </el-form-item>
                </el-col>
                <el-col :span="12">
@@ -215,12 +215,15 @@
             <el-row>
                <el-col :span="12">
                   <el-form-item v-if="form.userId == undefined" label="用户名称" prop="userName">
-                     <el-input v-model="form.userName" placeholder="请输入用户名称" maxlength="30" />
+                     <el-input 
+                     v-model="form.userName" 
+                     placeholder="请输入用户名称" 
+                     maxlength="30" />
                   </el-form-item>
                </el-col>
                <el-col :span="12">
                   <el-form-item v-if="form.userId == undefined" label="用户密码" prop="password">
-                     <el-input v-model="form.password" placeholder="请输入用户密码" type="password" maxlength="20" show-password />
+                     <el-input v-model="form.password" autocomplete ='off' placeholder="请输入用户密码" type="password" maxlength="20" show-password />
                   </el-form-item>
                </el-col>
             </el-row>
@@ -342,6 +345,7 @@ const open = ref(false);
 const loading = ref(true);
 const showSearch = ref(true);
 const ids = ref([]);
+const userNames = ref([]);
 const single = ref(true);
 const multiple = ref(true);
 const total = ref(0);
@@ -384,7 +388,7 @@ const data = reactive({
     pageNum: 1,
     pageSize: 10,
     userName: undefined,
-    phonenumber: undefined,
+    tel: undefined,
     status: undefined,
     deptId: undefined
   },
@@ -393,9 +397,11 @@ const data = reactive({
     nickName: [{ required: true, message: "用户昵称不能为空", trigger: "blur" }],
     password: [{ required: true, message: "用户密码不能为空", trigger: "blur" }, { min: 5, max: 20, message: "用户密码长度必须介于 5 和 20 之间", trigger: "blur" }],
     email: [{ type: "email", message: "请输入正确的邮箱地址", trigger: ["blur", "change"] }],
-    phonenumber: [{ pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/, message: "请输入正确的手机号码", trigger: "blur" }]
+    tel: [{ pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/, message: "请输入正确的手机号码", trigger: "blur" }]
   }
 });
+
+
 
 const { queryParams, form, rules } = toRefs(data);
 
@@ -410,17 +416,17 @@ watch(deptName, val => {
 });
 /** 查询部门下拉树结构 */
 function getDeptTree() {
-  deptTreeSelect().then(response => {
-    deptOptions.value = response.data;
+  deptTreeSelect().then(data => {
+      deptOptions.value = data;
   });
 };
 /** 查询用户列表 */
 function getList() {
   loading.value = true;
   listUser(proxy.addDateRange(queryParams.value, dateRange.value)).then(res => {
-    loading.value = false;
-    userList.value = res.rows;
-    total.value = res.total;
+      loading.value = false;
+      userList.value = res.records;
+      total.value = res.total;
   });
 };
 /** 节点单击事件 */
@@ -444,7 +450,8 @@ function resetQuery() {
 /** 删除按钮操作 */
 function handleDelete(row) {
   const userIds = row.userId || ids.value;
-  proxy.$modal.confirm('是否确认删除用户编号为"' + userIds + '"的数据项？').then(function () {
+  const userName = row.userName || userNames.value;
+  proxy.$modal.confirm('是否确认删除用户为"' + userName + '"的数据项？').then(function () {
     return delUser(userIds);
   }).then(() => {
     getList();
@@ -503,6 +510,7 @@ function handleResetPwd(row) {
 /** 选择条数  */
 function handleSelectionChange(selection) {
   ids.value = selection.map(item => item.userId);
+  userNames.value = selection.map(item => item.userName);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 };
@@ -540,7 +548,7 @@ function reset() {
     userName: undefined,
     nickName: undefined,
     password: undefined,
-    phonenumber: undefined,
+    tel: undefined,
     email: undefined,
     sex: undefined,
     status: "0",
@@ -570,12 +578,13 @@ function handleAdd() {
 function handleUpdate(row) {
   reset();
   const userId = row.userId || ids.value;
-  getUser(userId).then(response => {
-    form.value = response.data;
-    postOptions.value = response.posts;
-    roleOptions.value = response.roles;
-    form.value.postIds = response.postIds;
-    form.value.roleIds = response.roleIds;
+  getUser(userId).then(data => {
+   console.log(data);
+    form.value = data;
+    postOptions.value = data.posts;
+    roleOptions.value = data.roles;
+    form.value.postIds = data.postIds;
+    form.value.roleIds = data.roleIds;
     open.value = true;
     title.value = "修改用户";
     form.password = "";

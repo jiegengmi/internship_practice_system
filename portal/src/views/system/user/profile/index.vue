@@ -19,7 +19,7 @@
                      </li>
                      <li class="list-group-item">
                         <svg-icon icon-class="phone" />手机号码
-                        <div class="pull-right">{{ state.user.phonenumber }}</div>
+                        <div class="pull-right">{{ state.user.tel }}</div>
                      </li>
                      <li class="list-group-item">
                         <svg-icon icon-class="email" />用户邮箱

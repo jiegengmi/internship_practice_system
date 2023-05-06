@@ -19,11 +19,19 @@ spring:
       host: 127.0.0.1
       port: 6379
       password:
-#系统相关配置
+
 practice:
+  #系统相关配置
   system:
+    #验证码校验方式
     captcha:
       type: math
+    jwt:
+      #jwt签名密钥
+      signingKey: www.ikikyou.com
+      #jwt过期时间（秒）默认当天有效
+      expireTime: 36000
+  #用户相关配置
   user:
     #删除用户时是否逻辑删除，默认为true
     isLogicalDelete: true

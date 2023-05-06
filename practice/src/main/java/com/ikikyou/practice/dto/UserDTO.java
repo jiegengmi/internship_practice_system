@@ -1,9 +1,11 @@
 package com.ikikyou.practice.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
+import com.ikikyou.practice.entity.system.SysDept;
+import com.ikikyou.practice.entity.system.SysRole;
 import lombok.*;
+
+import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -19,44 +21,99 @@ public class UserDTO {
     /**
      *
      */
-    private Long id;
+    private Long userId;
 
     /**
-     * 用户名
+     * 部门ID
      */
-    @NotBlank(message = "用户名不能为空")
-    private String name;
+    private Long deptId;
 
+    /**
+     * 用户账号
+     */
+    private String userName;
+
+    /**
+     * 用户昵称
+     */
     private String nickName;
-    /**
-     * 年龄
-     */
-    private Integer age;
 
     /**
-     * 性别
+     * 用户类型（00系统用户）
      */
-    private Integer sex;
+    private String userType;
 
     /**
-     * 联系方式
+     * 用户邮箱
+     */
+    private String email;
+
+    /**
+     * 手机号码
      */
     private String tel;
 
     /**
-     * 邮箱
+     * 用户性别（0男 1女 2未知）
      */
-    @Email(message = "邮箱类型错误")
-    private String email;
+    private String sex;
 
     /**
-     *
+     * 头像地址
      */
-    @Min(8)
+    private String avatar;
+
+    /**
+     * 密码
+     */
     private String password;
 
     /**
-     * 状态（-1：注销；0，停用；1：启用）
+     * 帐号状态（0正常 1停用）
      */
-    private Integer status;
+    private String status;
+
+    /**
+     * 删除标志（0代表存在 2代表删除）
+     */
+    private String delFlag;
+
+    /**
+     * 最后登录IP
+     */
+    private String loginIp;
+
+    /**
+     * 最后登录时间
+     */
+    private Date loginDate;
+
+    /**
+     * 创建者
+     */
+    private String createBy;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    /**
+     * 更新者
+     */
+    private String updateBy;
+
+    /**
+     * 更新时间
+     */
+    private Date updateTime;
+
+    /**
+     * 备注
+     */
+    private String remark;
+
+    private SysDept dept;
+
+    private List<SysRole> roles;
 }

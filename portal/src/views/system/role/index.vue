@@ -180,7 +180,7 @@
                   node-key="id"
                   :check-strictly="!form.menuCheckStrictly"
                   empty-text="加载中，请稍候"
-                  :props="{ label: 'label', children: 'children' }"
+                  :props="{ label: 'name', children: 'children' }"
                ></el-tree>
             </el-form-item>
             <el-form-item label="备注">
@@ -227,7 +227,7 @@
                   node-key="id"
                   :check-strictly="!form.deptCheckStrictly"
                   empty-text="加载中，请稍候"
-                  :props="{ label: 'label', children: 'children' }"
+                  :props="{ label: 'name', children: 'children' }"
                ></el-tree>
             </el-form-item>
          </el-form>
@@ -300,7 +300,7 @@ const { queryParams, form, rules } = toRefs(data);
 function getList() {
   loading.value = true;
   listRole(proxy.addDateRange(queryParams.value, dateRange.value)).then(response => {
-    roleList.value = response.rows;
+    roleList.value = response.records;
     total.value = response.total;
     loading.value = false;
   });
@@ -368,8 +368,8 @@ function handleAuthUser(row) {
 }
 /** 查询菜单树结构 */
 function getMenuTreeselect() {
-  menuTreeselect().then(response => {
-    menuOptions.value = response.data;
+  menuTreeselect().then(data => {
+    menuOptions.value = data;
   });
 }
 /** 所有部门节点数据 */

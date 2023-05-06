@@ -30,7 +30,7 @@ public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDi
             return Result.ok(Collections.emptyList(),"字典类型为空");
         }
         QueryWrapper<SysDictData> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("status", 0).eq("dictType", dictType).orderByAsc("dictSort");
+        queryWrapper.eq("status", 0).eq("dict_type", dictType).orderByAsc("dict_sort");
         return Result.ok(dictDataMapper.selectList(queryWrapper));
     }
 

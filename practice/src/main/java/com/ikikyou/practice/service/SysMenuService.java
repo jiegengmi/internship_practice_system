@@ -1,5 +1,7 @@
 package com.ikikyou.practice.service;
 
+import com.ikikyou.practice.dto.query.MenuQueryDTO;
+import com.ikikyou.practice.utils.Result;
 import com.ikikyou.practice.vo.MenuVO;
 import com.ikikyou.practice.entity.system.SysMenu;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -13,5 +15,20 @@ import java.util.List;
 */
 public interface SysMenuService extends IService<SysMenu> {
 
-    List<MenuVO> buildMenus();
+    /**
+     * 构建菜单路由
+     */
+    List<MenuVO> buildRouteMenus();
+
+    /**
+     * 获取菜单下拉树列表
+     */
+    Result<List<MenuVO>> getTreeMenu(MenuQueryDTO menu);
+
+    /**
+     * 获取全部菜单
+     *
+     * @param menuQuery 菜单查询对象
+     */
+    List<SysMenu> getAllMenu(MenuQueryDTO menuQuery);
 }

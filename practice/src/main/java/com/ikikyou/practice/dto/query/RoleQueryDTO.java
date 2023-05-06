@@ -17,5 +17,17 @@ public class RoleQueryDTO extends BaseQueryDTO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -7224578716070533558L;
+
+    /**
+     * 角色名称
+     */
     private String roleName;
+
+    /**
+     * 角色标识
+     */
+    private String roleKey;
+
+
+    private Long roleId;
 }

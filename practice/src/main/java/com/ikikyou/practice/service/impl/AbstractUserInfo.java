@@ -56,7 +56,7 @@ public abstract class AbstractUserInfo {
             return Result.fail("登录用户不存在！");
         }
         userInfo.setUser(sysUser);
-        List<SysRole> roles = this.getRoles(sysUser.getId());
+        List<SysRole> roles = this.getRoles(sysUser.getUserId());
         if (CollectionUtil.isEmpty(roles)) {
             userInfo.setPermissions(new HashSet<>());
             return Result.ok();

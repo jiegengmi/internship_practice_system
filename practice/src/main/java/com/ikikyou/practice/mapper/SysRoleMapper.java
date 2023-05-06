@@ -1,5 +1,6 @@
 package com.ikikyou.practice.mapper;
 
+import com.ikikyou.practice.dto.query.RoleQueryDTO;
 import com.ikikyou.practice.entity.system.SysRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -14,10 +15,19 @@ import java.util.List;
 public interface SysRoleMapper extends BaseMapper<SysRole> {
 
     /**
+     * 查询角色
+     *
+     * @param roleQuery 查询对象
+     */
+    List<SysRole> getByQueryInfo(RoleQueryDTO roleQuery);
+
+    /**
      * 查询用户的角色
      * @param userId 用户id
      */
     List<SysRole> getRoleByUserId(Long userId);
+
+    List<Long> getRoleIdByUserId(Long userId);
 }
 
 

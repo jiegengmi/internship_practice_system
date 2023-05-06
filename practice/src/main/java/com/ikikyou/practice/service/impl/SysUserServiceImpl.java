@@ -1,5 +1,6 @@
 package com.ikikyou.practice.service.impl;
 
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -8,14 +9,16 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ikikyou.practice.common.BusinessException;
 import com.ikikyou.practice.dto.UserDTO;
+import com.ikikyou.practice.dto.UserUpdateDTO;
 import com.ikikyou.practice.dto.query.UserQueryDTO;
 import com.ikikyou.practice.emun.UserStatusEmun;
 import com.ikikyou.practice.entity.system.SysUser;
-import com.ikikyou.practice.entity.system.UserRole;
-import com.ikikyou.practice.mapper.UserRoleMapper;
+import com.ikikyou.practice.mapper.SysPostMapper;
+import com.ikikyou.practice.mapper.SysRoleMapper;
+import com.ikikyou.practice.service.SysUserPostService;
+import com.ikikyou.practice.service.SysUserRoleService;
 import com.ikikyou.practice.service.SysUserService;
 import com.ikikyou.practice.mapper.SysUserMapper;
-import com.ikikyou.practice.utils.PageResult;
 import com.ikikyou.practice.utils.Result;
 import com.ikikyou.practice.utils.SecurityUtil;
 import lombok.RequiredArgsConstructor;
@@ -26,18 +29,14 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-
-import static com.ikikyou.practice.constant.CommonConstant.BCRYPT_SALT;
 
 /**
 * @author 25726
-* @description 针对表【sys_user】的数据库操作Service实现
-* @createDate 2023-03-21 10:02:03
+* @description 针对表【sys_user(用户信息表)】的数据库操作Service实现
+* @createDate 2023-04-21 11:07:14
 */
 @Service
 @Slf4j
@@ -45,7 +44,11 @@ import static com.ikikyou.practice.constant.CommonConstant.BCRYPT_SALT;
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService{
 
     final SysUserMapper userMapper;
-    final UserRoleMapper userRoleMapper;
+    final SysPostMapper postMapper;
+    final SysRoleMapper roleMapper;
+    final SysUserRoleService userRoleService;
+    final SysUserPostService userPostService;
+
     @Value("${practice.user.isLogicalDelete}")
     private String isLogicalDelete;
 
@@ -53,61 +56,65 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     public SysUser findByName(String username) {
         Objects.requireNonNull(username);
         QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("name", username);
+        queryWrapper.eq("user_name", username);
         return userMapper.selectOne(queryWrapper);
     }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Result<Void> insert(UserDTO user) {
-        if (ObjectUtil.isEmpty(user)) {
+    public Result<Void> insert(UserUpdateDTO userDTO) {
+        if (ObjectUtil.hasEmpty(userDTO)) {
             return Result.fail("参数为空");
         }
         // 校验账号是否合法
-        if (checkUser(user)) {
-            return Result.fail("用户名已被注册！");
+        Result<Void> checkedUser = checkUser(userDTO);
+        if (!checkedUser.isSuccess()) {
+            return checkedUser;
         }
-        // 新增用户信息
-        SysUser userInfo = new SysUser();
-        BeanUtils.copyProperties(user, userInfo);
-        userInfo.setId(System.currentTimeMillis());
-        userInfo.setStatus(1);
-        userInfo.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
-        return this.save(userInfo) ? Result.ok("新增成功") : Result.fail("新增失败");
+        SysUser user = new SysUser();
+        BeanUtils.copyProperties(userDTO, user);
+        user.setCreateBy(SecurityUtil.getUserName());
+        user.setCreateTime(new Date());
+        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+        userRoleService.insertRelation(user.getUserId(), userDTO.getRoleIds(), true);
+        userPostService.insertRelation(user.getUserId(), userDTO.getRoleIds(), true);
+        if (!this.save(user)) {
+            throw new BusinessException("保存用户异常");
+        }
+        return Result.ok("新增成功");
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Result<Void> update(UserDTO userDTO) {
-        if (ObjectUtil.isEmpty(userDTO) || userDTO.getId() == null){
+    public Result<Void> update(UserUpdateDTO userDTO) {
+        if (ObjectUtil.hasEmpty(userDTO)){
             return Result.fail("修改失败");
         }
-        SysUser user = userMapper.selectById(userDTO.getId());
-        if (null == user) {
-            return Result.fail("修改失败");
+        Result<Void> checkedUser = checkUser(userDTO);
+        if (!checkedUser.isSuccess()) {
+            return checkedUser;
         }
-        user.setPassword(BCrypt.hashpw(userDTO.getPassword(), BCRYPT_SALT));
-        return this.saveOrUpdate(user) ? Result.ok() : Result.fail();
+        SysUser dtoUser = new SysUser();
+        BeanUtils.copyProperties(userDTO, dtoUser);
+        dtoUser.setUpdateBy(SecurityUtil.getUserName());
+        dtoUser.setUpdateTime(new Date());
+        userRoleService.deleteRelation(dtoUser.getUserId(), true);
+        userRoleService.insertRelation(dtoUser.getUserId(), userDTO.getRoleIds(), true);
+        userPostService.deleteRelation(dtoUser.getUserId(), true);
+        userPostService.insertRelation(dtoUser.getUserId(), userDTO.getRoleIds(), true);
+        if (!this.saveOrUpdate(dtoUser)) {
+            throw new BusinessException("更新用户异常");
+        }
+        return Result.ok();
     }
 
     @Override
-    public PageResult<SysUser> getUsers(UserQueryDTO userQueryDTO) {
-        Page<SysUser> page = new Page<>(userQueryDTO.getPageNum(), userQueryDTO.getPageSize());
-        List<Long> userIds = new ArrayList<>();
-        if (userQueryDTO.getRoleId() != 0) {
-            userIds = userRoleMapper.selectList(new LambdaQueryWrapper<UserRole>()
-                            .select(UserRole::getUserId).eq(UserRole::getRoleId, userQueryDTO.getRoleId()))
-                    .stream().map(UserRole::getUserId).collect(Collectors.toList());
-        }
-        Page<SysUser> sysUserPage = userMapper.selectPage(page, new LambdaQueryWrapper<SysUser>()
-                .in(!userIds.isEmpty(), SysUser::getId, userIds)
-                .like(StrUtil.isNotBlank(userQueryDTO.getNickName()), SysUser::getNickName, userQueryDTO.getNickName())
-                .like(StrUtil.isNotBlank(userQueryDTO.getTel()), SysUser::getNickName, userQueryDTO.getTel())
-                .like(StrUtil.isNotBlank(userQueryDTO.getEmail()), SysUser::getEmail, userQueryDTO.getEmail())
-                .like(StrUtil.isNotBlank(userQueryDTO.getUsername()), SysUser::getName, userQueryDTO.getUsername()));
-        PageResult<SysUser> pageResult = new PageResult<>();
-        BeanUtils.copyProperties(sysUserPage, pageResult);
-        return pageResult;
+    public Page<UserDTO> getUserList(UserQueryDTO userQueryDTO) {
+        Page<UserDTO> page = new Page<>(userQueryDTO.getPageNum(), userQueryDTO.getPageSize());
+        List<UserDTO> userList = userMapper.getUserList(userQueryDTO);
+        page.setTotal(userList.size());
+        page.setRecords(userList);
+        return page;
     }
 
     @Override
@@ -141,15 +148,30 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             if (null != user) {
                 user.setStatus(UserStatusEmun.CANCELLATION.getCode());
                 user.setUpdateTime(new Date());
+                user.setUpdateBy(SecurityUtil.getUserName());
                 saveOrUpdate(user);
-                log.warn("--用户{}注销账户{}----", SecurityUtil.getUserName(), user.getName());
+                log.warn("--用户{}注销账户{}----", SecurityUtil.getUserName(), user.getUserName());
             }
         } else {
             if (userMapper.deleteById(id) != 0) {
-                log.warn("--用户{}删除账户{}----", SecurityUtil.getUserName(), user.getName());
+                log.warn("--用户{}删除账户{}----", SecurityUtil.getUserName(), user.getUserName());
             }
         }
         return Result.ok();
+    }
+
+    @Override
+    public Result<UserUpdateDTO> getUserInfo(Long userId) {
+        UserUpdateDTO userUpdateDTO = new UserUpdateDTO();
+        userUpdateDTO.setPosts(postMapper.selectList(null));
+        userUpdateDTO.setRoles(roleMapper.selectList(null));
+        if (null != userId) {
+            SysUser user = getById(userId);
+            BeanUtils.copyProperties(user, userUpdateDTO);
+            userUpdateDTO.setPostIds(postMapper.getPostIdsByUserId(userId));
+            userUpdateDTO.setRoleIds(roleMapper.getRoleIdByUserId(userId));
+        }
+        return Result.ok(userUpdateDTO);
     }
 
     /**
@@ -157,12 +179,26 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      *
      * @return 结果
      */
-    private Boolean checkUser(UserDTO userDTO) {
+    private Result<Void> checkUser(UserUpdateDTO user) {
         //查询用户名是否存在
-        SysUser user = userMapper.selectOne(new LambdaQueryWrapper<SysUser>()
-                .select(SysUser::getName)
-                .eq(SysUser::getName, userDTO.getName()));
-        return Objects.nonNull(user);
+        SysUser sysUser = userMapper.selectOne(new LambdaQueryWrapper<SysUser>()
+                .eq(SysUser::getUserId, user.getUserId())
+                .or()
+                .eq(SysUser::getUserName, user.getUserName())
+                .or()
+                .eq(SysUser::getTel, user.getTel())
+                .or()
+                .eq(SysUser::getEmail, user.getEmail()));
+        if (null != sysUser && !Objects.equals(sysUser.getUserId(), user.getUserId()) ) {
+            if (user.getUserName().equals(sysUser.getUserName())) {
+                return Result.fail("当前用户名已存在");
+            } else if (user.getTel().equals(sysUser.getTel())) {
+                return Result.fail("当前电话已存在");
+            } else if (user.getEmail().equals(sysUser.getEmail())) {
+                return Result.fail("当前输入邮箱账户已存在");
+            }
+        }
+        return Result.ok();
     }
 }
 

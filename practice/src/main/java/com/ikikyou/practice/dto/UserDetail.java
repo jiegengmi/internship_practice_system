@@ -24,9 +24,12 @@ public class UserDetail extends User implements Serializable {
 
     private String nickName;
 
-    public UserDetail(Long userId, String username, String nickName, String password, Collection<? extends GrantedAuthority> authorities) {
+    private String token;
+
+    public UserDetail(String token, Long userId, String username, String nickName, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
         this.userId = userId;
         this.nickName = nickName;
+        this.token = token;
     }
 }

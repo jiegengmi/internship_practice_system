@@ -1,8 +1,11 @@
 package com.ikikyou.practice.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ikikyou.practice.constant.MenuConstants;
+import com.ikikyou.practice.dto.query.MenuQueryDTO;
+import com.ikikyou.practice.utils.Result;
 import com.ikikyou.practice.vo.MenuRouteVO;
 import com.ikikyou.practice.vo.MenuVO;
 import com.ikikyou.practice.entity.system.SysMenu;
@@ -17,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author 25726
@@ -30,31 +34,99 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     final SysMenuMapper menuMapper;
 
     @Override
-    public List<MenuVO> buildMenus() {
+    public List<MenuVO> buildRouteMenus() {
         List<Long> roles = SecurityUtil.getRoles();
         if (CollectionUtil.isEmpty(roles)) {
             return Collections.emptyList();
         }
         List<SysMenu> userSysMenus = menuMapper.getByRoleIds(roles);
-        return getTreeMenu(userSysMenus);
+        return getRouteTreeMenu(userSysMenus);
+    }
+
+    @Override
+    public Result<List<MenuVO>> getTreeMenu(MenuQueryDTO menu) {
+        Long userId = SecurityUtil.getUserId();
+        List<SysMenu> menuList;
+        if (SecurityUtil.isAdmin(userId)) {
+            menuList = getAllMenu(menu);
+        } else {
+            menu.setUserId(SecurityUtil.getUserId());
+            menuList = menuMapper.queryMenus(menu);
+        }
+        return Result.ok(buildMenuTree(menuList));
+    }
+
+    @Override
+    public List<SysMenu> getAllMenu(MenuQueryDTO menuQuery) {
+        return list(new LambdaQueryWrapper<SysMenu>()
+                .eq(StringUtils.isNotEmpty(menuQuery.getVisible()), SysMenu::getVisible, menuQuery.getVisible())
+                .eq(StringUtils.isNotEmpty(menuQuery.getStatus()), SysMenu::getStatus, menuQuery.getStatus())
+                .like(StringUtils.isNotEmpty(menuQuery.getMenuName()), SysMenu::getMenuName, menuQuery.getMenuName())
+                .orderBy(true, true, SysMenu::getParentId)
+                .orderBy(true, true, SysMenu::getOrderNum)
+        );
+    }
+
+    public List<MenuVO> buildMenuTree(List<SysMenu> menus) {
+        if (CollectionUtil.isEmpty(menus)) {
+            return Collections.emptyList();
+        }
+        List<Long> tempList = menus.stream().map(SysMenu::getMenuId).toList();
+        return menus.stream()
+                //如果是顶级节点, 遍历该父节点的所有子节点
+                .filter(menu -> !tempList.contains(menu.getParentId()))
+                .map(menu -> {
+                    MenuVO menuVO = new MenuVO();
+                    BeanUtils.copyProperties(menu, menuVO);
+                    menuVO.setName(menu.getMenuName());
+                    recursionFn(menus, menuVO);
+                    return menuVO;
+                }).collect(Collectors.toList());
+    }
+
+    private void recursionFn(List<SysMenu> list, MenuVO parentMenu) {
+        // 得到子节点列表
+        List<MenuVO> childList = getChildList(list, parentMenu);
+        parentMenu.setChildren(childList);
+        for (MenuVO tChild : childList) {
+            if (!hasChild(list, tChild)) {
+                recursionFn(list, tChild);
+            }
+        }
+    }
+
+    private boolean hasChild(List<SysMenu> list, MenuVO parentMenu) {
+        return list.stream()
+                .filter(menu -> menu.getParentId().equals(parentMenu.getMenuId()))
+                .findAny()
+                .isEmpty();
+    }
+
+    private List<MenuVO> getChildList(List<SysMenu> list, MenuVO parentMenu) {
+        return list.stream()
+                .filter(menu -> menu.getParentId().equals(parentMenu.getMenuId()))
+                .map(menu -> {
+                    MenuVO menuVO = new MenuVO();
+                    BeanUtils.copyProperties(menu, menuVO);
+                    menuVO.setName(menu.getMenuName());
+                    return menuVO;
+                }).collect(Collectors.toList());
     }
 
     /**
-     * 生成菜单树
+     * 生成路由菜单树
      *
      * @param menuList 一级菜单及其子菜单
      * @return 菜单树
      */
-    private List<MenuVO> getTreeMenu(List<SysMenu> menuList) {
-        List<MenuVO> rootMenu = new ArrayList<>();
-        for (SysMenu menu : menuList) {
-            if (menu.getParentId() == 0) {
-                MenuVO menuVO = covertMenu(menu);
-                menuVO.setChildren(getChild(menuVO.getMenuId(), menuList));
-                rootMenu.add(getMenuInfo(menuVO));
-            }
-        }
-        return rootMenu;
+    private List<MenuVO> getRouteTreeMenu(List<SysMenu> menuList) {
+        return menuList.stream()
+                .filter(menu -> menu.getParentId() == 0)
+                .map(menu -> {
+                    MenuVO menuVO = covertMenu(menu);
+                    menuVO.setChildren(getChild(menuVO.getMenuId(), menuList));
+                    return getMenuInfo(menuVO);
+                }).collect(Collectors.toList());
     }
 
     /**
@@ -95,17 +167,58 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         return menuVO;
     }
 
+    /***
+     * 获取子菜单
+     *
+     * @param id    菜单id
+     * @param systemMenuList 根
+     * @return list
+     */
+    private List<MenuVO> getChild(Long id, List<SysMenu> systemMenuList) {
+        List<MenuVO> childList = systemMenuList.stream()
+                //非根路径 且 是id的子目录
+                .filter(menu -> menu.getParentId() != 0 && menu.getParentId().equals(id))
+                //非按钮
+                .filter(menu -> !MenuConstants.TYPE_BUTTON.equals(menu.getMenuType()))
+                .map(menu -> {
+                    MenuVO menuVO = covertMenu(menu);
+                    menuVO.setChildren(getChild(menuVO.getMenuId(), systemMenuList));
+                    return getMenuInfo(menuVO);
+                }).collect(Collectors.toList());
+        if (childList.isEmpty()) {
+            return Collections.emptyList();
+        }
+        return childList;
+    }
+
+    private MenuVO covertMenu(SysMenu menu) {
+        MenuVO menuVO = new MenuVO();
+        BeanUtils.copyProperties(menu, menuVO);
+        menuVO.setHidden("1".equals(menu.getVisible()));
+        menuVO.setName(getRouteName(menu));
+        menuVO.setPath(getRoutePath(menu));
+        menuVO.setComponent(getComponent(menu));
+        menuVO.setQuery(menu.getQuery());
+        String link = isInnerLink(menu) ? menu.getPath() : null;
+        menuVO.setMeta(new MenuRouteVO(menu.getMenuName(), menu.getIcon(), menu.getIsCache() == 1, link));
+        return menuVO;
+    }
+
+
     public String innerLinkReplaceEach(String path) {
-        return StringUtils.replaceEach(path, new String[]{MenuConstants.HTTP, MenuConstants.HTTPS, MenuConstants.WWW, "."},
+        return StringUtils.replaceEach(path,
+                new String[]{MenuConstants.HTTP, MenuConstants.HTTPS, MenuConstants.WWW, "."},
                 new String[]{"", "", "", "/"});
     }
 
     private boolean isInnerLink(MenuVO menuVO) {
-        return (menuVO.getIsFrame() == MenuConstants.NO_FRAME) && StringUtils.startsWithAny(menuVO.getPath(), MenuConstants.HTTP, MenuConstants.HTTPS);
+        return (menuVO.getIsFrame() == MenuConstants.NO_FRAME)
+                && StringUtils.startsWithAny(menuVO.getPath(), MenuConstants.HTTP, MenuConstants.HTTPS);
     }
 
     private boolean isInnerLink(SysMenu menuVO) {
-        return (menuVO.getIsFrame() == MenuConstants.NO_FRAME) && StringUtils.startsWithAny(menuVO.getPath(), MenuConstants.HTTP, MenuConstants.HTTPS);
+        return (menuVO.getIsFrame() == MenuConstants.NO_FRAME)
+                && StringUtils.startsWithAny(menuVO.getPath(), MenuConstants.HTTP, MenuConstants.HTTPS);
     }
 
     private boolean isMenuFrame(MenuVO menuVO) {
@@ -156,53 +269,16 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         String component = MenuConstants.LAYOUT;
         if (StringUtils.isNotEmpty(menu.getComponent()) && !isMenuFrame(menu)) {
             component = menu.getComponent();
-        } else if (StringUtils.isEmpty(menu.getComponent()) && menu.getParentId().intValue() != 0 && isInnerLink(menu)) {
+        } else if (StringUtils.isEmpty(menu.getComponent()) && menu.getParentId().intValue() != 0
+                && isInnerLink(menu)) {
             component = MenuConstants.INNER_LINK;
-        } else if (StringUtils.isEmpty(menu.getComponent()) && menu.getParentId().intValue() != 0 && MenuConstants.TYPE_DIR.equals(menu.getMenuType())) {
+        } else if (StringUtils.isEmpty(menu.getComponent()) && menu.getParentId().intValue() != 0
+                && MenuConstants.TYPE_DIR.equals(menu.getMenuType())) {
             component = MenuConstants.PARENT_VIEW;
         }
         return component;
     }
 
-
-    /***
-     * 获取子菜单
-     *
-     * @param id    菜单id
-     * @param systemMenuList 根
-     * @return list
-     */
-    private List<MenuVO> getChild(Long id, List<SysMenu> systemMenuList) {
-        List<MenuVO> childList = new ArrayList<>();
-        for (SysMenu menu : systemMenuList) {
-            if (MenuConstants.TYPE_BUTTON.equals(menu.getMenuType())) {
-                continue;
-            }
-            // 遍历所有节点，将父菜单id与传过来的id比较
-            if (menu.getParentId() != 0 && menu.getParentId().equals(id)) {
-                MenuVO menuVO = covertMenu(menu);
-                menuVO.setChildren(getChild(menuVO.getMenuId(), systemMenuList));
-                childList.add(getMenuInfo(menuVO));
-            }
-        }
-        if (childList.isEmpty()) {
-            return Collections.emptyList();
-        }
-        return childList;
-    }
-
-    private MenuVO covertMenu(SysMenu menu) {
-        MenuVO menuVO = new MenuVO();
-        BeanUtils.copyProperties(menu, menuVO);
-        menuVO.setHidden("1".equals(menu.getVisible()));
-        menuVO.setName(getRouteName(menu));
-        menuVO.setPath(getRoutePath(menu));
-        menuVO.setComponent(getComponent(menu));
-        menuVO.setQuery(menu.getQuery());
-        String link = isInnerLink(menu) ? menu.getPath() : null;
-        menuVO.setMeta(new MenuRouteVO(menu.getMenuName(), menu.getIcon(), menu.getIsCache() == 1, link));
-        return menuVO;
-    }
 }
 
 

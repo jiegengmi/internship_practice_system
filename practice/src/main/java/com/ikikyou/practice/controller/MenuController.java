@@ -1,5 +1,6 @@
 package com.ikikyou.practice.controller;
 
+import com.ikikyou.practice.dto.query.MenuQueryDTO;
 import com.ikikyou.practice.service.SysMenuService;
 import com.ikikyou.practice.utils.Result;
 import com.ikikyou.practice.vo.MenuVO;
@@ -26,10 +27,19 @@ public class MenuController {
 
     /**
      * 构建用户菜单
+     *
      * @return 返回当前用户的菜单列表（父id为空则为一级菜单）
      */
     @GetMapping("/build")
     public Result<List<MenuVO>> buildUserMenus() {
-        return Result.ok(menuService.buildMenus());
+        return Result.ok(menuService.buildRouteMenus());
+    }
+
+    /**
+     * 获取菜单下拉树列表
+     */
+    @GetMapping("/tree")
+    public Result<List<MenuVO>> getTreeMenu(MenuQueryDTO menuQuery){
+        return menuService.getTreeMenu(menuQuery);
     }
 }

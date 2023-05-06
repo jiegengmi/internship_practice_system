@@ -8,6 +8,9 @@ public interface SecurityConstants {
 
     String AUTHORIZATION_HEADER = "Authorization";
     String TOKEN_PREFIX = "Bearer ";
+
+    String JWT_USER_KEY = "ikikyou_practice";
+    String USER_TOKEN_PREFIX = "ikikyou_com_";
     String BASIC_PREFIX = "Basic ";
     String BCRYPT = "{bcrypt}";
     String ROLE = "ROLE_";

@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 用户查询对象
@@ -22,9 +24,11 @@ public class UserQueryDTO extends BaseQueryDTO implements Serializable {
 
     private String email;
 
-    private String username;
+    private String userName;
 
     private String nickName;
 
-    private long roleId;
+    private Long roleId;
+
+    private Long deptId;
 }

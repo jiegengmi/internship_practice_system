@@ -18,15 +18,33 @@ import java.util.List;
  */
 @Slf4j
 public final class SecurityUtil {
+
+    /**
+     * 判断是否超级管理员
+     *
+     * @param userId 用户id
+     */
+    public static boolean isAdmin(Long userId) {
+        return null != userId && 1L == userId;
+    }
+
+    /**
+     * 判断当前用户是否超级管理员
+     *
+     */
+    public static boolean isAdmin(){
+        return isAdmin(getUserId());
+    }
     /**
      * 获取当前登录用户
+     *
      * @return 用户名
      */
-    public static String getUserName(){
+    public static String getUserName() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
         if (principal instanceof UserDetail) {
-            username = ((UserDetail)principal).getUsername();
+            username = ((UserDetail) principal).getUsername();
         } else {
             username = principal.toString();
         }
@@ -35,6 +53,7 @@ public final class SecurityUtil {
 
     /**
      * 获取当前登录用户id
+     *
      * @return 用户名id
      */
     public static Long getUserId() {
@@ -78,6 +97,7 @@ public final class SecurityUtil {
 
     /**
      * 获取自定义用户信息对象
+     *
      * @param authentication 认证信息
      */
     public static UserDetail getUser(Authentication authentication) {
@@ -86,7 +106,7 @@ public final class SecurityUtil {
             principal = null;
         }
 
-        return (UserDetail)principal;
+        return (UserDetail) principal;
     }
 
 }

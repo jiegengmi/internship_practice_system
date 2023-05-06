@@ -29,11 +29,50 @@
         update_time,remark
     </sql>
     <select id="getRoleByUserId" resultType="com.ikikyou.practice.entity.system.SysRole" parameterType="java.lang.Long">
-        select r.role_id,role_name,role_key,role_sort,data_scope,menu_check_strictly,dept_check_strictly,status,del_flag,
+        select
+            r.role_id,role_name,role_key,role_sort,data_scope,menu_check_strictly,dept_check_strictly,status,del_flag,
                create_by,create_time,update_by,update_time,remark
         from sys_role r
                  left join sys_user_role link on link.role_id = r.role_id
         where
             link.user_id = #{userId}
+    </select>
+    <select id="getRoleIdByUserId" resultType="java.lang.Long">
+        select
+            r.role_id
+        from sys_role r
+                 left join sys_user_role ur on ur.role_id = r.role_id
+                 left join sys_user u on u.user_id = ur.user_id
+        where
+            u.user_id = #{userId}
+    </select>
+    <select id="getByQueryInfo" resultMap="BaseResultMap">
+        select
+            <include refid="Base_Column_List"/>
+        from
+            sys_role r
+        where r.del_flag = '0'
+        <if test="roleId != null and roleId != 0">
+            AND r.role_id = #{roleId}
+        </if>
+        <if test="roleName != null and roleName != ''">
+            AND r.role_name like concat('%', #{roleName}, '%')
+        </if>
+        <if test="status != null and status != ''">
+            AND r.status = #{status}
+        </if>
+        <if test="roleKey != null and roleKey != ''">
+            AND r.role_key like concat('%', #{roleKey}, '%')
+        </if>
+        <if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
+            and date_format(r.create_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+        </if>
+        <if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
+            and date_format(r.create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+        </if>
+        order by
+            r.role_sort
+        limit
+            #{pageNum},#{pageSize}
     </select>
 </mapper>
