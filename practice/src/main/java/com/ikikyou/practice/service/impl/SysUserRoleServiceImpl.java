@@ -1,7 +1,7 @@
 package com.ikikyou.practice.service.impl;
 
-import com.ikikyou.practice.entity.system.SysUserRole;
-import com.ikikyou.practice.mapper.EntityRelationMapper;
+import com.ikikyou.practice.model.entity.system.SysUserRole;
+import com.ikikyou.practice.model.mapper.EntityRelationMapper;
 import com.ikikyou.practice.service.SysUserRoleService;
 import com.ikikyou.practice.utils.ParamUtil;
 import com.ikikyou.practice.utils.SecurityUtil;

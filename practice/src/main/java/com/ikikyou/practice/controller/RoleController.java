@@ -1,7 +1,7 @@
 package com.ikikyou.practice.controller;
 
-import com.ikikyou.practice.dto.query.RoleQueryDTO;
-import com.ikikyou.practice.entity.system.SysRole;
+import com.ikikyou.practice.model.query.RoleQuery;
+import com.ikikyou.practice.model.entity.system.SysRole;
 import com.ikikyou.practice.service.SysRoleService;
 import com.ikikyou.practice.utils.Result;
 import io.swagger.annotations.Api;
@@ -33,7 +33,7 @@ public class RoleController {
      */
     @GetMapping("/list")
     @PreAuthorize("hasAuthority('role:list')")
-    public Result<?> getRoleList(RoleQueryDTO roleQuery){
+    public Result<?> getRoleList(RoleQuery roleQuery){
         return roleService.getAllRoles(roleQuery);
     }
 

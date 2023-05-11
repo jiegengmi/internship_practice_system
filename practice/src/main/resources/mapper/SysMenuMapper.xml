@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ikikyou.practice.mapper.SysMenuMapper">
+<mapper namespace="com.ikikyou.practice.model.mapper.SysMenuMapper">
 
-    <resultMap id="BaseResultMap" type="com.ikikyou.practice.entity.system.SysMenu">
+    <resultMap id="BaseResultMap" type="com.ikikyou.practice.model.entity.system.SysMenu">
             <id property="menuId" column="menu_id" jdbcType="BIGINT"/>
             <result property="menuName" column="menu_name" jdbcType="VARCHAR"/>
             <result property="parentId" column="parent_id" jdbcType="BIGINT"/>
@@ -36,7 +36,7 @@
         remark
     </sql>
 
-    <select id="getByRoleIds" resultType="com.ikikyou.practice.entity.system.SysMenu">
+    <select id="getByRoleIds" resultType="com.ikikyou.practice.model.entity.system.SysMenu">
         SELECT
             menu.menu_id,menu_name,parent_id, order_num,path,component,query,is_frame,is_cache,menu_type,visible,status,
             perms,icon,create_by,create_time,update_by,update_time,remark
@@ -48,7 +48,7 @@
                 #{roleId}
             </foreach>
     </select>
-    <select id="queryMenus" resultMap="BaseResultMap" parameterType="com.ikikyou.practice.dto.query.MenuQueryDTO">
+    <select id="queryMenus" resultMap="BaseResultMap" parameterType="com.ikikyou.practice.model.query.MenuQuery">
         select
             distinct m.menu_id, m.parent_id, m.menu_name, m.path, m.component, m.`query`, m.visible, m.status, ifnull(m.perms,'') as perms, m.is_frame, m.is_cache, m.menu_type, m.icon, m.order_num, m.create_time
         from

@@ -1,9 +1,9 @@
 package com.ikikyou.practice.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ikikyou.practice.entity.Notice;
+import com.ikikyou.practice.model.entity.Notice;
 import com.ikikyou.practice.service.NoticeService;
-import com.ikikyou.practice.mapper.NoticeMapper;
+import com.ikikyou.practice.model.mapper.NoticeMapper;
 import org.springframework.stereotype.Service;
 
 /**

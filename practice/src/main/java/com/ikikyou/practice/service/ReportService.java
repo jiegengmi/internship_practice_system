@@ -1,6 +1,6 @@
 package com.ikikyou.practice.service;
 
-import com.ikikyou.practice.entity.Report;
+import com.ikikyou.practice.model.entity.Report;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

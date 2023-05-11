@@ -1,9 +1,9 @@
 package com.ikikyou.practice.controller;
 
-import com.ikikyou.practice.entity.system.SysDept;
+import com.ikikyou.practice.model.entity.system.SysDept;
 import com.ikikyou.practice.service.SysDeptService;
 import com.ikikyou.practice.utils.Result;
-import com.ikikyou.practice.vo.DeptVO;
+import com.ikikyou.practice.model.dto.DeptDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +23,7 @@ public class DeptController {
     final SysDeptService deptService;
 
     @GetMapping("/tree")
-    public Result<List<DeptVO>> getDeptList(SysDept dept) {
+    public Result<List<DeptDTO>> getDeptList(SysDept dept) {
         return Result.ok(deptService.getDeptListTree(dept));
     }
 }

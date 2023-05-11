@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 @SpringBootApplication
-@MapperScan("com.ikikyou.practice.mapper")
+@MapperScan("com.ikikyou.practice.model.mapper")
 @EnableCaching
 public class PracticeApplication {
 

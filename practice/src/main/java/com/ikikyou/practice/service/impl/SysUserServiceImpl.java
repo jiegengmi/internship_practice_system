@@ -1,6 +1,5 @@
 package com.ikikyou.practice.service.impl;
 
-import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -8,17 +7,17 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ikikyou.practice.common.BusinessException;
-import com.ikikyou.practice.dto.UserDTO;
-import com.ikikyou.practice.dto.UserUpdateDTO;
-import com.ikikyou.practice.dto.query.UserQueryDTO;
+import com.ikikyou.practice.model.dto.UserDTO;
+import com.ikikyou.practice.model.dto.UserUpdateDTO;
+import com.ikikyou.practice.model.query.UserQuery;
 import com.ikikyou.practice.emun.UserStatusEmun;
-import com.ikikyou.practice.entity.system.SysUser;
-import com.ikikyou.practice.mapper.SysPostMapper;
-import com.ikikyou.practice.mapper.SysRoleMapper;
+import com.ikikyou.practice.model.entity.system.SysUser;
+import com.ikikyou.practice.model.mapper.SysPostMapper;
+import com.ikikyou.practice.model.mapper.SysRoleMapper;
 import com.ikikyou.practice.service.SysUserPostService;
 import com.ikikyou.practice.service.SysUserRoleService;
 import com.ikikyou.practice.service.SysUserService;
-import com.ikikyou.practice.mapper.SysUserMapper;
+import com.ikikyou.practice.model.mapper.SysUserMapper;
 import com.ikikyou.practice.utils.Result;
 import com.ikikyou.practice.utils.SecurityUtil;
 import lombok.RequiredArgsConstructor;
@@ -109,9 +108,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
-    public Page<UserDTO> getUserList(UserQueryDTO userQueryDTO) {
-        Page<UserDTO> page = new Page<>(userQueryDTO.getPageNum(), userQueryDTO.getPageSize());
-        List<UserDTO> userList = userMapper.getUserList(userQueryDTO);
+    public Page<UserDTO> getUserList(UserQuery userQuery) {
+        Page<UserDTO> page = new Page<>(userQuery.getPageNum(), userQuery.getPageSize());
+        List<UserDTO> userList = userMapper.getUserList(userQuery);
         page.setTotal(userList.size());
         page.setRecords(userList);
         return page;

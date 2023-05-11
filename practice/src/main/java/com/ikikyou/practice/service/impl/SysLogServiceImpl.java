@@ -1,9 +1,9 @@
 package com.ikikyou.practice.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ikikyou.practice.entity.system.SysLog;
+import com.ikikyou.practice.model.entity.system.SysLog;
 import com.ikikyou.practice.service.SysLogService;
-import com.ikikyou.practice.mapper.SysLogMapper;
+import com.ikikyou.practice.model.mapper.SysLogMapper;
 import org.springframework.stereotype.Service;
 
 /**

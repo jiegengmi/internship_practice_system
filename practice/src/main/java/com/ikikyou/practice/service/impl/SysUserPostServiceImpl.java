@@ -1,7 +1,7 @@
 package com.ikikyou.practice.service.impl;
 
-import com.ikikyou.practice.entity.system.SysUserPost;
-import com.ikikyou.practice.mapper.EntityRelationMapper;
+import com.ikikyou.practice.model.entity.system.SysUserPost;
+import com.ikikyou.practice.model.mapper.EntityRelationMapper;
 import com.ikikyou.practice.service.SysUserPostService;
 import com.ikikyou.practice.utils.ParamUtil;
 import lombok.RequiredArgsConstructor;

@@ -1,8 +1,5 @@
 package com.ikikyou.practice.service;
 
-import com.ikikyou.practice.entity.system.SysUserPost;
-import com.baomidou.mybatisplus.extension.service.IService;
-
 import java.util.List;
 
 /**

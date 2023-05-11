@@ -4,13 +4,15 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ikikyou.practice.constant.MenuConstants;
-import com.ikikyou.practice.dto.query.MenuQueryDTO;
+import com.ikikyou.practice.model.query.MenuQuery;
+import com.ikikyou.practice.utils.ParamUtil;
 import com.ikikyou.practice.utils.Result;
-import com.ikikyou.practice.vo.MenuRouteVO;
-import com.ikikyou.practice.vo.MenuVO;
-import com.ikikyou.practice.entity.system.SysMenu;
+import com.ikikyou.practice.model.dto.MenuRoleDTO;
+import com.ikikyou.practice.model.dto.MenuRouteDTO;
+import com.ikikyou.practice.model.dto.MenuDTO;
+import com.ikikyou.practice.model.entity.system.SysMenu;
 import com.ikikyou.practice.service.SysMenuService;
-import com.ikikyou.practice.mapper.SysMenuMapper;
+import com.ikikyou.practice.model.mapper.SysMenuMapper;
 import com.ikikyou.practice.utils.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -34,7 +36,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     final SysMenuMapper menuMapper;
 
     @Override
-    public List<MenuVO> buildRouteMenus() {
+    public List<MenuDTO> buildRouteMenus() {
         List<Long> roles = SecurityUtil.getRoles();
         if (CollectionUtil.isEmpty(roles)) {
             return Collections.emptyList();
@@ -44,7 +46,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     }
 
     @Override
-    public Result<List<MenuVO>> getTreeMenu(MenuQueryDTO menu) {
+    public Result<List<MenuDTO>> getTreeMenu(MenuQuery menu) {
         Long userId = SecurityUtil.getUserId();
         List<SysMenu> menuList;
         if (SecurityUtil.isAdmin(userId)) {
@@ -57,7 +59,16 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     }
 
     @Override
-    public List<SysMenu> getAllMenu(MenuQueryDTO menuQuery) {
+    public Result<MenuRoleDTO> getRoleMenus(Long roleId) {
+        ParamUtil.checkId(roleId);
+        MenuRoleDTO menuRoleDTO = new MenuRoleDTO();
+        menuRoleDTO.setMenus(getTreeMenu(new MenuQuery()).getData());
+        menuRoleDTO.setCheckedKeys(getRoleIds(menuMapper.getByRoleIds(List.of(roleId))));
+        return Result.ok(menuRoleDTO);
+    }
+
+    @Override
+    public List<SysMenu> getAllMenu(MenuQuery menuQuery) {
         return list(new LambdaQueryWrapper<SysMenu>()
                 .eq(StringUtils.isNotEmpty(menuQuery.getVisible()), SysMenu::getVisible, menuQuery.getVisible())
                 .eq(StringUtils.isNotEmpty(menuQuery.getStatus()), SysMenu::getStatus, menuQuery.getStatus())
@@ -67,7 +78,11 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         );
     }
 
-    public List<MenuVO> buildMenuTree(List<SysMenu> menus) {
+    private List<Long> getRoleIds(List<SysMenu> menus) {
+        return menus.stream().map(SysMenu::getMenuId).toList();
+    }
+
+    public List<MenuDTO> buildMenuTree(List<SysMenu> menus) {
         if (CollectionUtil.isEmpty(menus)) {
             return Collections.emptyList();
         }
@@ -76,40 +91,40 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
                 //如果是顶级节点, 遍历该父节点的所有子节点
                 .filter(menu -> !tempList.contains(menu.getParentId()))
                 .map(menu -> {
-                    MenuVO menuVO = new MenuVO();
-                    BeanUtils.copyProperties(menu, menuVO);
-                    menuVO.setName(menu.getMenuName());
-                    recursionFn(menus, menuVO);
-                    return menuVO;
+                    MenuDTO menuDTO = new MenuDTO();
+                    BeanUtils.copyProperties(menu, menuDTO);
+                    menuDTO.setName(menu.getMenuName());
+                    recursionFn(menus, menuDTO);
+                    return menuDTO;
                 }).collect(Collectors.toList());
     }
 
-    private void recursionFn(List<SysMenu> list, MenuVO parentMenu) {
+    private void recursionFn(List<SysMenu> list, MenuDTO parentMenu) {
         // 得到子节点列表
-        List<MenuVO> childList = getChildList(list, parentMenu);
+        List<MenuDTO> childList = getChildList(list, parentMenu);
         parentMenu.setChildren(childList);
-        for (MenuVO tChild : childList) {
+        for (MenuDTO tChild : childList) {
             if (!hasChild(list, tChild)) {
                 recursionFn(list, tChild);
             }
         }
     }
 
-    private boolean hasChild(List<SysMenu> list, MenuVO parentMenu) {
+    private boolean hasChild(List<SysMenu> list, MenuDTO parentMenu) {
         return list.stream()
                 .filter(menu -> menu.getParentId().equals(parentMenu.getMenuId()))
                 .findAny()
                 .isEmpty();
     }
 
-    private List<MenuVO> getChildList(List<SysMenu> list, MenuVO parentMenu) {
+    private List<MenuDTO> getChildList(List<SysMenu> list, MenuDTO parentMenu) {
         return list.stream()
                 .filter(menu -> menu.getParentId().equals(parentMenu.getMenuId()))
                 .map(menu -> {
-                    MenuVO menuVO = new MenuVO();
-                    BeanUtils.copyProperties(menu, menuVO);
-                    menuVO.setName(menu.getMenuName());
-                    return menuVO;
+                    MenuDTO menuDTO = new MenuDTO();
+                    BeanUtils.copyProperties(menu, menuDTO);
+                    menuDTO.setName(menu.getMenuName());
+                    return menuDTO;
                 }).collect(Collectors.toList());
     }
 
@@ -119,52 +134,52 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
      * @param menuList 一级菜单及其子菜单
      * @return 菜单树
      */
-    private List<MenuVO> getRouteTreeMenu(List<SysMenu> menuList) {
+    private List<MenuDTO> getRouteTreeMenu(List<SysMenu> menuList) {
         return menuList.stream()
                 .filter(menu -> menu.getParentId() == 0)
                 .map(menu -> {
-                    MenuVO menuVO = covertMenu(menu);
-                    menuVO.setChildren(getChild(menuVO.getMenuId(), menuList));
-                    return getMenuInfo(menuVO);
+                    MenuDTO menuDTO = covertMenu(menu);
+                    menuDTO.setChildren(getChild(menuDTO.getMenuId(), menuList));
+                    return getMenuInfo(menuDTO);
                 }).collect(Collectors.toList());
     }
 
     /**
      * 赋值
      *
-     * @param menuVO 菜单对象
+     * @param menuDTO 菜单对象
      * @return 菜单对象
      */
-    private MenuVO getMenuInfo(MenuVO menuVO) {
-        List<MenuVO> subMenuList = menuVO.getChildren();
-        if (CollectionUtil.isNotEmpty(subMenuList) && MenuConstants.TYPE_DIR.equals(menuVO.getMenuType())) {
-            menuVO.setAlwaysShow(true);
-            menuVO.setRedirect("noRedirect");
-        } else if (isMenuFrame(menuVO)) {
-            menuVO.setMeta(null);
-            List<MenuVO> childrenList = new ArrayList<>();
-            MenuVO children = new MenuVO();
-            children.setPath(menuVO.getPath());
-            children.setComponent(menuVO.getComponent());
-            children.setName(StringUtils.capitalize(menuVO.getPath()));
-            children.setMeta(new MenuRouteVO(menuVO.getName(), menuVO.getIcon(), menuVO.getIsCache() == 1, menuVO.getPath()));
-            children.setQuery(menuVO.getQuery());
+    private MenuDTO getMenuInfo(MenuDTO menuDTO) {
+        List<MenuDTO> subMenuList = menuDTO.getChildren();
+        if (CollectionUtil.isNotEmpty(subMenuList) && MenuConstants.TYPE_DIR.equals(menuDTO.getMenuType())) {
+            menuDTO.setAlwaysShow(true);
+            menuDTO.setRedirect("noRedirect");
+        } else if (isMenuFrame(menuDTO)) {
+            menuDTO.setMeta(null);
+            List<MenuDTO> childrenList = new ArrayList<>();
+            MenuDTO children = new MenuDTO();
+            children.setPath(menuDTO.getPath());
+            children.setComponent(menuDTO.getComponent());
+            children.setName(StringUtils.capitalize(menuDTO.getPath()));
+            children.setMeta(new MenuRouteDTO(menuDTO.getName(), menuDTO.getIcon(), menuDTO.getIsCache() == 1, menuDTO.getPath()));
+            children.setQuery(menuDTO.getQuery());
             childrenList.add(children);
-            menuVO.setChildren(childrenList);
-        } else if (menuVO.getParentId().intValue() == 0 && isInnerLink(menuVO)) {
-            menuVO.setMeta(new MenuRouteVO(menuVO.getName(), menuVO.getIcon()));
-            menuVO.setPath("/");
-            List<MenuVO> childrenList = new ArrayList<>();
-            MenuVO children = new MenuVO();
-            String menuVOPath = innerLinkReplaceEach(menuVO.getPath());
+            menuDTO.setChildren(childrenList);
+        } else if (menuDTO.getParentId().intValue() == 0 && isInnerLink(menuDTO)) {
+            menuDTO.setMeta(new MenuRouteDTO(menuDTO.getName(), menuDTO.getIcon()));
+            menuDTO.setPath("/");
+            List<MenuDTO> childrenList = new ArrayList<>();
+            MenuDTO children = new MenuDTO();
+            String menuVOPath = innerLinkReplaceEach(menuDTO.getPath());
             children.setPath(menuVOPath);
             children.setComponent(MenuConstants.INNER_LINK);
             children.setName(StringUtils.capitalize(menuVOPath));
-            children.setMeta(new MenuRouteVO(menuVO.getName(), menuVO.getIcon(), menuVO.getPath()));
+            children.setMeta(new MenuRouteDTO(menuDTO.getName(), menuDTO.getIcon(), menuDTO.getPath()));
             childrenList.add(children);
-            menuVO.setChildren(childrenList);
+            menuDTO.setChildren(childrenList);
         }
-        return menuVO;
+        return menuDTO;
     }
 
     /***
@@ -174,16 +189,16 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
      * @param systemMenuList 根
      * @return list
      */
-    private List<MenuVO> getChild(Long id, List<SysMenu> systemMenuList) {
-        List<MenuVO> childList = systemMenuList.stream()
+    private List<MenuDTO> getChild(Long id, List<SysMenu> systemMenuList) {
+        List<MenuDTO> childList = systemMenuList.stream()
                 //非根路径 且 是id的子目录
                 .filter(menu -> menu.getParentId() != 0 && menu.getParentId().equals(id))
                 //非按钮
                 .filter(menu -> !MenuConstants.TYPE_BUTTON.equals(menu.getMenuType()))
                 .map(menu -> {
-                    MenuVO menuVO = covertMenu(menu);
-                    menuVO.setChildren(getChild(menuVO.getMenuId(), systemMenuList));
-                    return getMenuInfo(menuVO);
+                    MenuDTO menuDTO = covertMenu(menu);
+                    menuDTO.setChildren(getChild(menuDTO.getMenuId(), systemMenuList));
+                    return getMenuInfo(menuDTO);
                 }).collect(Collectors.toList());
         if (childList.isEmpty()) {
             return Collections.emptyList();
@@ -191,17 +206,17 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         return childList;
     }
 
-    private MenuVO covertMenu(SysMenu menu) {
-        MenuVO menuVO = new MenuVO();
-        BeanUtils.copyProperties(menu, menuVO);
-        menuVO.setHidden("1".equals(menu.getVisible()));
-        menuVO.setName(getRouteName(menu));
-        menuVO.setPath(getRoutePath(menu));
-        menuVO.setComponent(getComponent(menu));
-        menuVO.setQuery(menu.getQuery());
+    private MenuDTO covertMenu(SysMenu menu) {
+        MenuDTO menuDTO = new MenuDTO();
+        BeanUtils.copyProperties(menu, menuDTO);
+        menuDTO.setHidden("1".equals(menu.getVisible()));
+        menuDTO.setName(getRouteName(menu));
+        menuDTO.setPath(getRoutePath(menu));
+        menuDTO.setComponent(getComponent(menu));
+        menuDTO.setQuery(menu.getQuery());
         String link = isInnerLink(menu) ? menu.getPath() : null;
-        menuVO.setMeta(new MenuRouteVO(menu.getMenuName(), menu.getIcon(), menu.getIsCache() == 1, link));
-        return menuVO;
+        menuDTO.setMeta(new MenuRouteDTO(menu.getMenuName(), menu.getIcon(), menu.getIsCache() == 1, link));
+        return menuDTO;
     }
 
 
@@ -211,9 +226,9 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
                 new String[]{"", "", "", "/"});
     }
 
-    private boolean isInnerLink(MenuVO menuVO) {
-        return (menuVO.getIsFrame() == MenuConstants.NO_FRAME)
-                && StringUtils.startsWithAny(menuVO.getPath(), MenuConstants.HTTP, MenuConstants.HTTPS);
+    private boolean isInnerLink(MenuDTO menuDTO) {
+        return (menuDTO.getIsFrame() == MenuConstants.NO_FRAME)
+                && StringUtils.startsWithAny(menuDTO.getPath(), MenuConstants.HTTP, MenuConstants.HTTPS);
     }
 
     private boolean isInnerLink(SysMenu menuVO) {
@@ -221,9 +236,9 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
                 && StringUtils.startsWithAny(menuVO.getPath(), MenuConstants.HTTP, MenuConstants.HTTPS);
     }
 
-    private boolean isMenuFrame(MenuVO menuVO) {
-        return menuVO.getParentId().intValue() == 0 && MenuConstants.TYPE_MENU.equals(menuVO.getMenuType())
-                && menuVO.getIsFrame().equals(MenuConstants.NO_FRAME);
+    private boolean isMenuFrame(MenuDTO menuDTO) {
+        return menuDTO.getParentId().intValue() == 0 && MenuConstants.TYPE_MENU.equals(menuDTO.getMenuType())
+                && menuDTO.getIsFrame().equals(MenuConstants.NO_FRAME);
     }
 
     private boolean isMenuFrame(SysMenu menu) {

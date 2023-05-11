@@ -2,7 +2,7 @@ package com.ikikyou.practice.filter;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.ikikyou.practice.constant.SecurityConstants;
-import com.ikikyou.practice.dto.UserDetail;
+import com.ikikyou.practice.model.dto.UserDetail;
 import com.ikikyou.practice.utils.DateUtil;
 import com.ikikyou.practice.utils.SecurityUtil;
 import io.jsonwebtoken.Claims;

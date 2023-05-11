@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ikikyou.practice.mapper.SysRoleMapper">
+<mapper namespace="com.ikikyou.practice.model.mapper.SysRoleMapper">
 
-    <resultMap id="BaseResultMap" type="com.ikikyou.practice.entity.system.SysRole">
+    <resultMap id="BaseResultMap" type="com.ikikyou.practice.model.entity.system.SysRole">
             <id property="roleId" column="role_id" jdbcType="BIGINT"/>
             <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
             <result property="roleKey" column="role_key" jdbcType="VARCHAR"/>
@@ -28,7 +28,7 @@
         create_by,create_time,update_by,
         update_time,remark
     </sql>
-    <select id="getRoleByUserId" resultType="com.ikikyou.practice.entity.system.SysRole" parameterType="java.lang.Long">
+    <select id="getRoleByUserId" resultType="com.ikikyou.practice.model.entity.system.SysRole" parameterType="java.lang.Long">
         select
             r.role_id,role_name,role_key,role_sort,data_scope,menu_check_strictly,dept_check_strictly,status,del_flag,
                create_by,create_time,update_by,update_time,remark

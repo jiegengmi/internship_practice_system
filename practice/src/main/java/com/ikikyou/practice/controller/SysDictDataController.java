@@ -1,6 +1,6 @@
 package com.ikikyou.practice.controller;
 
-import com.ikikyou.practice.entity.system.SysDictData;
+import com.ikikyou.practice.model.entity.system.SysDictData;
 import com.ikikyou.practice.service.SysDictDataService;
 import com.ikikyou.practice.service.SysDictTypeService;
 import com.ikikyou.practice.utils.Result;

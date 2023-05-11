@@ -1,11 +1,11 @@
 package com.ikikyou.practice.service.impl;
 
-import com.ikikyou.practice.dto.UserInfoDTO;
-import com.ikikyou.practice.entity.system.SysMenu;
-import com.ikikyou.practice.entity.system.SysRole;
-import com.ikikyou.practice.entity.system.SysUser;
-import com.ikikyou.practice.mapper.SysMenuMapper;
-import com.ikikyou.practice.mapper.SysRoleMapper;
+import com.ikikyou.practice.model.dto.UserInfoDTO;
+import com.ikikyou.practice.model.entity.system.SysMenu;
+import com.ikikyou.practice.model.entity.system.SysRole;
+import com.ikikyou.practice.model.entity.system.SysUser;
+import com.ikikyou.practice.model.mapper.SysMenuMapper;
+import com.ikikyou.practice.model.mapper.SysRoleMapper;
 import com.ikikyou.practice.service.SysUserService;
 import com.ikikyou.practice.service.UserInfoService;
 import com.ikikyou.practice.utils.Result;
@@ -15,8 +15,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * @author ikikyou

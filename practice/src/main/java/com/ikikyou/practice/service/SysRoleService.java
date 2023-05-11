@@ -1,8 +1,8 @@
 package com.ikikyou.practice.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.ikikyou.practice.dto.query.RoleQueryDTO;
-import com.ikikyou.practice.entity.system.SysRole;
+import com.ikikyou.practice.model.query.RoleQuery;
+import com.ikikyou.practice.model.entity.system.SysRole;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ikikyou.practice.utils.Result;
 
@@ -31,7 +31,7 @@ public interface SysRoleService extends IService<SysRole> {
      *
      * @param roleQuery 查询对象
      */
-    Result<Page<SysRole>> getAllRoles(RoleQueryDTO roleQuery);
+    Result<Page<SysRole>> getAllRoles(RoleQuery roleQuery);
 
     /**
      * 新增或者删除一个角色

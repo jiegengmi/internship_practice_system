@@ -2,9 +2,9 @@ package com.ikikyou.practice.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ikikyou.practice.entity.system.SysConfig;
+import com.ikikyou.practice.model.entity.system.SysConfig;
 import com.ikikyou.practice.service.SysConfigService;
-import com.ikikyou.practice.mapper.SysConfigMapper;
+import com.ikikyou.practice.model.mapper.SysConfigMapper;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;

@@ -1,14 +1,12 @@
 package com.ikikyou.practice.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.ikikyou.practice.dto.UserDTO;
-import com.ikikyou.practice.dto.UserInfoDTO;
-import com.ikikyou.practice.dto.UserUpdateDTO;
-import com.ikikyou.practice.dto.query.UserQueryDTO;
-import com.ikikyou.practice.entity.system.SysUser;
+import com.ikikyou.practice.model.dto.UserDTO;
+import com.ikikyou.practice.model.dto.UserInfoDTO;
+import com.ikikyou.practice.model.dto.UserUpdateDTO;
+import com.ikikyou.practice.model.query.UserQuery;
 import com.ikikyou.practice.service.SysUserService;
 import com.ikikyou.practice.service.UserInfoService;
-import com.ikikyou.practice.utils.PageResult;
 import com.ikikyou.practice.utils.Result;
 import com.ikikyou.practice.utils.SecurityUtil;
 import io.swagger.annotations.Api;
@@ -33,8 +31,8 @@ public class UserController {
 
     @GetMapping("/list")
     @PreAuthorize("hasAuthority('user:list')")
-    public Result<Page<UserDTO>> getUserList(UserQueryDTO userQueryDTO){
-        return Result.ok(userService.getUserList(userQueryDTO));
+    public Result<Page<UserDTO>> getUserList(UserQuery userQuery){
+        return Result.ok(userService.getUserList(userQuery));
     }
 
     @GetMapping({"/{userId}", "/"})

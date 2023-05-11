@@ -1,7 +1,7 @@
 package com.ikikyou.practice.common;
 
 import com.ikikyou.practice.annotation.DataScope;
-import com.ikikyou.practice.entity.system.SysUser;
+import com.ikikyou.practice.model.entity.system.SysUser;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;

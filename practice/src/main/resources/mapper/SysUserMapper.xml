@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ikikyou.practice.mapper.SysUserMapper">
+<mapper namespace="com.ikikyou.practice.model.mapper.SysUserMapper">
 
-    <resultMap id="BaseResultMap" type="com.ikikyou.practice.entity.system.SysUser">
+    <resultMap id="BaseResultMap" type="com.ikikyou.practice.model.entity.system.SysUser">
             <id property="userId" column="user_id" jdbcType="BIGINT"/>
             <result property="deptId" column="dept_id" jdbcType="BIGINT"/>
             <result property="userName" column="user_name" jdbcType="VARCHAR"/>
@@ -25,7 +25,7 @@
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
             <result property="remark" column="remark" jdbcType="VARCHAR"/>
     </resultMap>
-    <resultMap id="UserDTOMap" type="com.ikikyou.practice.dto.UserDTO">
+    <resultMap id="UserDTOMap" type="com.ikikyou.practice.model.dto.UserDTO">
             <id property="userId" column="user_id" jdbcType="BIGINT"/>
             <result property="deptId" column="dept_id" jdbcType="BIGINT"/>
             <result property="userName" column="user_name" jdbcType="VARCHAR"/>
@@ -45,10 +45,10 @@
             <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
             <result property="remark" column="remark" jdbcType="VARCHAR"/>
-            <association property="dept" javaType="com.ikikyou.practice.entity.system.SysDept"
-                     resultMap="com.ikikyou.practice.mapper.SysDeptMapper.BaseResultMap"/>
+            <association property="dept" javaType="com.ikikyou.practice.model.entity.system.SysDept"
+                     resultMap="com.ikikyou.practice.model.mapper.SysDeptMapper.BaseResultMap"/>
             <collection property="roles" javaType="java.util.List"
-                        resultMap="com.ikikyou.practice.mapper.SysRoleMapper.BaseResultMap"/>
+                        resultMap="com.ikikyou.practice.model.mapper.SysRoleMapper.BaseResultMap"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -60,7 +60,7 @@
         create_time,update_by,update_time,
         remark
     </sql>
-    <select id="getUserList" resultMap="UserDTOMap" parameterType="com.ikikyou.practice.dto.query.UserQueryDTO">
+    <select id="getUserList" resultMap="UserDTOMap" parameterType="com.ikikyou.practice.model.query.UserQuery">
         select
             u.user_id,u.dept_id,user_name,nick_name,user_type,u.email,tel,sex,avatar,password,u.status,u.del_flag,
             login_ip,login_date,u.create_by,u.create_time,u.update_by,u.update_time,u.remark,

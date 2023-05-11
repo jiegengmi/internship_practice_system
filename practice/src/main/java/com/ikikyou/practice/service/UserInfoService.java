@@ -1,6 +1,6 @@
 package com.ikikyou.practice.service;
 
-import com.ikikyou.practice.dto.UserInfoDTO;
+import com.ikikyou.practice.model.dto.UserInfoDTO;
 import com.ikikyou.practice.utils.Result;
 
 /**

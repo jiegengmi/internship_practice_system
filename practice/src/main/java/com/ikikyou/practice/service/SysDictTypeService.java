@@ -1,13 +1,7 @@
 package com.ikikyou.practice.service;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.ikikyou.practice.entity.system.SysDictData;
-import com.ikikyou.practice.entity.system.SysDictType;
+import com.ikikyou.practice.model.entity.system.SysDictType;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
 * @author 25726

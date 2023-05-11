@@ -1,12 +1,11 @@
 package com.ikikyou.practice.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.ikikyou.practice.dto.UserDTO;
-import com.ikikyou.practice.dto.UserUpdateDTO;
-import com.ikikyou.practice.dto.query.UserQueryDTO;
-import com.ikikyou.practice.entity.system.SysUser;
+import com.ikikyou.practice.model.dto.UserDTO;
+import com.ikikyou.practice.model.dto.UserUpdateDTO;
+import com.ikikyou.practice.model.query.UserQuery;
+import com.ikikyou.practice.model.entity.system.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ikikyou.practice.utils.PageResult;
 import com.ikikyou.practice.utils.Result;
 
 /**
@@ -41,9 +40,9 @@ public interface SysUserService extends IService<SysUser> {
     /**
      * 分页查询用户列表
      *
-     * @param userQueryDTO 用户查询对象
+     * @param userQuery 用户查询对象
      */
-    Page<UserDTO> getUserList(UserQueryDTO userQueryDTO);
+    Page<UserDTO> getUserList(UserQuery userQuery);
 
     /**
      * 根据用户id获取用户信息
