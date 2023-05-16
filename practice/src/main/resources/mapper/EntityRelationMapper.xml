@@ -4,6 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ikikyou.practice.model.mapper.EntityRelationMapper">
 
+    <resultMap id="roleMenuResult" type="com.ikikyou.practice.model.entity.system.SysRoleMenu" >
+        <result property="roleId"     column="role_id"      />
+        <result property="menuId"     column="menu_id"      />
+    </resultMap>
+
     <insert id="insertUserRoleRelation">
         insert into sys_user_role(user_id, role_id) values
         <foreach item="item" index="index" collection="list" separator=",">
@@ -12,15 +17,32 @@
     </insert>
 
     <delete id="deleteUserRoleRelation">
+        delete from sys_user_role
         <choose>
             <when test="isUser">
-                delete from sys_user_role where user_id=#{id}
+                where user_id=#{id}
             </when>
             <otherwise>
-                delete from sys_user_role where role_id=#{id}
+                where role_id=#{id}
             </otherwise>
         </choose>
     </delete>
+
+    <select id="getRoleMenuById" resultMap="roleMenuResult">
+        select
+            role_id,menu_id
+        from
+            sys_role_menu
+        <choose>
+            <when test="isRole">
+                where role_id = #{id}
+            </when>
+            <otherwise>
+                where menu_id = #{id}
+            </otherwise>
+        </choose>
+    </select>
+
     <insert id="insertUserPostRelation">
         insert into sys_user_post(user_id, post_id) values
         <foreach item="item" index="index" collection="list" separator=",">
@@ -29,12 +51,15 @@
     </insert>
 
     <delete id="deleteUserPostRelation">
+        delete
+        from
+            sys_user_post
         <choose>
             <when test="isUser">
-                delete from sys_user_post where user_id=#{id}
+                where user_id=#{id}
             </when>
             <otherwise>
-                delete from sys_user_post where post_id=#{id}
+                where post_id=#{id}
             </otherwise>
         </choose>
     </delete>
@@ -46,12 +71,13 @@
     </insert>
 
     <delete id="deleteRoleMenuRelation">
+        delete from sys_role_menu
         <choose>
-            <when test="isUser">
-                delete from sys_role_menu where role_id=#{id}
+            <when test="isRole">
+                 where role_id=#{id}
             </when>
             <otherwise>
-                delete from sys_role_menu where menu_id=#{id}
+                where menu_id=#{id}
             </otherwise>
         </choose>
     </delete>

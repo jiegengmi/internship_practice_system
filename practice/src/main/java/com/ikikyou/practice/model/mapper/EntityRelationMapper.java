@@ -51,7 +51,7 @@ public interface EntityRelationMapper {
      * @param id     菜单或者角色id
      * @param isRole true：删除角色的所有菜单关联；false：删除菜单的所有角色关联
      */
-    void deleteRoleMenuRelation(@Param("id") Long id, @Param("isUser") boolean isRole);
+    void deleteRoleMenuRelation(@Param("id") Long id, @Param("isRole") boolean isRole);
 
     /**
      * 新增用户和职位关联
@@ -59,4 +59,12 @@ public interface EntityRelationMapper {
      * @param roleMenuList 角色和菜单关联关系集合
      */
     void insertRoleMenuRelation(List<SysRoleMenu> roleMenuList);
+
+    /**
+     * 获取角色和菜单关联
+     *
+     * @param id     菜单或者角色id
+     * @param isRole true：通过角色id找菜单；false：通过菜单id找角色
+     */
+    List<SysRoleMenu> getRoleMenuById(@Param("id") Long id, @Param("isRole") boolean isRole);
 }

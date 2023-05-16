@@ -170,8 +170,8 @@ const tableHeight = ref(window.innerHeight - 200);
 /** 查询缓存名称列表 */
 function getCacheNames() {
   loading.value = true;
-  listCacheName().then(response => {
-    cacheNames.value = response.data;
+  listCacheName().then(data => {
+    cacheNames.value = data;
     loading.value = false;
   });
 }
@@ -197,8 +197,8 @@ function getCacheKeys(row) {
     return;
   }
   subLoading.value = true;
-  listCacheKey(cacheName).then(response => {
-    cacheKeys.value = response.data;
+  listCacheKey(cacheName).then(data => {
+    cacheKeys.value = data;
     subLoading.value = false;
     nowCacheName.value = cacheName;
   });

@@ -1,9 +1,11 @@
 package com.ikikyou.practice.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ikikyou.practice.constant.MenuConstants;
+import com.ikikyou.practice.model.mapper.EntityRelationMapper;
 import com.ikikyou.practice.model.query.MenuQuery;
 import com.ikikyou.practice.utils.ParamUtil;
 import com.ikikyou.practice.utils.Result;
@@ -14,14 +16,14 @@ import com.ikikyou.practice.model.entity.system.SysMenu;
 import com.ikikyou.practice.service.SysMenuService;
 import com.ikikyou.practice.model.mapper.SysMenuMapper;
 import com.ikikyou.practice.utils.SecurityUtil;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -34,6 +36,62 @@ import java.util.stream.Collectors;
 public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> implements SysMenuService {
 
     final SysMenuMapper menuMapper;
+    final EntityRelationMapper relationMapper;
+
+    /**
+     * 新增一个菜单
+     *
+     * @param menuDTO 菜单传递对象
+     * @return 结果
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Result<Void> save(@NotNull MenuDTO menuDTO) {
+        if (checkName(menuDTO)) {
+            return Result.fail("新增菜单'" + menuDTO.getMenuName() + "'失败，菜单名称已存在");
+        } else if (MenuConstants.YES_FRAME == menuDTO.getIsFrame() && !ParamUtil.ishttp(menuDTO.getPath())) {
+            return Result.fail("新增菜单'" + menuDTO.getMenuName() + "'失败，地址必须以http(s)://开头");
+        }
+        menuDTO.setCreateBy(SecurityUtil.getUserName());
+        menuDTO.setCreateTime(new Date());
+        SysMenu menu = new SysMenu();
+        BeanUtils.copyProperties(menuDTO, menu);
+        return save(menu) ? Result.ok("新增成功") : Result.fail("新增菜单失败");
+    }
+
+    /**
+     * 修改一个菜单
+     *
+     * @param menuDTO 菜单传递对象
+     * @return 结果
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Result<Void> update(MenuDTO menuDTO) {
+        SysMenu sysMenu = getById(menuDTO.getMenuId());
+        if (checkName(menuDTO)) {
+            return Result.fail("修改菜单'" + menuDTO.getMenuName() + "'失败，菜单名称已存在");
+        } else if (MenuConstants.YES_FRAME == menuDTO.getIsFrame() && !ParamUtil.ishttp(menuDTO.getPath())) {
+            return Result.fail("修改菜单'" + menuDTO.getMenuName() + "'失败，地址必须以http(s)://开头");
+        } else if (sysMenu.getMenuId().equals(menuDTO.getParentId())) {
+            return Result.fail("修改菜单'" + menuDTO.getMenuName() + "'失败，上级菜单不能选择自己");
+        }
+        menuDTO.setUpdateBy(SecurityUtil.getUserName());
+        menuDTO.setUpdateTime(new Date());
+        SysMenu menu = new SysMenu();
+        BeanUtils.copyProperties(menuDTO, menu);
+        return saveOrUpdate(menu) ? Result.ok("修改成功") : Result.fail("修改菜单失败");
+    }
+
+    /**
+     * 获取菜单列表
+     *
+     * @param menuQuery 菜单查询对象
+     */
+    @Override
+    public Result<List<MenuDTO>> getMenuList(MenuQuery menuQuery) {
+        return Result.ok(BeanUtil.copyToList(getSysMenuList(menuQuery), MenuDTO.class));
+    }
 
     @Override
     public List<MenuDTO> buildRouteMenus() {
@@ -47,15 +105,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
 
     @Override
     public Result<List<MenuDTO>> getTreeMenu(MenuQuery menu) {
-        Long userId = SecurityUtil.getUserId();
-        List<SysMenu> menuList;
-        if (SecurityUtil.isAdmin(userId)) {
-            menuList = getAllMenu(menu);
-        } else {
-            menu.setUserId(SecurityUtil.getUserId());
-            menuList = menuMapper.queryMenus(menu);
-        }
-        return Result.ok(buildMenuTree(menuList));
+        return Result.ok(buildMenuTree(getSysMenuList(menu)));
     }
 
     @Override
@@ -76,6 +126,94 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
                 .orderBy(true, true, SysMenu::getParentId)
                 .orderBy(true, true, SysMenu::getOrderNum)
         );
+    }
+
+    /**
+     * 获取单个菜单
+     *
+     * @param menuId 菜单id
+     * @return 菜单对象
+     */
+    @Override
+    public Result<MenuDTO> getByMenuId(Long menuId) {
+        ParamUtil.checkId(menuId);
+        return Result.ok(BeanUtil.copyProperties(this.getById(menuId), MenuDTO.class));
+    }
+
+    /**
+     * 删除一个菜单对象
+     *
+     * @param menuId 菜单id
+     * @return 菜单对象
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Result<Void> deleteByMenuId(Long menuId) {
+        ParamUtil.checkId(menuId);
+        if (checkHasChild(menuId)) {
+            return Result.fail("存在子菜单,不允许删除");
+        } else if (checkMenuExistRole(menuId)) {
+            return Result.fail("菜单已分配,不允许删除");
+        }
+        return removeById(menuId) ? Result.ok("删除成功") : Result.fail("删除失败");
+    }
+
+    /**
+     * 查看是否存在子节点
+     *
+     * @param menId 菜单id
+     * @return true：存在
+     */
+    @Override
+    public boolean checkHasChild(@NotNull Long menId) {
+        return count(new LambdaQueryWrapper<SysMenu>().eq(SysMenu::getParentId, menId)) > 0;
+    }
+
+    /**
+     * 查询菜单是否存在角色
+     *
+     * @param menuId 菜单ID
+     * @return 结果 true 存在 false 不存在
+     */
+    @Override
+    public boolean checkMenuExistRole(@NotNull Long menuId) {
+        return CollectionUtil.isNotEmpty(relationMapper.getRoleMenuById(menuId, false));
+    }
+
+    /**
+     * 检查同一父类下是否存在菜单名称相同的
+     *
+     * @param menuDTO     菜单对象
+     * @return true：存在 (修改时需要判断id)
+     */
+    private boolean checkName(@NotNull MenuDTO menuDTO) {
+        List<SysMenu> sysMenuList = list(new LambdaQueryWrapper<SysMenu>()
+                .eq(SysMenu::getMenuName, menuDTO.getMenuName())
+                .eq(SysMenu::getParentId, menuDTO.getMenuType())
+        );
+        if (CollectionUtil.isEmpty(sysMenuList)) {
+            return false;
+        }
+        return !sysMenuList.get(0).getMenuId().equals(menuDTO.getMenuId());
+    }
+
+    /**
+     * 获取系统菜单
+     *
+     * @param menu 菜单查询对象
+     * @return 系统菜单列表
+     */
+    private List<SysMenu> getSysMenuList(MenuQuery menu) {
+        Long userId = SecurityUtil.getUserId();
+        List<SysMenu> menuList;
+        // 超级管理员获取全部
+        if (SecurityUtil.isAdmin(userId)) {
+            menuList = getAllMenu(menu);
+        } else {
+            menu.setUserId(SecurityUtil.getUserId());
+            menuList = menuMapper.queryMenus(menu);
+        }
+        return menuList;
     }
 
     private List<Long> getRoleIds(List<SysMenu> menus) {

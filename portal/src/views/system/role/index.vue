@@ -416,8 +416,8 @@ function handleUpdate(row) {
   reset();
   const roleId = row.roleId || ids.value;
   const roleMenu = getRoleMenuTreeselect(roleId);
-  getRole(roleId).then(response => {
-    form.value = response.data;
+  getRole(roleId).then(data => {
+    form.value = data;
     form.value.roleSort = Number(form.value.roleSort);
     open.value = true;
     nextTick(() => {
@@ -435,9 +435,9 @@ function handleUpdate(row) {
 }
 /** 根据角色ID查询菜单树结构 */
 function getRoleMenuTreeselect(roleId) {
-  return roleMenuTreeselect(roleId).then(response => {
-    menuOptions.value = response.menus;
-    return response;
+  return roleMenuTreeselect(roleId).then(data => {
+    menuOptions.value = data;
+    return data;
   });
 }
 /** 根据角色ID查询部门树结构 */

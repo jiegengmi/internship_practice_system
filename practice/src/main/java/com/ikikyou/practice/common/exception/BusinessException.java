@@ -1,4 +1,4 @@
-package com.ikikyou.practice.common;
+package com.ikikyou.practice.common.exception;
 
 import java.io.Serial;
 

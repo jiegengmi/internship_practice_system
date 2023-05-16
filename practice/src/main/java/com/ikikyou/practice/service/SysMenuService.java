@@ -17,6 +17,29 @@ import java.util.List;
 public interface SysMenuService extends IService<SysMenu> {
 
     /**
+     * 新增一个菜单
+     *
+     * @param menuDTO 菜单传递对象
+     * @return 结果
+     */
+    Result<Void> save(MenuDTO menuDTO);
+
+    /**
+     * 修改一个菜单
+     *
+     * @param menuDTO 菜单传递对象
+     * @return 结果
+     */
+    Result<Void> update(MenuDTO menuDTO);
+
+    /**
+     * 获取菜单列表
+     *
+     * @param menuQuery 菜单查询对象
+     */
+    Result<List<MenuDTO>> getMenuList(MenuQuery menuQuery);
+
+    /**
      * 构建菜单路由
      */
     List<MenuDTO> buildRouteMenus();
@@ -40,4 +63,36 @@ public interface SysMenuService extends IService<SysMenu> {
      * @param menuQuery 菜单查询对象
      */
     List<SysMenu> getAllMenu(MenuQuery menuQuery);
+
+    /**
+     * 获取单个菜单
+     *
+     * @param menuId 菜单id
+     * @return 菜单对象
+     */
+    Result<MenuDTO> getByMenuId(Long menuId);
+
+    /**
+     * 删除一个菜单对象
+     *
+     * @param menuId 菜单id
+     * @return 菜单对象
+     */
+    Result<Void> deleteByMenuId(Long menuId);
+
+    /**
+     * 查看是否存在子节点
+     *
+     * @param menId 菜单id
+     * @return true：存在
+     */
+    boolean checkHasChild(Long menId);
+
+    /**
+     * 查询菜单是否存在角色
+     *
+     * @param menuId 菜单ID
+     * @return 结果 true 存在 false 不存在
+     */
+    boolean checkMenuExistRole(Long menuId);
 }

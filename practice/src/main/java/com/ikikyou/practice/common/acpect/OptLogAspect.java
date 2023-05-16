@@ -1,7 +1,7 @@
-package com.ikikyou.practice.common;
+package com.ikikyou.practice.common.acpect;
 
 import com.alibaba.fastjson2.JSON;
-import com.ikikyou.practice.annotation.OptLog;
+import com.ikikyou.practice.common.annotation.OptLog;
 import com.ikikyou.practice.model.entity.system.SysLog;
 import com.ikikyou.practice.model.mapper.SysLogMapper;
 import com.ikikyou.practice.utils.IpUtil;
@@ -36,7 +36,7 @@ public class OptLogAspect {
     /**
      * 设置操作日志切入点 记录操作日志 在注解的位置切入代码
      */
-    @Pointcut("@annotation(com.ikikyou.practice.annotation.OptLog)")
+    @Pointcut("@annotation(com.ikikyou.practice.common.annotation.OptLog)")
     public void optLogPointCut() {}
 
 

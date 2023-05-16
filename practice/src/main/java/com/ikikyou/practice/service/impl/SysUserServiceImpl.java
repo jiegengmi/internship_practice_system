@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ikikyou.practice.common.BusinessException;
+import com.ikikyou.practice.common.exception.BusinessException;
 import com.ikikyou.practice.model.dto.UserDTO;
 import com.ikikyou.practice.model.dto.UserUpdateDTO;
 import com.ikikyou.practice.model.query.UserQuery;

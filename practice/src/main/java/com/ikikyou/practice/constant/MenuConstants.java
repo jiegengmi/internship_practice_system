@@ -10,7 +10,7 @@ public class MenuConstants {
     public static final String YES = "Y";
 
     /** 是否菜单外链（是） */
-    public static final String YES_FRAME = "0";
+    public static final int YES_FRAME = 0;
 
     /** 是否菜单外链（否） */
     public static final int NO_FRAME = 1;

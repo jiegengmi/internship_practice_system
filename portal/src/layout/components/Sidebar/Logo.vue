@@ -25,7 +25,7 @@ defineProps({
   }
 })
 
-const title = ref('实习实训管理系统');
+const title = ref('XXXXXXXXX系统');
 const settingsStore = useSettingsStore();
 const sideTheme = computed(() => settingsStore.sideTheme);
 </script>

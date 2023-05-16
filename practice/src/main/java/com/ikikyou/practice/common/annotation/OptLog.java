@@ -1,4 +1,4 @@
-package com.ikikyou.practice.annotation;
+package com.ikikyou.practice.common.annotation;
 
 import com.ikikyou.practice.emun.LogEnum;
 
