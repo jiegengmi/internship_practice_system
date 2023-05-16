@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 实体中间表操作mapper
  *
- * @author hongx
+ * @author ikikyou
  * @date 2023/04/25 15:32
  */
 public interface EntityRelationMapper {

@@ -32,7 +32,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * jwt校验
- * @author hongx
+ * @author ikikyou
  * @date 2023/04/20 09:28
  */
 @Slf4j

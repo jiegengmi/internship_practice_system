@@ -1,23 +1,34 @@
-package com.ikikyou.practice.model.dto;
+package com.ikikyou.practice.model.entity.system;
 
-import com.ikikyou.practice.model.entity.system.SysDept;
-import lombok.Data;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
- * @author hongx
- * @date 2023/05/16 13:10
+ * 部门表
+ * @TableName sys_dept
  */
+@TableName(value ="sys_dept")
 @Data
-public class DeptDTO implements Serializable {
+@NoArgsConstructor
+public class SysDept implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = -3218047536022788874L;
-
+    @TableField(exist = false)
+    private static final long serialVersionUID = -4663377026244939252L;
+    /**
+     * 部门id
+     */
+    @TableId(type = IdType.AUTO)
     private Long deptId;
 
     /**
@@ -84,9 +95,4 @@ public class DeptDTO implements Serializable {
      * 更新时间
      */
     private Date updateTime;
-
-    /**
-     * 子节点
-     */
-    private List<DeptDTO> children;
 }

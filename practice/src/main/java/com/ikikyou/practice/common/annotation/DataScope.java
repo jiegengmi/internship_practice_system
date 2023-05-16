@@ -4,7 +4,7 @@ import java.lang.annotation.*;
 
 /**
  * 数据权限注解
- * @author hongx
+ * @author ikikyou
  * @date 2023/04/21 16:05
  */
 @Target(ElementType.METHOD)

@@ -1,5 +1,6 @@
 package com.ikikyou.practice.model.query;
 
+import io.swagger.models.auth.In;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,15 +19,16 @@ public class BaseQuery {
      * 状态
      */
     private String status;
+
     /**
      * 页数（第几页）
      */
-    private int pageNum;
+    private Integer pageNum;
 
     /**
      * 每页大小
      */
-    private int pageSize;
+    private Integer pageSize;
 
     /**
      * 其他查询参数

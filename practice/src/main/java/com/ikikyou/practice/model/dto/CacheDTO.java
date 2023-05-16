@@ -9,7 +9,7 @@ import java.util.Properties;
 /**
  * 缓存信息对象
  *
- * @author hongx
+ * @author ikikyou
  * @date 2023/05/12 09:02
  */
 @Data

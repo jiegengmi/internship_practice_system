@@ -1,7 +1,7 @@
 package com.ikikyou.practice.constant;
 
 /**
- * @author hongx
+ * @author ikikyou
  * @date 2023/04/19 10:37
  */
 public class MenuConstants {

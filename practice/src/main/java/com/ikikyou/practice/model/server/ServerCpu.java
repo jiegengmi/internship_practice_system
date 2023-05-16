@@ -4,7 +4,7 @@ import com.ikikyou.practice.utils.ArithUtil;
 import lombok.Data;
 
 /**
- * @author hongx
+ * @author ikikyou
  * @date 2023/05/12 10:40
  */
 @Data

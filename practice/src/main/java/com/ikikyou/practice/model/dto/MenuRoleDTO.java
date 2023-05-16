@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 角色与菜单传递对象
  *
- * @author hongx
+ * @author ikikyou
  * @date 2023/05/08 14:56
  */
 @Data

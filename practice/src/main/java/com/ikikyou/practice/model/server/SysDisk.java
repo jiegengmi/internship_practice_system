@@ -3,7 +3,7 @@ package com.ikikyou.practice.model.server;
 import lombok.Data;
 
 /**
- * @author hongx
+ * @author ikikyou
  * @date 2023/05/12 10:51
  */
 @Data

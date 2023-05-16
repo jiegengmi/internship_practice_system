@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * 系统相关信息
  *
- * @author hongx
+ * @author ikikyou
  * @date 2023/05/12 10:47
  */
 @Data

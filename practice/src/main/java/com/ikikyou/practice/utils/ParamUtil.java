@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * 参数校验工具类
  *
- * @author hongx
+ * @author ikikyou
  * @date 2023/04/25 14:15
  */
 public class ParamUtil {

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 获取服务器相关信息
  *
- * @author hongx
+ * @author ikikyou
  * @date 2023/05/12 11:13
  */
 @RestController
