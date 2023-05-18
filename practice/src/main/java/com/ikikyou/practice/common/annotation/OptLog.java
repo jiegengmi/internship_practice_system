@@ -1,6 +1,6 @@
 package com.ikikyou.practice.common.annotation;
 
-import com.ikikyou.practice.emun.LogEnum;
+import com.ikikyou.practice.enums.LogEnum;
 
 import java.lang.annotation.*;
 

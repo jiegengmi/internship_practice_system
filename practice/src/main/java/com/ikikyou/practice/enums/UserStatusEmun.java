@@ -1,4 +1,4 @@
-package com.ikikyou.practice.emun;
+package com.ikikyou.practice.enums;
 
 import lombok.Getter;
 

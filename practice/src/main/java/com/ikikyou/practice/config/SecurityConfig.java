@@ -3,12 +3,17 @@ package com.ikikyou.practice.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ikikyou.practice.auth.UserDetailsServiceImpl;
 import com.ikikyou.practice.constant.CommonConstant;
+import com.ikikyou.practice.enums.LogEnum;
 import com.ikikyou.practice.model.dto.UserDetail;
 import com.ikikyou.practice.filter.JWTAuthFilter;
 import com.ikikyou.practice.filter.VerifyCodeFilter;
+import com.ikikyou.practice.model.entity.system.SysLog;
+import com.ikikyou.practice.model.mapper.SysLogMapper;
+import com.ikikyou.practice.utils.IpUtil;
 import com.ikikyou.practice.utils.Result;
 import com.ikikyou.practice.utils.SecurityUtil;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +30,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,6 +50,8 @@ public class SecurityConfig {
     private VerifyCodeFilter verifyCodeFilter;
     @Resource
     private JWTAuthFilter jwtAuthFilter;
+    @Resource
+    private SysLogMapper logMapper;
 
     @Bean
     public AuthenticationProvider systemAuthenticationProvider() {
@@ -88,10 +96,36 @@ public class SecurityConfig {
             UserDetail userDetail = SecurityUtil.getUser(authentication);
             Map<String, Object> resultMap = new HashMap<>();
             resultMap.put("token", jwtAuthFilter.createToken(userDetail));
+            //登录日志
+            writeLog(request, userDetail);
             response.getOutputStream().write(
-                    new ObjectMapper().writeValueAsString(Result.ok(resultMap,"登录成功")).getBytes()
+                    new ObjectMapper().writeValueAsString(Result.ok(resultMap, "登录成功")).getBytes()
             );
         };
+    }
+
+    /**
+     * 登录日志
+     *
+     * @param request    请求
+     * @param userDetail 当前登录用户
+     */
+    private void writeLog(HttpServletRequest request, UserDetail userDetail) {
+        // 请求IP
+        String ipAddress = IpUtil.getIpAddress(request);
+        SysLog sysLog = SysLog.builder()
+                .id(System.currentTimeMillis())
+                .type(LogEnum.LOGIN_IN.getType())
+                .opMethod("/login")
+                .userId(userDetail.getUserId())
+                .userNickName(userDetail.getNickName())
+                .userIp(ipAddress)
+                .userIpSource(IpUtil.getIpSource(ipAddress))
+                .opUrl(request.getRequestURI())
+                .result("登录成功")
+                .createTime(new Date())
+                .build();
+        logMapper.insert(sysLog);
     }
 
     @Bean
