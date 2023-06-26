@@ -3,7 +3,7 @@ package com.ikikyou.practice.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ikikyou.practice.model.entity.Report;
 import com.ikikyou.practice.service.ReportService;
-import com.ikikyou.practice.model.mapper.ReportMapper;
+import com.ikikyou.practice.mapper.ReportMapper;
 import org.springframework.stereotype.Service;
 
 /**

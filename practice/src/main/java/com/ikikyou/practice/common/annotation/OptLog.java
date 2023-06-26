@@ -1,6 +1,6 @@
 package com.ikikyou.practice.common.annotation;
 
-import com.ikikyou.practice.enums.LogEnum;
+import com.ikikyou.practice.enums.LogEnums;
 
 import java.lang.annotation.*;
 
@@ -15,5 +15,5 @@ public @interface OptLog {
     /**
      * @return 操作类型
      */
-    LogEnum optType() default LogEnum.DEFAULT;
+    LogEnums optType() default LogEnums.DEFAULT;
 }

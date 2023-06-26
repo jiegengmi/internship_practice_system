@@ -15,11 +15,23 @@ import java.util.Set;
 @Data
 public class UserInfoDTO {
 
+    /**
+     * 用户信息
+     */
     private SysUser user;
 
+    /**
+     * 角色id集合
+     */
     private List<Long> roleIds;
 
+    /**
+     * 角色名称集合
+     */
     private Set<String> roles;
 
+    /**
+     * 权限集合
+     */
     private Set<String> permissions;
 }

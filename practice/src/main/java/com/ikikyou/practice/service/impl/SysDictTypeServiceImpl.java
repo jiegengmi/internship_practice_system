@@ -3,7 +3,7 @@ package com.ikikyou.practice.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ikikyou.practice.model.entity.system.SysDictType;
 import com.ikikyou.practice.service.SysDictTypeService;
-import com.ikikyou.practice.model.mapper.SysDictTypeMapper;
+import com.ikikyou.practice.mapper.SysDictTypeMapper;
 import org.springframework.stereotype.Service;
 
 /**

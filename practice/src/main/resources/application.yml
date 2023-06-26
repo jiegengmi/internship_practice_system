@@ -10,7 +10,6 @@ spring:
       password:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
-    time-zone: GMT + 8
   devtools:
     livereload:
       enabled: true
@@ -18,7 +17,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
-    url: jdbc:mysql://127.0.0.1:3306/practice?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&serverTimezone=UTC
+    url: jdbc:mysql://127.0.0.1:3306/practice?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     druid:
       # 初始连接数
       initialSize: 5
@@ -68,6 +67,9 @@ spring:
 practice:
   #系统相关配置
   system:
+    file:
+      path: "/usr/local/files"
+      size: 20
     #验证码校验方式
     captcha:
       type: math

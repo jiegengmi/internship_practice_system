@@ -1,7 +1,7 @@
 package com.ikikyou.practice;
 
 import com.ikikyou.practice.model.query.UserQuery;
-import com.ikikyou.practice.model.mapper.SysUserMapper;
+import com.ikikyou.practice.mapper.SysUserMapper;
 import com.ikikyou.practice.service.SysUserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +32,6 @@ public class UserTest {
     @Test
     public void listTest(){
         UserQuery queryDTO = new UserQuery();
-        System.out.println(userMapper.getUserList(queryDTO));
+//        System.out.println(userMapper.getUserList(queryDTO));
     }
 }

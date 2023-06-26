@@ -4,10 +4,12 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ikikyou.practice.constant.CommonConstant;
+import com.ikikyou.practice.constant.ResultMsg;
 import com.ikikyou.practice.model.query.RoleQuery;
 import com.ikikyou.practice.model.entity.system.SysRole;
 import com.ikikyou.practice.service.SysRoleService;
-import com.ikikyou.practice.model.mapper.SysRoleMapper;
+import com.ikikyou.practice.mapper.SysRoleMapper;
 import com.ikikyou.practice.utils.ParamUtil;
 import com.ikikyou.practice.utils.Result;
 import com.ikikyou.practice.utils.SecurityUtil;
@@ -48,9 +50,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Override
     public Result<Page<SysRole>> getAllRoles(RoleQuery roleQuery) {
         Page<SysRole> page = new Page<>(roleQuery.getPageNum(), roleQuery.getPageSize());
-        List<SysRole> roleList = roleMapper.getByQueryInfo(roleQuery);
-        page.setRecords(roleList);
-        page.setTotal(roleList.size());
+        page.setRecords(roleMapper.getByQueryInfo(page,roleQuery));
         return Result.ok(page);
     }
 
@@ -81,7 +81,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         }
         role.setDelFlag("1");
         saveOrUpdate(role);
-        return Result.ok("删除成功");
+        return Result.ok(ResultMsg.DELETE_SUCCESS_MSG);
     }
 
     @Override

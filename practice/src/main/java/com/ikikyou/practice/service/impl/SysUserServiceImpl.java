@@ -2,51 +2,62 @@ package com.ikikyou.practice.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ikikyou.practice.common.exception.BusinessException;
+import com.ikikyou.practice.listener.UserExcelImportListener;
 import com.ikikyou.practice.model.dto.UserDTO;
+import com.ikikyou.practice.model.dto.UserDetail;
+import com.ikikyou.practice.model.dto.UserIndexInfoDTO;
 import com.ikikyou.practice.model.dto.UserUpdateDTO;
+import com.ikikyou.practice.model.entity.system.SysLog;
 import com.ikikyou.practice.model.query.UserQuery;
-import com.ikikyou.practice.emun.UserStatusEmun;
+import com.ikikyou.practice.enums.UserStatusEnums;
 import com.ikikyou.practice.model.entity.system.SysUser;
-import com.ikikyou.practice.model.mapper.SysPostMapper;
-import com.ikikyou.practice.model.mapper.SysRoleMapper;
+import com.ikikyou.practice.mapper.SysPostMapper;
+import com.ikikyou.practice.mapper.SysRoleMapper;
+import com.ikikyou.practice.service.SysLogService;
 import com.ikikyou.practice.service.SysUserPostService;
 import com.ikikyou.practice.service.SysUserRoleService;
 import com.ikikyou.practice.service.SysUserService;
-import com.ikikyou.practice.model.mapper.SysUserMapper;
+import com.ikikyou.practice.mapper.SysUserMapper;
+import com.ikikyou.practice.utils.ExcelUtil;
 import com.ikikyou.practice.utils.Result;
 import com.ikikyou.practice.utils.SecurityUtil;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 /**
-* @author 25726
-* @description 针对表【sys_user(用户信息表)】的数据库操作Service实现
-* @createDate 2023-04-21 11:07:14
-*/
+ * @author 25726
+ * @description 针对表【sys_user(用户信息表)】的数据库操作Service实现
+ * @createDate 2023-04-21 11:07:14
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService{
+public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
 
     final SysUserMapper userMapper;
     final SysPostMapper postMapper;
     final SysRoleMapper roleMapper;
     final SysUserRoleService userRoleService;
     final SysUserPostService userPostService;
+    final SysLogService logService;
 
     @Value("${practice.user.isLogicalDelete}")
     private String isLogicalDelete;
@@ -86,7 +97,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Result<Void> update(UserUpdateDTO userDTO) {
-        if (ObjectUtil.hasEmpty(userDTO)){
+        if (ObjectUtil.hasEmpty(userDTO)) {
             return Result.fail("修改失败");
         }
         Result<Void> checkedUser = checkUser(userDTO);
@@ -110,9 +121,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public Page<UserDTO> getUserList(UserQuery userQuery) {
         Page<UserDTO> page = new Page<>(userQuery.getPageNum(), userQuery.getPageSize());
-        List<UserDTO> userList = userMapper.getUserList(userQuery);
-        page.setTotal(userList.size());
-        page.setRecords(userList);
+        page.setRecords(userMapper.getUserList(page, userQuery));
         return page;
     }
 
@@ -145,7 +154,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         SysUser user = userMapper.selectById(id);
         if (StrUtil.isEmpty(isLogicalDelete) || Boolean.parseBoolean(isLogicalDelete)) {
             if (null != user) {
-                user.setStatus(UserStatusEmun.CANCELLATION.getCode());
+                user.setStatus(UserStatusEnums.CANCELLATION.getCode());
                 user.setUpdateTime(new Date());
                 user.setUpdateBy(SecurityUtil.getUserName());
                 saveOrUpdate(user);
@@ -174,6 +183,68 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     /**
+     * 获取用户首页数据
+     *
+     * @return {@link UserIndexInfoDTO}
+     */
+    @Override
+    public Result<UserIndexInfoDTO> getUserIndexInfo() {
+        UserDetail baseUser = SecurityUtil.getBaseUser();
+        SysLog sysLog = logService.getByCurUserLoginLog();
+        UserIndexInfoDTO indexInfoDTO = UserIndexInfoDTO
+                .builder()
+                .username(baseUser.getUsername())
+                .nickname(baseUser.getNickName())
+                .lastLoginIp(sysLog.getUserIp())
+                .lastLoginTime(sysLog.getCreateTime())
+                .lastLoginAddress(sysLog.getUserIpSource())
+                .build();
+        return Result.ok(indexInfoDTO);
+    }
+
+    /**
+     * 用户信息批量导入（excel）
+     *
+     * @param file   excel文件
+     * @param deptId 部门（组织）id
+     * @return 导入结果
+     */
+    @Override
+    @Transactional(rollbackFor = BusinessException.class)
+    public Result<Void> userInfoImport(MultipartFile file, Long deptId, int updateSupport) {
+        if (file.isEmpty() || deptId == null) {
+            return Result.fail("缺少参数");
+        }
+        try {
+            UserExcelImportListener listener = new UserExcelImportListener(this,
+                    SecurityUtil.getBaseUser(), deptId, updateSupport == 0);
+            EasyExcel.read(file.getInputStream(), SysUser.class, listener).sheet().doRead();
+            return Result.ok("总计：" + listener.getCount() + ",其中成功：" + listener.getSuccess() + "条数据");
+        } catch (Exception e) {
+            throw new BusinessException("用户导入异常");
+        }
+    }
+
+    /**
+     * 下载用户导入模板
+     *
+     */
+    @Override
+    public void downloadExcelTemplate(HttpServletResponse response) {
+        ExcelUtil.createTemplate(response, "用户批量导入(模板)", "sheet", SysUser.class, null);
+    }
+
+    /**
+     * 导出数据
+     *
+     * @param response {@link HttpServletResponse} 文件流
+     */
+    @Override
+    public void downloadExcelData(HttpServletResponse response) {
+
+    }
+
+    /**
      * 校验用户数据是否合法
      *
      * @return 结果
@@ -188,7 +259,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
                 .eq(SysUser::getTel, user.getTel())
                 .or()
                 .eq(SysUser::getEmail, user.getEmail()));
-        if (null != sysUser && !Objects.equals(sysUser.getUserId(), user.getUserId()) ) {
+        if (null != sysUser && !Objects.equals(sysUser.getUserId(), user.getUserId())) {
             if (user.getUserName().equals(sysUser.getUserName())) {
                 return Result.fail("当前用户名已存在");
             } else if (user.getTel().equals(sysUser.getTel())) {

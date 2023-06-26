@@ -273,8 +273,8 @@ const deptRef = ref(null);
 const dataScopeOptions = ref([
   { value: "1", label: "全部数据权限" },
   { value: "2", label: "自定数据权限" },
-  { value: "3", label: "本部门数据权限" },
-  { value: "4", label: "本部门及以下数据权限" },
+  { value: "3", label: "本组织数据权限" },
+  { value: "4", label: "本组织及以下数据权限" },
   { value: "5", label: "仅本人数据权限" }
 ]);
 
@@ -372,11 +372,11 @@ function getMenuTreeselect() {
     menuOptions.value = data;
   });
 }
-/** 所有部门节点数据 */
+/** 所有组织节点数据 */
 function getDeptAllCheckedKeys() {
-  // 目前被选中的部门节点
+  // 目前被选中的组织节点
   let checkedKeys = deptRef.value.getCheckedKeys();
-  // 半选中的部门节点
+  // 半选中的组织节点
   let halfCheckedKeys = deptRef.value.getHalfCheckedKeys();
   checkedKeys.unshift.apply(checkedKeys, halfCheckedKeys);
   return checkedKeys;
@@ -440,7 +440,7 @@ function getRoleMenuTreeselect(roleId) {
     return data;
   });
 }
-/** 根据角色ID查询部门树结构 */
+/** 根据角色ID查询组织树结构 */
 function getDeptTree(roleId) {
   return deptTreeSelect(roleId).then(response => {
     deptOptions.value = response.depts;

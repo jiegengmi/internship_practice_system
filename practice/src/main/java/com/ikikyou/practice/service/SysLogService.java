@@ -10,4 +10,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface SysLogService extends IService<SysLog> {
 
+    /**
+     * 获取当前登录用户最新登录日志
+     *
+     * @return {@link SysLog}
+     */
+    SysLog getByCurUserLoginLog();
 }

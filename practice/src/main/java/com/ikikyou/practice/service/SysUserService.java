@@ -2,11 +2,14 @@ package com.ikikyou.practice.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ikikyou.practice.model.dto.UserDTO;
+import com.ikikyou.practice.model.dto.UserIndexInfoDTO;
 import com.ikikyou.practice.model.dto.UserUpdateDTO;
 import com.ikikyou.practice.model.query.UserQuery;
 import com.ikikyou.practice.model.entity.system.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ikikyou.practice.utils.Result;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author 25726
@@ -72,4 +75,33 @@ public interface SysUserService extends IService<SysUser> {
      * @param userId 用户id
      */
     Result<UserUpdateDTO> getUserInfo(Long userId);
+
+    /**
+     * 获取用户首页数据
+     *
+     * @return {@link UserIndexInfoDTO}
+     */
+    Result<UserIndexInfoDTO> getUserIndexInfo();
+
+    /**
+     * 用户信息批量导入（excel）
+     *
+     * @param file excel文件
+     * @param deptId 部门（组织）id
+     * @param updateSupport 是否支持更新 0：不更新 其他：更新
+     * @return 导入结果
+     */
+    Result<Void> userInfoImport(MultipartFile file, Long deptId, int updateSupport);
+
+    /**
+     * 下载用户导入模板
+     *
+     */
+    void downloadExcelTemplate(HttpServletResponse response);
+
+    /**
+     * 导出数据
+     * @param response {@link HttpServletResponse} 文件流
+     */
+    void downloadExcelData(HttpServletResponse response);
 }

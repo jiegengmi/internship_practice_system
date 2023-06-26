@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ikikyou.practice.mapper.SysTypeMapper">
+
+    <resultMap id="BaseResultMap" type="com.ikikyou.practice.model.entity.system.SysType">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="typeDefine" column="type_define" jdbcType="VARCHAR"/>
+            <result property="typeName" column="type_name" jdbcType="VARCHAR"/>
+            <result property="typeDescription" column="type_description" jdbcType="VARCHAR"/>
+            <result property="typeOrder" column="type_order" jdbcType="INTEGER"/>
+            <result property="typeParent" column="type_parent" jdbcType="BIGINT"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,type_define,type_name,
+        type_description,type_order,type_parent,
+        update_time,update_by,status
+    </sql>
+</mapper>

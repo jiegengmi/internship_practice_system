@@ -1,8 +1,10 @@
-package com.ikikyou.practice.model.mapper;
+package com.ikikyou.practice.mapper;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ikikyou.practice.model.query.RoleQuery;
 import com.ikikyou.practice.model.entity.system.SysRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,7 +21,7 @@ public interface SysRoleMapper extends BaseMapper<SysRole> {
      *
      * @param roleQuery 查询对象
      */
-    List<SysRole> getByQueryInfo(RoleQuery roleQuery);
+    List<SysRole> getByQueryInfo(@Param("p") Page<SysRole> page, @Param("q") RoleQuery roleQuery);
 
     /**
      * 查询用户的角色

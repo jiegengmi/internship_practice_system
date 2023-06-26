@@ -2,7 +2,9 @@ package com.ikikyou.practice.filter;
 
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ikikyou.practice.common.exception.BusinessException;
 import com.ikikyou.practice.constant.CacheConstants;
+import com.ikikyou.practice.constant.CommonConstant;
 import com.ikikyou.practice.utils.Result;
 import jakarta.annotation.Resource;
 import jakarta.servlet.FilterChain;
@@ -39,7 +41,7 @@ public class VerifyCodeFilter extends GenericFilterBean {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         response.setContentType(JSON_CONTENT_TYPE);
         //校验登录表单请求
-        if ("/login".equals(request.getServletPath()) && FORM_CONTENT_TYPE.equals(request.getContentType())) {
+        if (CommonConstant.LOGIN_URL.equals(request.getServletPath()) && FORM_CONTENT_TYPE.equals(request.getContentType())) {
             String uuid = request.getParameter("uuid");
             String code = request.getParameter("code");
             Object result = null;
@@ -56,6 +58,8 @@ public class VerifyCodeFilter extends GenericFilterBean {
                 response.getOutputStream().write(new ObjectMapper().writeValueAsString(result).getBytes());
                 return;
             }
+        } else if (CommonConstant.LOGIN_URL.equals(request.getServletPath())) {
+            throw new BusinessException("无效的登录请求");
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }

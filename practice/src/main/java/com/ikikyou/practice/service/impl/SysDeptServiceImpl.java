@@ -9,7 +9,7 @@ import com.ikikyou.practice.model.dto.DeptDTO;
 import com.ikikyou.practice.model.entity.system.SysDept;
 import com.ikikyou.practice.model.query.DeptQuery;
 import com.ikikyou.practice.service.SysDeptService;
-import com.ikikyou.practice.model.mapper.SysDeptMapper;
+import com.ikikyou.practice.mapper.SysDeptMapper;
 import com.ikikyou.practice.model.dto.DeptTreeDTO;
 import com.ikikyou.practice.utils.Result;
 import com.ikikyou.practice.utils.SecurityUtil;
@@ -141,12 +141,13 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
     }
 
     @Override
-    public List<DeptDTO> getDeptListTree(DeptQuery deptQuery) {
+    public List<DeptTreeDTO> getDeptListTree(DeptQuery deptQuery) {
         if (ObjectUtil.isEmpty(deptQuery)) {
             return Collections.emptyList();
         }
         List<SysDept> sysDeptList = deptMapper.queryDept(deptQuery);
-        return buildDeptTree(BeanUtil.copyToList(sysDeptList, DeptDTO.class));
+        List<DeptDTO> deptDTOList = buildDeptTree(BeanUtil.copyToList(sysDeptList, DeptDTO.class));
+        return deptDTOList.stream().map(DeptTreeDTO::new).toList();
     }
 
     private List<DeptDTO> buildDeptTree(List<DeptDTO> deptList) {

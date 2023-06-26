@@ -3,7 +3,7 @@ package com.ikikyou.practice.common.acpect;
 import com.alibaba.fastjson2.JSON;
 import com.ikikyou.practice.common.annotation.OptLog;
 import com.ikikyou.practice.model.entity.system.SysLog;
-import com.ikikyou.practice.model.mapper.SysLogMapper;
+import com.ikikyou.practice.mapper.SysLogMapper;
 import com.ikikyou.practice.utils.IpUtil;
 import com.ikikyou.practice.utils.SecurityUtil;
 import io.swagger.annotations.Api;

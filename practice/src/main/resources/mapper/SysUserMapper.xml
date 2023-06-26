@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ikikyou.practice.model.mapper.SysUserMapper">
+<mapper namespace="com.ikikyou.practice.mapper.SysUserMapper">
 
     <resultMap id="BaseResultMap" type="com.ikikyou.practice.model.entity.system.SysUser">
             <id property="userId" column="user_id" jdbcType="BIGINT"/>
@@ -38,32 +38,29 @@
             <result property="password" column="password" jdbcType="VARCHAR"/>
             <result property="status" column="status" jdbcType="CHAR"/>
             <result property="delFlag" column="del_flag" jdbcType="CHAR"/>
-            <result property="loginIp" column="login_ip" jdbcType="VARCHAR"/>
-            <result property="loginDate" column="login_date" jdbcType="TIMESTAMP"/>
             <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
             <result property="remark" column="remark" jdbcType="VARCHAR"/>
             <association property="dept" javaType="com.ikikyou.practice.model.entity.system.SysDept"
-                     resultMap="com.ikikyou.practice.model.mapper.SysDeptMapper.BaseResultMap"/>
+                     resultMap="com.ikikyou.practice.mapper.SysDeptMapper.BaseResultMap"/>
             <collection property="roles" javaType="java.util.List"
-                        resultMap="com.ikikyou.practice.model.mapper.SysRoleMapper.BaseResultMap"/>
+                        resultMap="com.ikikyou.practice.mapper.SysRoleMapper.BaseResultMap"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         user_id,dept_id,user_name,
         nick_name,user_type,email,
         tel,sex,avatar,
-        password,status,del_flag,
-        login_ip,login_date,create_by,
+        password,status,del_flag,create_by,
         create_time,update_by,update_time,
         remark
     </sql>
     <select id="getUserList" resultMap="UserDTOMap" parameterType="com.ikikyou.practice.model.query.UserQuery">
         select
             u.user_id,u.dept_id,user_name,nick_name,user_type,u.email,tel,sex,avatar,password,u.status,u.del_flag,
-            login_ip,login_date,u.create_by,u.create_time,u.update_by,u.update_time,u.remark,
+            u.create_by,u.create_time,u.update_by,u.update_time,u.remark,
 
             sd.dept_id,sd.dept_name,sd.parent_id,sd.del_flag,sd.order_num,sd.leader,
 
@@ -75,30 +72,28 @@
             left join sys_dept sd on u.dept_id = sd.dept_id
         where
             u.del_flag = '0'
-            <if test="nickName != null and nickName != ''">
-                and u.nick_name like concat('%', #{nickName}, '%')
+            <if test="userQuery.nickName != null and userQuery.nickName != ''">
+                and u.nick_name like concat('%', #{userQuery.nickName}, '%')
             </if>
-            <if test="tel != null and tel != ''">
-                and u.tel like concat('%', #{tel}, '%')
+            <if test="userQuery.tel != null and userQuery.tel != ''">
+                and u.tel like concat('%', #{userQuery.tel}, '%')
             </if>
-            <if test="userName != null and userName != ''">
-                and u.user_name like concat('%', #{userName}, '%')
+            <if test="userQuery.userName != null and userQuery.userName != ''">
+                and u.user_name like concat('%', #{userQuery.userName}, '%')
             </if>
-            <if test="email != null and email != ''">
-                and u.email like concat('%', #{email}, '%')
+            <if test="userQuery.email != null and userQuery.email != ''">
+                and u.email like concat('%', #{userQuery.email}, '%')
             </if>
             <!-- 开始时间检索 -->
-             <if test="params.beginTime != null and params.beginTime != ''">
-                AND date_format(u.create_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+             <if test="userQuery.params.beginTime != null and userQuery.params.beginTime != ''">
+                AND date_format(u.create_time,'%y%m%d') &gt;= date_format(#{userQuery.params.beginTime},'%y%m%d')
              </if>
             <!-- 结束时间检索 -->
-            <if test="params.endTime != null and params.endTime != ''">
-                AND date_format(u.create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+            <if test="userQuery.params.endTime != null and userQuery.params.endTime != ''">
+                AND date_format(u.create_time,'%y%m%d') &lt;= date_format(#{userQuery.params.endTime},'%y%m%d')
             </if>
-            <if test="deptId != null">
-                and (sd.dept_id =#{deptId} or sd.dept_id IN ( SELECT t.dept_id FROM sys_dept t WHERE find_in_set(#{deptId}, ancestors) ))
+            <if test="userQuery.deptId != null">
+                and (sd.dept_id =#{userQuery.deptId} or sd.dept_id IN ( SELECT t.dept_id FROM sys_dept t WHERE find_in_set(#{userQuery.deptId}, ancestors) ))
             </if>
-        limit
-            #{pageNum},#{pageSize}
     </select>
 </mapper>

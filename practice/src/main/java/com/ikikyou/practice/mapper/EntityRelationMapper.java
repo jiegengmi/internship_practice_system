@@ -1,4 +1,4 @@
-package com.ikikyou.practice.model.mapper;
+package com.ikikyou.practice.mapper;
 
 import com.ikikyou.practice.model.entity.system.SysRoleMenu;
 import com.ikikyou.practice.model.entity.system.SysUserPost;

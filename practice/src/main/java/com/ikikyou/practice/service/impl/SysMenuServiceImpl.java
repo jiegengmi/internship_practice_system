@@ -4,8 +4,10 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ikikyou.practice.constant.CommonConstant;
 import com.ikikyou.practice.constant.MenuConstants;
-import com.ikikyou.practice.model.mapper.EntityRelationMapper;
+import com.ikikyou.practice.constant.ResultMsg;
+import com.ikikyou.practice.mapper.EntityRelationMapper;
 import com.ikikyou.practice.model.query.MenuQuery;
 import com.ikikyou.practice.utils.ParamUtil;
 import com.ikikyou.practice.utils.Result;
@@ -14,7 +16,7 @@ import com.ikikyou.practice.model.dto.MenuRouteDTO;
 import com.ikikyou.practice.model.dto.MenuDTO;
 import com.ikikyou.practice.model.entity.system.SysMenu;
 import com.ikikyou.practice.service.SysMenuService;
-import com.ikikyou.practice.model.mapper.SysMenuMapper;
+import com.ikikyou.practice.mapper.SysMenuMapper;
 import com.ikikyou.practice.utils.SecurityUtil;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -155,7 +157,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         } else if (checkMenuExistRole(menuId)) {
             return Result.fail("菜单已分配,不允许删除");
         }
-        return removeById(menuId) ? Result.ok("删除成功") : Result.fail("删除失败");
+        return removeById(menuId) ? Result.ok(ResultMsg.DELETE_SUCCESS_MSG) : Result.fail("删除失败");
     }
 
     /**

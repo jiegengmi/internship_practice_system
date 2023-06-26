@@ -26,6 +26,11 @@ public class Notice implements Serializable {
     private Long id;
 
     /**
+     * 编号
+     */
+    private String noticeId;
+
+    /**
      * 标题
      */
     private String noticeTitle;
@@ -33,7 +38,7 @@ public class Notice implements Serializable {
     /**
      * 发布作者
      */
-    private Long noticeAuthorName;
+    private String noticeAuthorName;
 
     /**
      * 作者用户id

@@ -1,9 +1,12 @@
-package com.ikikyou.practice.model.mapper;
+package com.ikikyou.practice.mapper;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ikikyou.practice.model.dto.UserDTO;
 import com.ikikyou.practice.model.query.UserQuery;
 import com.ikikyou.practice.model.entity.system.SysUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.security.core.userdetails.User;
 
 import java.util.List;
 
@@ -15,7 +18,7 @@ import java.util.List;
 */
 public interface SysUserMapper extends BaseMapper<SysUser> {
 
-    List<UserDTO> getUserList(UserQuery userQuery);
+    List<UserDTO> getUserList(@Param("page") Page<UserDTO> page, @Param("userQuery") UserQuery userQuery);
 }
 
 

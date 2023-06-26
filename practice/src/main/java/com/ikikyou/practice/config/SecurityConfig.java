@@ -3,12 +3,13 @@ package com.ikikyou.practice.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ikikyou.practice.auth.UserDetailsServiceImpl;
 import com.ikikyou.practice.constant.CommonConstant;
-import com.ikikyou.practice.enums.LogEnum;
+import com.ikikyou.practice.constant.ResultMsg;
+import com.ikikyou.practice.enums.LogEnums;
 import com.ikikyou.practice.model.dto.UserDetail;
 import com.ikikyou.practice.filter.JWTAuthFilter;
 import com.ikikyou.practice.filter.VerifyCodeFilter;
 import com.ikikyou.practice.model.entity.system.SysLog;
-import com.ikikyou.practice.model.mapper.SysLogMapper;
+import com.ikikyou.practice.mapper.SysLogMapper;
 import com.ikikyou.practice.utils.IpUtil;
 import com.ikikyou.practice.utils.Result;
 import com.ikikyou.practice.utils.SecurityUtil;
@@ -72,10 +73,11 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 //验证码校验
                 .addFilterBefore(verifyCodeFilter, UsernamePasswordAuthenticationFilter.class)
-                .authorizeHttpRequests((auth) -> auth
-                        //登录和验证码接口放过
-                        .requestMatchers("/captchaImage", "/login").permitAll()
-                        .anyRequest().authenticated())
+                .authorizeHttpRequests((auth) ->
+                        auth.requestMatchers("/captchaImage", CommonConstant.LOGIN_URL).permitAll()
+                                .anyRequest()
+                                .authenticated()
+                )
                 .authenticationProvider(systemAuthenticationProvider())
                 .csrf().disable()
                 .cors(Customizer.withDefaults())
@@ -99,7 +101,7 @@ public class SecurityConfig {
             //登录日志
             writeLog(request, userDetail);
             response.getOutputStream().write(
-                    new ObjectMapper().writeValueAsString(Result.ok(resultMap, "登录成功")).getBytes()
+                    new ObjectMapper().writeValueAsString(Result.ok(resultMap, ResultMsg.LOGIN_SUCCESS_MSG)).getBytes()
             );
         };
     }
@@ -115,14 +117,14 @@ public class SecurityConfig {
         String ipAddress = IpUtil.getIpAddress(request);
         SysLog sysLog = SysLog.builder()
                 .id(System.currentTimeMillis())
-                .type(LogEnum.LOGIN_IN.getType())
-                .opMethod("/login")
+                .type(LogEnums.LOGIN_IN.getType())
+                .opMethod(CommonConstant.LOGIN_URL)
                 .userId(userDetail.getUserId())
                 .userNickName(userDetail.getNickName())
                 .userIp(ipAddress)
                 .userIpSource(IpUtil.getIpSource(ipAddress))
                 .opUrl(request.getRequestURI())
-                .result("登录成功")
+                .result(ResultMsg.LOGIN_SUCCESS_MSG)
                 .createTime(new Date())
                 .build();
         logMapper.insert(sysLog);

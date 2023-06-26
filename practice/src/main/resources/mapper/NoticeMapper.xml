@@ -2,25 +2,65 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ikikyou.practice.model.mapper.NoticeMapper">
+<mapper namespace="com.ikikyou.practice.mapper.NoticeMapper">
 
     <resultMap id="BaseResultMap" type="com.ikikyou.practice.model.entity.Notice">
-            <id property="id" column="id" jdbcType="BIGINT"/>
-            <result property="noticeTitle" column="notice_title" jdbcType="VARCHAR"/>
-            <result property="noticeAuthorName" column="notice_author_name" jdbcType="BIGINT"/>
-            <result property="noticeAuthorId" column="notice_author_id" jdbcType="BIGINT"/>
-            <result property="noticeContent" column="notice_content" jdbcType="VARCHAR"/>
-            <result property="noticeType" column="notice_type" jdbcType="VARCHAR"/>
-            <result property="informType" column="inform_type" jdbcType="INTEGER"/>
-            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-            <result property="status" column="status" jdbcType="INTEGER"/>
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="noticeTitle" column="notice_title" jdbcType="VARCHAR"/>
+        <result property="noticeId" column="notice_id" jdbcType="VARCHAR"/>
+        <result property="noticeAuthorName" column="notice_author_name" jdbcType="VARCHAR"/>
+        <result property="noticeAuthorId" column="notice_author_id" jdbcType="BIGINT"/>
+        <result property="noticeContent" column="notice_content" jdbcType="VARCHAR"/>
+        <result property="noticeType" column="notice_type" jdbcType="VARCHAR"/>
+        <result property="informType" column="inform_type" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="DTOMap" type="com.ikikyou.practice.model.dto.NoticeDTO">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="noticeId" column="notice_id" jdbcType="VARCHAR"/>
+        <result property="noticeTitle" column="notice_title" jdbcType="VARCHAR"/>
+        <result property="noticeAuthorName" column="notice_author_name" jdbcType="VARCHAR"/>
+        <result property="noticeAuthorId" column="notice_author_id" jdbcType="BIGINT"/>
+        <result property="noticeContent" column="notice_content" jdbcType="VARCHAR"/>
+        <result property="noticeType" column="notice_type" jdbcType="VARCHAR"/>
+        <result property="informType" column="inform_type" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,notice_title,notice_author_name,
+        id,notice_title,notice_author_name,notice_id,
         notice_author_id,notice_content,notice_type,
         inform_type,create_time,update_time,
         status
     </sql>
+
+    <select id="getNoticeList" resultMap="DTOMap" parameterType="com.ikikyou.practice.model.query.NoticeQuery">
+        select
+            <include refid="Base_Column_List"/>
+        from
+            notice
+        where
+            status != -1
+            <if test="q.noticeTitle != null and q.noticeTitle != ''">
+                and notice_title like concat('%', #{q.noticeTitle}, '%')
+            </if>
+            <if test="q.noticeContent != null and q.noticeContent != ''">
+                and notice_content like concat('%', #{q.noticeContent}, '%')
+            </if>
+            <if test="q.noticePublishUser != null and q.noticePublishUser != ''">
+                and notice_author_name like concat('%', #{q.noticePublishUser}, '%')
+            </if>
+            <!-- 开始时间检索 -->
+            <if test="q.params.beginTime != null and q.params.beginTime != ''">
+                AND date_format(create_time,'%y%m%d') &gt;= date_format(#{q.params.beginTime},'%y%m%d')
+            </if>
+            <!-- 结束时间检索 -->
+            <if test="q.params.endTime != null and q.params.endTime != ''">
+                AND date_format(create_time,'%y%m%d') &lt;= date_format(#{q.params.endTime},'%y%m%d')
+            </if>
+    </select>
 </mapper>

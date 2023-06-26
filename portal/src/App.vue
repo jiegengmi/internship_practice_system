@@ -5,6 +5,7 @@
 <script setup>
 import useSettingsStore from '@/store/modules/settings'
 import { handleThemeStyle } from '@/utils/theme'
+import {nextTick, onMounted} from "vue";
 
 onMounted(() => {
   nextTick(() => {

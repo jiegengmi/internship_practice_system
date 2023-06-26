@@ -1,6 +1,8 @@
 package com.ikikyou.practice.constant;
 
 /**
+ * 公共常量
+ *
  * @author ikikyou
  * @date 2023/03/24 09:36
  */
@@ -20,4 +22,9 @@ public class CommonConstant {
      * 表单请求类型
      */
     public static final String FORM_CONTENT_TYPE = "application/x-www-form-urlencoded";
+
+    /**
+     * 登录接口
+     */
+    public static final String LOGIN_URL = "/login";
 }

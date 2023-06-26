@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ikikyou.practice.model.entity.system.SysDictData;
 import com.ikikyou.practice.service.SysDictDataService;
-import com.ikikyou.practice.model.mapper.SysDictDataMapper;
+import com.ikikyou.practice.mapper.SysDictDataMapper;
 import com.ikikyou.practice.utils.Result;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;

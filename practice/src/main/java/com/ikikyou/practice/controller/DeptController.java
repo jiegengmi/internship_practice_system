@@ -1,6 +1,7 @@
 package com.ikikyou.practice.controller;
 
 import com.ikikyou.practice.model.dto.DeptDTO;
+import com.ikikyou.practice.model.dto.DeptTreeDTO;
 import com.ikikyou.practice.model.entity.system.SysDept;
 import com.ikikyou.practice.model.query.DeptQuery;
 import com.ikikyou.practice.service.SysDeptService;
@@ -97,10 +98,10 @@ public class DeptController {
      * 获取部门（组织机构）树
      *
      * @param deptQuery 部门
-     * @return {@link DeptDTO} 列表
+     * @return {@link DeptTreeDTO} 列表
      */
     @GetMapping("/tree")
-    public Result<List<DeptDTO>> getDeptTree(DeptQuery deptQuery) {
+    public Result<List<DeptTreeDTO>> getDeptTree(DeptQuery deptQuery) {
         return Result.ok(deptService.getDeptListTree(deptQuery));
     }
 }
